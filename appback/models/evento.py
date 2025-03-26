@@ -1,27 +1,26 @@
 from sqlmodel import SQLModel, Field
+from typing import Optional
+class EventoBase(SQLModel):  
+    nombre: str  
+    descripcion: str 
+    foto_principal: str  
+    foto_secundaria: str  
+    cedula_adm: int   
+    estado: int 
 
-class EventoBase(SQLModel):
-    id_evento: int = Field(default=None, primary_key=True)  # Clave primaria autoincremental
-    nombre: str = Field(index=True)  
-    descripcion: str = Field()  
-    foto_principal: str = Field()  
-    foto_secundaria: str = Field()  
-    cedula_adm: int = Field(index=True)  # Clave foránea de Administrador  
-    estado: int = Field()  
+class Evento(SQLModel, table=True):  
+    id_evento: Optional[int] = Field(primary_key=True, default=None) 
+    nombre: str  
+    descripcion: str 
+    foto_principal: str  
+    foto_secundaria: str  
+    cedula_adm: int = Field(foreign_key="administrador.cedula_adm")   
+    estado: int  
 
-class Evento(EventoBase, table=True):
+class EventoPublic(EventoBase): 
+    id_evento: int
+class EventoCreate(EventoBase):  
     pass
 
-class EventoPublic(EventoBase):
+class EventoUpdate(EventoBase):  
     pass
-
-class EventoCreate(EventoBase):
-    pass
-
-class EventoUpdate(SQLModel):  # Solo incluye los campos que pueden actualizarse
-    nombre: str
-    descripcion: str
-    foto_principal: str
-    foto_secundaria: str
-    cedula_adm: int
-    estado: int
