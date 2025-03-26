@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlmodel import select, Session
-from appback.models.cliente import Cliente, ClienteCreate, ClientePublic, ClienteUpdate
+from appback.models.cliente import Cliente, ClienteCreate, ClientePublic, ClienteUpdate, LoginData
 from appback.database import get_session
+from pydantic import BaseModel
 from typing import Annotated
 
 cliente_router = APIRouter()
@@ -47,3 +48,13 @@ def delete_cliente(cedula: int, session: session_dep):
     session.delete(cliente)
     session.commit()
     return {"ok": True}
+
+
+@cliente_router.post("/login")
+def login(user: LoginData, session: session_dep):
+    cliente = session.exec(select(Cliente).where(Cliente.cedula == user.cedula)).first()
+
+    if not cliente or cliente.contrasena != user.contrasena:
+        raise HTTPException(status_code=401, detail="Credenciales incorrectas")
+
+    return {"message": "Login exitoso", "user": cliente.cedula}

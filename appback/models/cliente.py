@@ -26,8 +26,13 @@ class Cliente(SQLModel, table=True):
 class ClientePublic(ClienteBase):
     cedula: int
 
+
 class ClienteCreate(ClienteBase):
     cedula: int
 
 class ClienteUpdate(ClienteBase):
     pass
+
+class LoginData(SQLModel):
+    cedula: int
+    contrasena: str
