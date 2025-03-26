@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
         <h1>Registro de Usuario</h1>
         <nav>
             <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="eventos.html">Explorar Eventos</a></li>
-                <li><a href="login.html">Iniciar Sesión</a></li>
+                <li><a href="/static/index.html">Inicio</a></li>
+                <li><a href="/static/eventos.html">Explorar Eventos</a></li>
+                <li><a href="/static/login.html">Iniciar Sesión</a></li>
             </ul>
         </nav>
     </header>
@@ -21,13 +21,41 @@
     <main>
         <section>
             <h2>Crea tu Cuenta</h2>
-            <form class="form-container">
-                <input type="text" placeholder="Nombre Completo" required>
-                <input type="email" placeholder="Correo Electrónico" required>
-                <input type="password" placeholder="Contraseña" required>
-                <input type="password" placeholder="Confirmar Contraseña" required>
+            <form id="registro-form">
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula" name="cedula" required>
+                <br>
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" required>
+                <br>
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" required>
+                <br>
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required>
+                <br>
+                <label for="departamento">Departamento:</label>
+                <input type="text" id="departamento" name="departamento" required>
+                <br>
+                <label for="municipio">Municipio:</label>
+                <input type="text" id="municipio" name="municipio" required>
+                <br>
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+                <br>
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" required>
+                <br>
+                <label for="confirmar_contraseña">Confirmar Contraseña:</label>
+                <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" required>
+                <br>
+
                 <button type="submit">Registrarse</button>
             </form>
+            
             <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
         </section>
     </main>
@@ -36,6 +64,6 @@
         <p>&copy; 2025 Plataforma de Venta de Boletos. Todos los derechos reservados.</p>
     </footer>
     
-    <script src="../js/script.js"></script>
+    <script src="js/cliente.js"></script>
 </body>
 </html>

@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
         <h1>Iniciar Sesión</h1>
         <nav>
             <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="eventos.html">Explorar Eventos</a></li>
-                <li><a href="register.html">Registrarse</a></li>
+                <li><a href="/static/index.html">Inicio</a></li>
+                <li><a href="/static/eventos.html">Explorar Eventos</a></li>
+                <li><a href="/static/register.html">Registrarse</a></li>
             </ul>
         </nav>
     </header>
@@ -21,11 +21,12 @@
     <main>
         <section>
             <h2>Accede a tu Cuenta</h2>
-            <form class="form-container">
-                <input type="email" placeholder="Correo Electrónico" required>
-                <input type="password" placeholder="Contraseña" required>
+            <form id="login-form" class="form-container">
+                <input type="text" id="cedula" name="cedula" placeholder="Cédula" required>
+                <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required>
                 <button type="submit">Ingresar</button>
             </form>
+            <p id="error-msg" style="color: red; display: none;">Error: Credenciales incorrectas</p>
             <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
         </section>
     </main>
@@ -34,6 +35,6 @@
         <p>&copy; 2025 Plataforma de Venta de Boletos. Todos los derechos reservados.</p>
     </footer>
     
-    <script src="../js/script.js"></script>
+    <script src="js/login.js"></script>
 </body>
 </html>

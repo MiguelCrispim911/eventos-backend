@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Plataforma de Venta de Boletos cargada");
 
@@ -31,3 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+

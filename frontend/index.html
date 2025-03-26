@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - Plataforma de Venta de Boletos</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <header>
         <div class="logo-container">
             <h1>EventTicket</h1>
-            <img src="img/entradas (2).png" alt="Logo de EventTicket" class="logo">
+            <img src="/static/img/entradas (2).png" alt="Logo de EventTicket" class="logo">
         </div>
         <nav>
             <ul>
-                <li><a href="eventos.html">Explorar Eventos</a></li>
-                <li><a href="compras.html">Mis Compras</a></li>
-                <li><a href="login.html">Iniciar Sesión</a></li>
-                <li><a href="register.html">Registrarse</a></li>
-                <li><a href="#acerca">Acerca de</a></li> <!-- Ahora es un enlace -->
+                <li><a href="/static/eventos.html">Explorar Eventos</a></li>
+                <li><a href="/static/historialcompras.html">Mis Compras</a></li>
+                <li><a href="/static/login.html">Iniciar Sesión</a></li>
+                <li><a href="/static/register.html">Registrarse</a></li>
+                <li><a href="#acerca">Acerca de</a></li> 
             </ul>
         </nav>
     </header>
@@ -30,78 +30,60 @@
                 <h2>Vive momentos <span class="highlight">inolvidables</span> en los mejores <span class="highlight-2">eventos</span></h2>
                 <p>Encuentra y compra boletos para festivales, conciertos y mucho más. ¡No te pierdas ni un solo momento!</p>
                 <div class="buttons">
-                    <a href="eventos.html" class="explore">🎫 Explorar eventos</a>
-                    <a href="buscar.html" class="search">🔍 Buscar eventos</a>
+                    <a href="/static/eventos.html" class="explore">🎫 Explorar eventos</a>
+                    <a href="/static/buscar.html" class="search">🔍 Buscar eventos</a>
                 </div>
             </div>
         </section>
 
-        <!-- Eventos Destacados (ahora con mejor estilo) -->
+        <!-- Eventos Destacados -->
         <section class="eventos">
             <h2>Eventos Destacados</h2>
             <div class="grid-container">
                 <div class="event-card">
-                    <a href="evento1.html">
-                        <img src="img/eventoshakira.jpeg" alt="Evento 1">
-                        <h3>Concierto – Shakira en Vivo</h3>
-                    </a>
+                    <a href="/static/evento1.html">
+                        <img src="/static/img/eventoshakira.jpeg" alt="Evento 1">
                         <h3>Shakira - Tour Las Mujeres Ya No Lloran 🎵 </h3>
-                        <p>📅 15 al 28 de abril - 📍 Estadio El Campín, Bogotá</p>
-                        <p>✨Vive una noche inolvidable con los grandes éxitos de Shakira en su gira mundial.✨</p>
-                    
+                    </a>
+                    <p>📅 15 al 28 de abril - 📍 Estadio El Campín, Bogotá</p>
+                    <p>✨Vive una noche inolvidable con los grandes éxitos de Shakira en su gira mundial.✨</p>
                 </div>
                 <div class="event-card">
-                    <a href="evento2.html">
-                        <img src="img/eventosferiaflores.jpg" alt="Evento 2">
-                        <h3>Feria de Medellin</h3>
-                    </a>
+                    <a href="/static/evento2.html">
+                        <img src="/static/img/eventosferiaflores.jpg" alt="Evento 2">
                         <h3>🌼🌸 Feria de las Flores Medellín 🌺🪻</h3>
-                        <p>📅 1 al 10 de agosto - 📍 Medellín, Colombia</p>
-                        <p>Un evento lleno de cultura, música y tradición. Disfruta del Desfile de Silleteros y más actividades.</p>
-                    
+                    </a>
+                    <p>📅 1 al 10 de agosto - 📍 Medellín, Colombia</p>
+                    <p>Un evento lleno de cultura, música y tradición. Disfruta del Desfile de Silleteros y más actividades.</p>
                 </div>
                 <div class="event-card">
-                    <a href="evento3.html">
-                        <img src="img/eventosobrateatro.png" alt="Evento 3">
-                        <h3>Obra de Teatro Gonawindúa</h3>
+                    <a href="/static/evento3.html">
+                        <img src="/static/img/eventosobrateatro.png" alt="Evento 3">
+                        <h3>Gonawindúa: el corazón del mundo 🌎</h3>
                     </a>
-                         <h3>Gonawindúa: el corazón del mundo🌎</h3>
-                        <p>📅 25 de abril - 📍 Sala DEF</p>
-                        <p>Déjate envolver por la magia de la sabiduría indígena en esta impactante obra que mezcla teatro, música en vivo y ritualidad. </p>
-                    
+                    <p>📅 25 de abril - 📍 Sala DEF</p>
+                    <p>Déjate envolver por la magia de la sabiduría indígena en esta impactante obra que mezcla teatro, música en vivo y ritualidad.</p>
                 </div>
                 <div class="event-card">
-                    <a href="evento4.html">
-                        <img src="img/eventosfestival.jpg" alt="Evento 4">
-                        <h3>Festival de Música</h3>
+                    <a href="/static/evento4.html">
+                        <img src="/static/img/eventosfestival.jpg" alt="Evento 4">
+                        <h3>Estéreo Picnic 2025 🎤</h3>
                     </a>
-                        <h3>Estéreo Picnic 2025🎤</h3>
-                        <p>📅 1 de mayo - 📍 Briceño 18 Golf, Bogotá</p>
-                        <p>Disfruta de los mejores artistas internacionales y nacionales en un festival épico.</p>
-                    
+                    <p>📅 1 de mayo - 📍 Briceño 18 Golf, Bogotá</p>
+                    <p>Disfruta de los mejores artistas internacionales y nacionales en un festival épico.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Beneficios (con más separación) -->
+        <!-- Beneficios -->
         <section class="beneficios">
-            <p> 
-
-        ___________________________________________________________________________________________________________________
-
-            </p>
             <h2>Beneficios de nuestra plataforma</h2>
             <ul>
                 <li>✅ Compra segura y rápida</li>
                 <li>🎤 Variedad de eventos disponibles</li>
                 <li>🎟️ Gestión sencilla de boletos y asistentes</li>
-        <p>
-
-        </p>
             </ul>
         </section>
-
-        
     </main>
     
     <footer>
