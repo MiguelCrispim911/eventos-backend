@@ -114,8 +114,8 @@ h2 {
 .grid-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centra las tarjetas */
-    align-items: stretch; /* Asegura alturas iguales */
+    justify-content: center;
+    align-items: stretch;
     gap: 30px;
     margin: 20px auto;
     max-width: 90%;
@@ -126,7 +126,7 @@ h2 {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-    width: 320px; /* Ajusta el tamaño para que no se deforme */
+    width: 320px;
     text-align: center;
     transition: transform 0.3s ease-in-out;
     display: flex;
@@ -173,4 +173,79 @@ footer {
     background-color: #007bff;
     color: white;
     margin-top: 30px;
+}
+
+/* Clase para ocultar elementos */
+.hidden {
+    display: none;
+}
+
+/* 🔹 Estilos del usuario */
+.user-link {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* 🔹 Menú desplegable */
+#userDropdown {
+    position: relative;
+    display: none; /* Se oculta hasta que el usuario se loguea */
+}
+
+#userDropdown.show {
+    display: inline-block;
+}
+
+.dropdown-content {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #222;
+    color: white;
+    min-width: 150px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    list-style: none;
+    z-index: 1000;
+    display: none; /* Ocultar por defecto */
+    border-radius: 5px;
+}
+
+/* 🔹 Mostrar el menú desplegable cuando tenga la clase .show */
+.dropdown-content.show {
+    display: block !important;
+}
+
+/* 🔹 Estilos de los elementos del menú desplegable */
+.dropdown-content li {
+    padding: 8px;
+    text-align: left;
+}
+
+.dropdown-content li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 5px;
+}
+
+.dropdown-content li a:hover {
+    background-color: #444;
+}
+
+/* 🔹 Botón de cierre de sesión */
+.dropdown-content li button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+}
+
+.dropdown-content li button:hover {
+    background-color: #444;
 }

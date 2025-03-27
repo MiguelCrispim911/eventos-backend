@@ -14,11 +14,17 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/static/eventos.html">Explorar Eventos</a></li>
-                <li><a href="/static/historialcompras.html">Mis Compras</a></li>
-                <li><a href="/static/login.html">Iniciar Sesión</a></li>
-                <li><a href="/static/register.html">Registrarse</a></li>
-                <li><a href="#acerca">Acerca de</a></li> 
+                <li><a href="">Explorar Eventos</a></li>
+                <li id="loginBtn"><a href="/static/login.html">Iniciar Sesión</a></li>
+                <li id="registerBtn"><a href="/static/register.html">Registrarse</a></li>
+                <li id="userDropdown" class="hidden">
+                    <a href="#" id="userLink" class="user-link">Usuario</a>
+                    <ul id="userMenu" class="dropdown-content hidden">
+                        <li><a href="/static/cambiar_password.html">Cambiar contraseña</a></li>
+                        <li><a href="/static/historialcompras.html">Verificar compras</a></li>
+                        <li><button id="logoutBtn">Cerrar sesión</button></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
@@ -89,5 +95,6 @@
     <footer>
         <p>&copy; 2025 Plataforma de Venta de Boletos. Todos los derechos reservados.</p>
     </footer>
+    <script src="js/auth.js"></script>
 </body>
 </html>

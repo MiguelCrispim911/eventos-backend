@@ -17,7 +17,8 @@ document.getElementById("login-form").addEventListener("submit", async function 
 
         if (response.ok) {
             alert("Login exitoso");
-            localStorage.setItem("user", JSON.stringify(data));
+            localStorage.setItem("user", JSON.stringify(data));  // Guardar datos
+            console.log(localStorage.getItem("user"));
             window.location.href = "index.html";
         } else {
             document.getElementById("error-msg").style.display = "block";
