@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nuevo Evento</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Agregar Nuevo Evento</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="eventos.html">Explorar Eventos</a></li>
+                <li><a href="login.html">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="form-container">
+            <h2>Información del Evento</h2>
+            <form id="form-evento">
+                
+                <!-- Sección 1: Datos básicos -->
+                <div class="form-container">
+                    <h3>Datos principales</h3>
+                    <div>
+
+                    </div>
+                    <div class="form-section">
+                        <label for="nombre">Nombre del Evento:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    
+                    <div class="form-section">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                    </div>
+                </div>
+                
+                <!-- Sección 2: Imágenes -->
+                <div class="form-container">
+                    <h3>Imágenes</h3>
+                    <div class="form-section">
+                        <label for="foto-principal">Foto Principal:</label>
+                        <input type="file" id="foto-principal" name="foto-principal" accept="image/*" required>
+                    </div>
+                    
+                    <div class="form-section">
+                        <label for="foto-secundaria">Foto Secundaria:</label>
+                        <input type="file" id="foto-secundaria" name="foto-secundaria" accept="image/*">
+                    </div>
+                </div>
+                
+                <!-- Sección 3: Ubicación y funciones -->
+                <div class="form-container">
+                    <h3>Detalles adicionales</h3>
+                    <div class="form-section">
+                        <label for="cedula">Cédula del Administrador:</label>
+                        <input type="text" id="cedula" name="cedula" required>
+                    </div>
+                    
+                    <div class="form-section">
+                        <label for="ciudad">Ciudad/Lugar del Evento:</label>
+                        <input type="text" id="ciudad" name="ciudad" required>
+                    </div>
+                    
+                    <div class="form-section">
+                        <label for="funciones">Cantidad de Funciones:</label>
+                        <input type="number" id="funciones" name="funciones" min="1" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">Registrar Evento</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Plataforma de Venta de Boletos. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script src="eventos.js"></script>
+</body>
+</html>
