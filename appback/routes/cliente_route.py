@@ -58,3 +58,26 @@ def login(user: LoginData, session: session_dep):
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
 
     return {"message": "Login exitoso", "user": cliente.cedula}
+
+
+class ChangePasswordRequest(BaseModel):
+    cedula: int
+    contrasena_actual: str
+    nueva_contrasena: str
+
+@cliente_router.post("/cambiar_contrasena")
+def cambiar_contrasena(data: ChangePasswordRequest, session: session_dep):
+    cliente = session.exec(select(Cliente).where(Cliente.cedula == data.cedula)).first()
+
+    if not cliente:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+
+    if cliente.contrasena != data.contrasena_actual:
+        raise HTTPException(status_code=401, detail="Contraseña actual incorrecta")
+
+    cliente.contrasena = data.nueva_contrasena
+    session.add(cliente)
+    session.commit()
+    session.refresh(cliente)
+
+    return {"message": "Contraseña actualizada exitosamente"}
