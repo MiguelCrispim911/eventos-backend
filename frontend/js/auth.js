@@ -19,26 +19,22 @@ document.addEventListener("DOMContentLoaded", function () {
         // Mostrar el menú de usuario
         userDropdown.style.display = "inline-block";
 
-        // Cambiar el texto del usuario
-        userLink.textContent = user.nombres || "Usuario";
+        // Mostrar número de cédula en lugar del nombre
+        userLink.textContent = user.cedula || "Usuario"; 
 
-        // Manejar la apertura/cierre del menú desplegable
-        userLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            userMenu.classList.toggle("show");
+        // Manejar la apertura/cierre del menú desplegable al pasar el mouse
+        userDropdown.addEventListener("mouseenter", function () {
+            userMenu.classList.add("show");
+        });
+
+        userDropdown.addEventListener("mouseleave", function () {
+            userMenu.classList.remove("show");
         });
 
         // Cerrar sesión
         logoutBtn.addEventListener("click", function () {
             localStorage.removeItem("user");
             window.location.reload();
-        });
-
-        // Cerrar el menú si se hace clic fuera de él
-        document.addEventListener("click", function (event) {
-            if (!userDropdown.contains(event.target)) {
-                userMenu.classList.remove("show");
-            }
         });
 
     } else {

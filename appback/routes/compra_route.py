@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlmodel import select, Session
+from typing import Annotated, Optional 
 from appback.models.compra import Compra, CompraCreate, CompraPublic, CompraUpdate
 from appback.database import get_session
 from typing import Annotated
@@ -47,3 +48,21 @@ def delete_compra(idcompra: int, session: session_dep):
     session.delete(compra)
     session.commit()
     return {"ok": True}
+
+
+@compra_router.get("/cedula/{cedula}", response_model=list[CompraPublic])
+def read_compras_by_cedula(
+    cedula: int, 
+    session: session_dep, 
+    offset: int = 0, 
+    limit: Annotated[int, Query(le=100)] = 100
+):
+    compras = session.exec(
+        select(Compra).where(Compra.cedula == cedula).offset(offset).limit(limit)
+    ).all()
+
+    if not compras:
+        raise HTTPException(status_code=404, detail="No se encontraron compras para esta cédula")
+
+    return compras
+
