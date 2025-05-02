@@ -11,8 +11,8 @@ const NavAdmin = () => {
           </Link>
         </li>
         <li>
-          <Link to="/eventos" className="text-blue-500 hover:underline">
-            Ver Eventos
+          <Link to="/administrador/dashboard/crearEvento" className="text-blue-500 hover:underline">
+            Crear Evento
           </Link>
         </li>
         <li>
