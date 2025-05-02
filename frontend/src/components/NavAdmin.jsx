@@ -16,8 +16,8 @@ const NavAdmin = () => {
           </Link>
         </li>
         <li>
-          <Link to="/clientes" className="text-blue-500 hover:underline">
-            Gestionar Clientes
+          <Link to="/administrador/dashboard/crearFuncion" className="text-blue-500 hover:underline">
+            Crear Funcion
           </Link>
         </li>
         <li>
@@ -26,8 +26,8 @@ const NavAdmin = () => {
           </Link>
         </li>
         <li>
-          <Link to="/configuracion" className="text-blue-500 hover:underline">
-            Configuración
+          <Link to="/administrador/dashboard/crearUbicacion" className="text-blue-500 hover:underline">
+            Crear Ubicacion
           </Link>
         </li>
       </ul>
