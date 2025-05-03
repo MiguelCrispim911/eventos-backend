@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NavAdmin from "../../components/NavAdmin"; // Asegúrate de que esta ruta sea correcta
+
 
 function CrearEvento() {
   const [formData, setFormData] = useState({
@@ -46,7 +46,6 @@ function CrearEvento() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 p-4">
-      <NavAdmin />
 
       <form
         onSubmit={handleSubmit}

@@ -11,8 +11,18 @@ const NavAdmin = () => {
           </Link>
         </li>
         <li>
+          <Link to="/administrador/dashboard/listarAdministradores" className="text-blue-500 hover:underline">
+            Listar Administradores
+          </Link>
+        </li>
+        <li>
           <Link to="/administrador/dashboard/crearEvento" className="text-blue-500 hover:underline">
             Crear Evento
+          </Link>
+        </li>
+        <li>
+          <Link to="/administrador/dashboard/listarEventos" className="text-blue-500 hover:underline">
+            Listar Eventos
           </Link>
         </li>
         <li>
@@ -21,12 +31,27 @@ const NavAdmin = () => {
           </Link>
         </li>
         <li>
-          <Link to="/usuarios" className="text-blue-500 hover:underline">
-            Gestionar Usuarios
+          <Link to="/administrador/dashboard/listarFunciones" className="text-blue-500 hover:underline">
+            Listar Funciones
+          </Link>
+        </li>
+        <li>
+          <Link to="/administrador/dashboard/crearTipoBoleta" className="text-blue-500 hover:underline">
+            Crear Tipo de Boleta
+          </Link>
+        </li>
+        <li>
+          <Link to="/administrador/dashboard/listarTipoBoleta" className="text-blue-500 hover:underline">
+            Listar tipos de Boleta
           </Link>
         </li>
         <li>
           <Link to="/administrador/dashboard/crearUbicacion" className="text-blue-500 hover:underline">
+            Crear Ubicacion
+          </Link>
+        </li>
+        <li>
+          <Link to="/administrador/dashboard/listarUbicaciones" className="text-blue-500 hover:underline">
             Crear Ubicacion
           </Link>
         </li>

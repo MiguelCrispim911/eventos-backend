@@ -1,4 +1,3 @@
-import NavAdmin from "../../components/NavAdmin"; // Ajusta la ruta según tu estructura
 import { useState } from "react";
 
 const CrearAdministrador = ({ username }) => {
@@ -81,7 +80,6 @@ const CrearAdministrador = ({ username }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 p-4">
-      <NavAdmin />
 
       <form
         onSubmit={handleSubmit}
