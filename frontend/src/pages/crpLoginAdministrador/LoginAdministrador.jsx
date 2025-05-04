@@ -59,7 +59,7 @@ const LoginAdministrador = () => {
       }
       
       // 2. Realiza la petición con el token en los headers
-      const response = await fetch('http://tu-api.com/administrador/me/', {
+      const response = await fetch('http://localhost:8000/administrador/perfil/', {
         headers: {
           'Authorization': `Bearer ${token}` // Envía el token en el header
         }

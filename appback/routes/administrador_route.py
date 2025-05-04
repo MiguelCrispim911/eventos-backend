@@ -62,10 +62,10 @@ def login_admin(admin: AdministradorLogin, session: Session = Depends(get_sessio
     if not db_admin:
         raise HTTPException(status_code=401, detail="Credenciales inválidas")
     
-    access_token = create_access_token(data={"sub": str(db_admin.cedula_adm)})
+    access_token = create_access_token(data={"tipo_usuario":"admin", "id_usuario": str(db_admin.cedula_adm), "nombre_usuario":str(db_admin.nombres)})
     
     return {
         "access_token": access_token,
         "token_type": "bearer",
-        "admin": db_admin
+        # "admin": db_admin
     }

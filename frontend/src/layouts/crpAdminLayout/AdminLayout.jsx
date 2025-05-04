@@ -3,6 +3,7 @@ import NavAdmin from "../../components/crpNavAdmin/NavAdmin";
 import HeaderAdmin from "../../components/crpHeaderAdmin/HeaderAdmin";
 import { Outlet } from "react-router-dom";
 import "./AdminLayout.css"; // Importa el CSS
+import fotoAdminLateral from "../../assets/imagenes/fotoAdminLateral.jpg";
 
 const AdminLayout = () => (
   <div className="admin-layout">
@@ -14,7 +15,7 @@ const AdminLayout = () => (
       </main>
       <div className="admin-image-sidebar">
         {/* Aquí va tu imagen */}
-        <img src="/ruta-de-tu-imagen.jpg" alt="Sidebar" />
+        <img src={fotoAdminLateral} alt="Sidebar" />
       </div>
     </div>
     <FooterAdmin />

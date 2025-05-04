@@ -16,6 +16,7 @@ import ListarAdministradores from "../pages/crpListarAdministradores/ListarAdmin
 import ListarFunciones from "../pages/crpListarFunciones/ListarFunciones";
 import ListarTipoBoleta from "../pages/crpListarTipoBoleta/ListarTipoBoleta";
 import ListarUbicaciones from "../pages/crpListarUbicaciones/ListarUbicaciones";
+import ProtectedRouteAdmin from './ProtectedRouteAdmin'; // Importa el componente ProtectedRoute
 
 const AppRouter = () => (
   <Routes>
@@ -34,17 +35,17 @@ const AppRouter = () => (
     {/* Layout de administrador */}
     <Route element={<AdminLayout />}>
       <Route path="/administrador" element={<LoginAdministrador />} />
-      <Route path="/administrador/dashboard" element={<AdminDashboard />} />
-      <Route path="/administrador/dashboard/crearAdministrador" element={<CrearAdministrador />} />
-      <Route path="/administrador/dashboard/crearEvento" element={<CrearEvento />} />
-      <Route path="/administrador/dashboard/crearUbicacion" element={<CrearUbicacion />} />
-      <Route path="/administrador/dashboard/crearFuncion" element={<CrearFuncion />} />
-      <Route path="/administrador/dashboard/crearTipoBoleta" element={<CrearTipoBoleta />} />
-      <Route path="/administrador/dashboard/listarEventos" element={<ListarEventos />} />
-      <Route path="/administrador/dashboard/listarAdministradores" element={<ListarAdministradores />} />
-      <Route path="/administrador/dashboard/listarFunciones" element={<ListarFunciones />} />
-      <Route path="/administrador/dashboard/listarTipoBoleta" element={<ListarTipoBoleta />} />
-      <Route path="/administrador/dashboard/listarUbicaciones" element={<ListarUbicaciones />} />
+      <Route path="/administrador/dashboard" element={<ProtectedRouteAdmin><AdminDashboard /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/crearAdministrador" element={<ProtectedRouteAdmin><CrearAdministrador /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/crearEvento" element={<ProtectedRouteAdmin><CrearEvento /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/crearUbicacion" element={<ProtectedRouteAdmin><CrearUbicacion /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/crearFuncion" element={<ProtectedRouteAdmin><CrearFuncion /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/crearTipoBoleta" element={<ProtectedRouteAdmin><CrearTipoBoleta /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/listarEventos" element={<ProtectedRouteAdmin><ListarEventos /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/listarAdministradores" element={<ProtectedRouteAdmin><ListarAdministradores /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/listarFunciones" element={<ProtectedRouteAdmin><ListarFunciones /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/listarTipoBoleta" element={<ProtectedRouteAdmin><ListarTipoBoleta /></ProtectedRouteAdmin>} />
+      <Route path="/administrador/dashboard/listarUbicaciones" element={<ProtectedRouteAdmin><ListarUbicaciones /></ProtectedRouteAdmin>} />
       {/* más rutas privadas o de admin aquí */}
     </Route>
   </Routes>
