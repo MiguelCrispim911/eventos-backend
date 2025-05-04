@@ -1,0 +1,55 @@
+/* Estilos generales del header */
+.header {
+    background-color: #1a1a1a; /* Fondo oscuro */
+    color: white;
+    padding: 1rem;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo y título */
+  .header__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .header__logo {
+    height: 40px;
+    width: 40px;
+  }
+  
+  .header__title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Usuario y botón */
+  .header__user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .header__username {
+    font-size: 0.875rem;
+  }
+  
+  .header__logout-btn {
+    background-color: #d32f2f; /* Rojo */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.3s;
+  }
+  
+  .header__logout-btn:hover {
+    background-color: #b71c1c; /* Rojo oscuro */
+  }

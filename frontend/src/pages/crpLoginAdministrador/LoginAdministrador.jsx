@@ -1,130 +1,129 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './LoginAdministrador.css';
 
 const LoginAdministrador = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // Estados para manejar los datos del formulario
+  const [cedula, setCedula] = useState('');
+  const [contrasena, setContrasena] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // Función para manejar el envío del formulario
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Evita que el formulario se recargue
     
-    // Validación simple
-    if (!email || !password) {
-      setError('Por favor, completa todos los campos');
-      return;
+    try {
+      // 1. Realiza la petición al servidor
+      const response = await fetch('http://localhost:8000/administradores/login/', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cedula_adm: parseInt(cedula), // Convierte la cédula a número
+          contrasena: contrasena
+        }),
+      });
+      
+      // 2. Procesa la respuesta
+      const data = await response.json();
+      
+      // 3. Si la respuesta no es exitosa, lanza un error
+      if (!response.ok) {
+        throw new Error(data.detail || 'Error de autenticación');
+      }
+      
+      // 4. Almacena los datos en localStorage
+      localStorage.setItem('adminToken', data.access_token); // Guarda el token JWT
+      localStorage.setItem('adminData', JSON.stringify(data.admin)); // Guarda datos del admin
+      
+      // 5. Redirige al dashboard
+      navigate('/administrador/dashboard');
+      
+    } catch (error) {
+      // Manejo de errores
+      setError(error.message); // Muestra el mensaje de error
+      setContrasena(''); // Limpia el campo de contraseña
     }
-    
-    // Aquí iría la lógica de autenticación
-    console.log('Datos de login:', { email, password });
-    
-    // Limpiar formulario
-    setEmail('');
-    setPassword('');
-    setError('');
-    
-    // Mostrar mensaje de éxito (simulado)
-    alert('Login exitoso (simulación)');
   };
 
+  // Función para hacer peticiones a rutas protegidas
+  const fetchProtectedData = async () => {
+    try {
+      // 1. Obtiene el token del localStorage
+      const token = localStorage.getItem('adminToken');
+      
+      if (!token) {
+        throw new Error('No hay token de autenticación');
+      }
+      
+      // 2. Realiza la petición con el token en los headers
+      const response = await fetch('http://tu-api.com/administrador/me/', {
+        headers: {
+          'Authorization': `Bearer ${token}` // Envía el token en el header
+        }
+      });
+      
+      // 3. Verifica si la respuesta es exitosa
+      if (!response.ok) {
+        throw new Error('Error al obtener datos protegidos');
+      }
+      
+      // 4. Procesa los datos
+      const protectedData = await response.json();
+      console.log('Datos protegidos:', protectedData);
+      return protectedData;
+      
+    } catch (error) {
+      console.error('Error:', error);
+      // Opcional: redirigir al login si el token es inválido
+      if (error.message.includes('autenticación')) {
+        navigate('/login');
+      }
+      throw error;
+    }
+  };
+
+  // Renderizado del formulario
   return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>Iniciar Sesión</h2>
+    <div className="login-container">
+      <h2 className="login-title">Iniciar Sesión Administrador</h2>
       
-      {error && <p style={styles.error}>{error}</p>}
+      {/* Muestra errores si existen */}
+      {error && <p className="login-error">{error}</p>}
       
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.formGroup}>
-          <label htmlFor="email" style={styles.label}>Email:</label>
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-group">
+          <label htmlFor="cedula" className="form-label">Cédula:</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-            placeholder="tu@email.com"
+            type="number"
+            id="cedula"
+            value={cedula}
+            onChange={(e) => setCedula(e.target.value)}
+            className="form-input"
+            placeholder="Ingrese su cédula"
+            required
           />
         </div>
         
-        <div style={styles.formGroup}>
-          <label htmlFor="password" style={styles.label}>Contraseña:</label>
+        <div className="form-group">
+          <label htmlFor="contrasena" className="form-label">Contraseña:</label>
           <input
             type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-            placeholder="••••••••"
+            id="contrasena"
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
+            className="form-input"
+            placeholder="Ingrese su contraseña"
+            required
           />
         </div>
         
-        <button type="submit" style={styles.button}>Ingresar</button>
+        <button type="submit" className="login-button">Ingresar</button>
       </form>     
-      <p style={styles.footer}>
-        ¿No tienes cuenta? <a href="#" style={styles.link}>Regístrate</a> 
-      </p>
     </div>
   );
-};
-const styles = {
-  container: {
-    maxWidth: '400px',
-    margin: '50px auto',
-    padding: '20px',
-    borderRadius: '8px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    backgroundColor: '#fff',
-  },
-  title: {
-    textAlign: 'center',
-    color: '#333',
-    marginBottom: '20px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  formGroup: {
-    marginBottom: '15px',
-  },
-  label: {
-    display: 'block',
-    marginBottom: '5px',
-    color: '#555',
-  },
-  input: {
-    width: '100%',
-    padding: '10px',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-    fontSize: '16px',
-  },
-  button: {
-    padding: '12px',
-    backgroundColor: '#007bff',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontSize: '16px',
-    marginTop: '10px',
-  },
-  buttonHover: {
-    backgroundColor: '#0056b3',
-  },
-  footer: {
-    textAlign: 'center',
-    marginTop: '20px',
-    color: '#666',
-  },
-  link: {
-    color: '#007bff',
-    textDecoration: 'none',
-  },
-  error: {
-    color: '#dc3545',
-    textAlign: 'center',
-    marginBottom: '15px',
-  },
 };
 
 export default LoginAdministrador;

@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import AdminLayout from "../layouts/AdminLayout";
+import AdminLoginLayout from "../layouts/crpAdminLoginLayout/AdminLoginLayout";
+import AdminLayout from "../layouts/crpAdminLayout/AdminLayout";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import LoginAdministrador from "../pages/crpLoginAdministrador/LoginAdministrador";
@@ -24,6 +25,11 @@ const AppRouter = () => (
       <Route path="/login" element={<Login />} />
       {/* más rutas públicas aquí */}
     </Route>
+
+    <Route element={<AdminLoginLayout />}>
+      <Route path="/administrador" element={<LoginAdministrador />} />
+    </Route>
+
 
     {/* Layout de administrador */}
     <Route element={<AdminLayout />}>

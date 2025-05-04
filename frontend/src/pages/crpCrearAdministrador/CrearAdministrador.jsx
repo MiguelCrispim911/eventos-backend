@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./CrearAdministrador.css";
 
 const CrearAdministrador = ({ username }) => {
   const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ const CrearAdministrador = ({ username }) => {
       email: formData.email,
       telefono: formData.telefono,
       contrasena: formData.password,
-      estado: 1  // Puedes cambiarlo según lógica de negocio
+      estado: 1
     };
   
     try {
@@ -59,7 +60,6 @@ const CrearAdministrador = ({ username }) => {
       const result = await response.json();
       console.log("Administrador creado:", result);
       alert("Administrador registrado con éxito");
-      // Limpia el formulario si deseas:
       setFormData({
         cedula: "",
         nombres: "",
@@ -79,134 +79,127 @@ const CrearAdministrador = ({ username }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 p-4">
+    <div className="crear-administrador-container">
+      <form onSubmit={handleSubmit} className="crear-administrador-form">
+        <h2 className="form-title">Registro de Usuario</h2>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-xl mx-auto mt-6"
-      >
-        <h2 className="text-2xl font-bold mb-4">Registro de Usuario</h2>
-
-        <label className="block mb-2">
+        <label className="form-label">
           Cédula:
           <input
             type="number"
             name="cedula"
             value={formData.cedula}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Nombres:
           <input
             type="text"
             name="nombres"
             value={formData.nombres}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Apellidos:
           <input
             type="text"
             name="apellidos"
             value={formData.apellidos}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Dirección:
           <input
             type="text"
             name="direccion"
             value={formData.direccion}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Municipio:
           <input
             type="text"
             name="municipio"
             value={formData.municipio}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Departamento:
           <input
             type="text"
             name="departamento"
             value={formData.departamento}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Email:
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Teléfono:
           <input
             type="text"
             name="telefono"
             value={formData.telefono}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Contraseña:
           <input
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Confirmar Contraseña:
           <input
             type="password"
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <button
-          type="submit"
-          className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
+        <button type="submit" className="submit-button">
           Registrar
         </button>
       </form>

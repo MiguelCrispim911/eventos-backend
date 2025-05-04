@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./CrearFuncion.css";
 
 const CrearFuncion = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ const CrearFuncion = () => {
       hora_inicio: formData.hora_inicio,
       id_evento: parseInt(formData.id_evento),
       id_ubicacion: parseInt(formData.id_ubicacion),
-      estado: 1, // por defecto
+      estado: 1,
     };
 
     try {
@@ -48,7 +49,6 @@ const CrearFuncion = () => {
       console.log("Función creada:", result);
       alert("Función registrada con éxito");
 
-      // Limpiar formulario
       setFormData({
         nombre: "",
         descripcion: "",
@@ -64,89 +64,82 @@ const CrearFuncion = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 p-4">
+    <div className="crear-funcion-container">
+      <form onSubmit={handleSubmit} className="crear-funcion-form">
+        <h2 className="form-title">Crear Función</h2>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-xl mx-auto mt-6"
-      >
-        <h2 className="text-2xl font-bold mb-4">Crear Función</h2>
-
-        <label className="block mb-2">
+        <label className="form-label">
           Nombre:
           <input
             type="text"
             name="nombre"
             value={formData.nombre}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Descripción:
           <textarea
             name="descripcion"
             value={formData.descripcion}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Fecha:
           <input
             type="date"
             name="fecha"
             value={formData.fecha}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Hora de Inicio:
           <input
             type="time"
             name="hora_inicio"
             value={formData.hora_inicio}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           ID Evento:
           <input
             type="number"
             name="id_evento"
             value={formData.id_evento}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           ID Ubicación:
           <input
             type="number"
             name="id_ubicacion"
             value={formData.id_ubicacion}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <button
-          type="submit"
-          className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
+        <button type="submit" className="submit-button">
           Crear Función
         </button>
       </form>

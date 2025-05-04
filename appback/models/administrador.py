@@ -32,3 +32,8 @@ class AdministradorCreate(AdministradorBase):
 
 class AdministradorUpdate(AdministradorBase):  
     pass
+
+class AdministradorLogin(SQLModel):
+    cedula_adm: int
+    contrasena: str
+

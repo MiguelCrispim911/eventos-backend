@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlmodel import select, Session
-from appback.models.administrador import Administrador, AdministradorCreate, AdministradorPublic, AdministradorUpdate
+from appback.models.administrador import Administrador, AdministradorLogin, AdministradorCreate, AdministradorPublic, AdministradorUpdate
 from appback.database import get_session
 from typing import Annotated
+from appback.core.security import create_access_token
+from appback.api.dependencies import get_current_admin
 
 administrador_router = APIRouter()
 
@@ -47,3 +49,23 @@ def delete_admin(cedula_adm: int, session: session_dep):
     session.delete(admin)
     session.commit()
     return {"ok": True}
+
+
+@administrador_router.post("/login/")
+def login_admin(admin: AdministradorLogin, session: Session = Depends(get_session)):
+    db_admin = session.exec(
+        select(Administrador)
+        .where(Administrador.cedula_adm == admin.cedula_adm)
+        .where(Administrador.contrasena == admin.contrasena)
+    ).first()
+    
+    if not db_admin:
+        raise HTTPException(status_code=401, detail="Credenciales inválidas")
+    
+    access_token = create_access_token(data={"sub": str(db_admin.cedula_adm)})
+    
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "admin": db_admin
+    }

@@ -1,0 +1,61 @@
+/* Estilos generales del sidebar */
+.nav-bar-admin {
+  width: 250px;
+  background-color: #242526;
+  color: white;
+  padding: 20px 0;
+  font-family: 'Arial', sans-serif;
+  /* Elimina height: 80vh si existe */
+}
+
+/* Título "Menu del Administrador" */
+.nav-bar-admin h2 {
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #34495e;
+}
+
+/* Items principales (Administradores, Eventos, etc.) */
+.menu-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #34495e;
+  transition: background-color 0.3s;
+  font-weight: 500;
+}
+
+.menu-item:hover {
+  background-color: #34495e; /* Efecto hover */
+}
+
+/* Submenús desplegables */
+.submenu {
+  padding: 5px 0 5px 30px; /* Indentación */
+}
+
+.submenu li {
+  padding: 8px 0;
+  list-style-type: none;
+}
+
+/* Enlaces de submenú (reemplazan a text-blue-500 hover:underline) */
+.submenu-link {
+  color: #ffffff; /* Azul equivalente a text-blue-500 */
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+.submenu-link:hover {
+  text-decoration: underline; /* Equivalente a hover:underline */
+  color: #60a5fa; /* Azul más claro al hover */
+}
+
+/* Separador entre subitems (opcional) */
+.submenu li:not(:last-child) {
+  border-bottom: 1px solid #2c3e50;
+}

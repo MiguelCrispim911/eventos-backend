@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./CrearEvento.css";
 
 function CrearEvento() {
   const [formData, setFormData] = useState({
@@ -8,7 +8,7 @@ function CrearEvento() {
     foto_principal: "",
     foto_secundaria: "",
     cedula_adm: "",
-    estado: 1, // Estado fijo: activo por defecto
+    estado: 1,
   });
 
   const handleChange = (e) => {
@@ -27,7 +27,7 @@ function CrearEvento() {
         body: JSON.stringify({
           ...formData,
           cedula_adm: parseInt(formData.cedula_adm),
-          estado: 1, // Aseguramos que siempre se envíe como activo
+          estado: 1,
         }),
       });
 
@@ -45,78 +45,71 @@ function CrearEvento() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 p-4">
+    <div className="crear-evento-container">
+      <form onSubmit={handleSubmit} className="crear-evento-form">
+        <h2 className="form-title">Crear Evento</h2>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-xl mx-auto mt-6"
-      >
-        <h2 className="text-2xl font-bold mb-4">Crear Evento</h2>
-
-        <label className="block mb-2">
+        <label className="form-label">
           Nombre:
           <input
             type="text"
             name="nombre"
             value={formData.nombre}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Descripción:
           <input
             type="text"
             name="descripcion"
             value={formData.descripcion}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Foto principal (URL):
           <input
             type="text"
             name="foto_principal"
             value={formData.foto_principal}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Foto secundaria (URL):
           <input
             type="text"
             name="foto_secundaria"
             value={formData.foto_secundaria}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="form-label">
           Cédula del administrador:
           <input
             type="number"
             name="cedula_adm"
             value={formData.cedula_adm}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
+            className="form-input"
             required
           />
         </label>
 
-        <button
-          type="submit"
-          className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
+        <button type="submit" className="submit-button">
           Crear Evento
         </button>
       </form>
