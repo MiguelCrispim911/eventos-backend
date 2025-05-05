@@ -1,9 +1,12 @@
 import React from 'react';
+import './Footer.css';
 
 const Footer = () => (
-  <footer className="bg-gray-100 mt-12 py-4">
-    <div className="container mx-auto text-center text-sm text-gray-600">
-      © {new Date().getFullYear()} ClienteEventos. Todos los derechos reservados.
+  <footer className="footer">
+    <div className="footer-container">
+      <div className="footer-copyright">
+        © {new Date().getFullYear()} EventTicket. Todos los derechos reservados.
+      </div>
     </div>
   </footer>
 );

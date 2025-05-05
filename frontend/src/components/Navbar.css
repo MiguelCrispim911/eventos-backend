@@ -6,6 +6,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    overflow: visible; /* Aseguramos que no corte el contenido */
 }
 
 .nav-container {
@@ -14,19 +15,33 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative; /* Añadimos posición relativa */
+    overflow: visible; /* Aseguramos que no corte el contenido */
 }
 
 .logo {
-    color: #F8F9FA; /* Blanco suave */
+    color: #F8F9FA; 
     font-size: 1.75rem;
     font-weight: 700;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: -4,2rem; 
+
+}
+
+.logo-img {
+    height: 4rem;
+    width: auto;
 }
 
 .nav-links {
     display: flex;
     gap: 2rem;
     align-items: center;
+    position: relative; /* Añadimos posición relativa */
+    overflow: visible; /* Aseguramos que no corte el contenido */
 }
 
 .nav-link {
@@ -86,4 +101,149 @@
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(255, 107, 53, 0.4);
+}
+
+/* Estilos para el menú de usuario - versión mejorada */
+.user-menu-container {
+  position: relative;
+  margin-left: 2rem;
+}
+
+.user-menu-button {
+  background-color: transparent;
+  border: none;
+  color: #F8F9FA;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.user-menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #FF6B35;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.dropdown-icon {
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+/* Estilos para el menú desplegable usando Portal */
+.user-dropdown-menu {
+  position: fixed;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 250px;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-info {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #F8F9FA;
+}
+
+.user-avatar-large {
+  width: 48px;
+  height: 48px;
+  background-color: #FF6B35;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-full-name {
+  font-weight: 600;
+  color: #343A40;
+}
+
+.user-email {
+  font-size: 0.85rem;
+  color: #6C757D;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #E9ECEF;
+  margin: 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #343A40;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.dropdown-item:hover {
+  background-color: #F8F9FA;
+  color: #0070CE;
+}
+
+.dropdown-icon-profile,
+.dropdown-icon-purchases,
+.dropdown-icon-logout {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.logout-button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #DC3545;
+  display: flex;
+  align-items: center;
+}
+
+.logout-button:hover {
+  background-color: #FFF5F5;
 }

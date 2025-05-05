@@ -1,56 +1,94 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginUser } from '../services/apiAuth';
-import "../pages/Login.css";
+import { useAuth } from '../context/AuthContext';
+import "./Login.css";
 
 const Login = () => {
   const [cedula, setCedula] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
+    
     try {
-      await loginUser({ cedula, password });
-      navigate('/eventos');
+      // Validar que la cédula sea un número
+      if (isNaN(parseInt(cedula, 10))) {
+        throw new Error('La cédula debe ser un número');
+      }
+      
+      const userData = await loginUser({ cedula, password });
+      // Guardar los datos del usuario en el contexto
+      login(userData);
+      // Redirigir a la página Home
+      navigate('/');
     } catch (err) {
-      setError('Cédula o contraseña inválida');
+      console.error('Error de login:', err);
+      
+      if (err.response && err.response.status === 401) {
+        setError('Cédula o contraseña incorrecta');
+      } else if (err.message === 'La cédula debe ser un número') {
+        setError(err.message);
+      } else {
+        setError('Error al iniciar sesión. Intente nuevamente.');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto py-8">
-      <h2 className="text-2xl font-semibold mb-4">Iniciar Sesión</h2>
-      {error && <p className="text-red-600 mb-2">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block mb-1">Cédula</label>
+    <div className="login-container">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h2 className="login-title">Iniciar Sesión</h2>
+        
+        {error && <div className="error-message">{error}</div>}
+        
+        <div className="form-group">
+          <label className="form-label">Cédula</label>
           <input
             type="text"
             value={cedula}
             onChange={(e) => setCedula(e.target.value)}
-            className="w-full border px-3 py-2 rounded"
+            className="form-input"
+            placeholder="Ingresa tu número de cédula"
             required
           />
         </div>
-        <div>
-          <label className="block mb-1">Contraseña</label>
+        
+        <div className="form-group">
+          <label className="form-label">Contraseña</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border px-3 py-2 rounded"
+            className="form-input"
+            placeholder="Ingresa tu contraseña"
             required
           />
         </div>
-        <button type="submit" className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Entrar
+        
+        <button 
+          type="submit" 
+          className={`submit-button ${loading ? 'loading' : ''}`}
+          disabled={loading}
+        >
+          {loading ? 'Iniciando sesión...' : 'Entrar'}
         </button>
+        
+        <div className="register-link">
+          ¿No tienes cuenta? <Link to="/registro">Regístrate</Link>
+        </div>
+        <div className="forgot-password-link">
+          ¿Olvidaste tu contraseña? <Link to="/recuperar-contrasena">Recuperar</Link>
+        </div>
       </form>
-      <p className="mt-4">
-        ¿No tienes cuenta? <Link to="/registro" className="text-blue-600">Regístrate</Link>
-      </p>
     </div>
   );
 };

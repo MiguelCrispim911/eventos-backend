@@ -120,6 +120,25 @@
     color: #E85925;
     text-decoration: underline;
   }
+
+  .forgot-password-link {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+  }
+
+  .forgot-password-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .forgot-password-link a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+  }
   
   /* Efectos de carga */
   .submit-button.loading {
