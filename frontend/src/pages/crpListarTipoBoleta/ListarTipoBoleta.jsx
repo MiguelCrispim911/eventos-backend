@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./ListarTipoBoleta.css";
 
 const ListarTipoBoleta = () => {
   const [boletas, setBoletas] = useState([]);
@@ -23,38 +24,40 @@ const ListarTipoBoleta = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Listado de Tipos de Boleta</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="boletas-container">
+      <h2 className="boletas-title">Listado de Tipos de Boleta</h2>
+      {error && <p className="boletas-error">{error}</p>}
       {boletas.length === 0 ? (
-        <p>No hay tipos de boleta disponibles.</p>
+        <p className="boletas-empty">No hay tipos de boleta disponibles.</p>
       ) : (
-        <table border="1" cellPadding="10" cellSpacing="0">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Localización</th>
-              <th>Precio</th>
-              <th>Cupo Máximo</th>
-              <th>Disponibles</th>
-              <th>ID Función</th>
-            </tr>
-          </thead>
-          <tbody>
-            {boletas.map((boleta) => (
-              <tr key={boleta.id_tipoboleta}>
-                <td>{boleta.id_tipoboleta}</td>
-                <td>{boleta.nombre}</td>
-                <td>{boleta.localizacion}</td>
-                <td>{boleta.precio}</td>
-                <td>{boleta.cupo_maximo}</td>
-                <td>{boleta.disponibles}</td>
-                <td>{boleta.id_funcion}</td>
+        <div className="table-responsive">
+          <table className="boletas-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Localización</th>
+                <th>Precio</th>
+                <th>Cupo Máximo</th>
+                <th>Disponibles</th>
+                <th>ID Función</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {boletas.map((boleta) => (
+                <tr key={boleta.id_tipoboleta}>
+                  <td>{boleta.id_tipoboleta}</td>
+                  <td>{boleta.nombre}</td>
+                  <td>{boleta.localizacion}</td>
+                  <td>${boleta.precio.toLocaleString()}</td>
+                  <td>{boleta.cupo_maximo}</td>
+                  <td>{boleta.disponibles}</td>
+                  <td>{boleta.id_funcion}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

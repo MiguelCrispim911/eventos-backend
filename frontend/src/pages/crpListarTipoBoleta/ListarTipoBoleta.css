@@ -1,0 +1,99 @@
+/* Contenedor principal */
+.boletas-container {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.boletas-title {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Mensajes */
+.boletas-error {
+  color: #f44336;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+}
+
+.boletas-empty {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+/* Tabla responsive */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 15px;
+}
+
+/* Estilos de tabla */
+.boletas-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 800px;
+}
+
+/* Encabezados */
+.boletas-table thead tr {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.boletas-table th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Celdas */
+.boletas-table td {
+  padding: 10px 12px;
+  color: #555;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+/* Formato numérico */
+.boletas-table td:nth-child(4),
+.boletas-table td:nth-child(5),
+.boletas-table td:nth-child(6) {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+/* Filas */
+.boletas-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+.boletas-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.boletas-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .boletas-container {
+    padding: 15px;
+  }
+  
+  .boletas-table th, 
+  .boletas-table td {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+}

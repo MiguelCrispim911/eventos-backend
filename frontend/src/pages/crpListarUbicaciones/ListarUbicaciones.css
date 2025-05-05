@@ -1,0 +1,110 @@
+/* Contenedor principal */
+.ubicaciones-container {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Título */
+  .ubicaciones-title {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  
+  /* Mensajes */
+  .ubicaciones-error {
+    color: #f44336;
+    font-size: 0.75rem;
+    margin-bottom: 15px;
+  }
+  
+  .ubicaciones-empty {
+    color: #666;
+    font-size: 0.75rem;
+  }
+  
+  /* Tabla responsive */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 15px;
+  }
+  
+  /* Estilos de tabla */
+  .ubicaciones-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+    min-width: 1000px;
+  }
+  
+  /* Encabezados */
+  .ubicaciones-table thead tr {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .ubicaciones-table th {
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+    white-space: nowrap;
+  }
+  
+  /* Celdas */
+  .ubicaciones-table td {
+    padding: 10px 12px;
+    color: #555;
+    line-height: 1.4;
+    vertical-align: middle;
+  }
+  
+  /* Filas */
+  .ubicaciones-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+  }
+  
+  .ubicaciones-table tbody tr:last-child {
+    border-bottom: none;
+  }
+  
+  .ubicaciones-table tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Indicadores de estado */
+  .status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  
+  .status-indicator.activo {
+    background-color: #4CAF50;
+  }
+  
+  .status-indicator.inactivo {
+    background-color: #F44336;
+  }
+  
+  /* Ajustes para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .ubicaciones-container {
+      padding: 15px;
+    }
+    
+    .ubicaciones-table th, 
+    .ubicaciones-table td {
+      padding: 8px 10px;
+      font-size: 0.7rem;
+    }
+  }

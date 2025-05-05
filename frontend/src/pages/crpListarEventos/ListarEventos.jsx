@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./ListarEventos.css";
 
 const ListarEventos = () => {
   const [eventos, setEventos] = useState([]);
@@ -22,51 +23,60 @@ const ListarEventos = () => {
     obtenerEventos();
   }, []);
 
+  const getEstadoClass = (estado) => {
+    return estado === 1 ? 'activo' : 'inactivo';
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Listado de Eventos</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="eventos-container">
+      <h2 className="eventos-title">Listado de Eventos</h2>
+      {error && <p className="eventos-error">{error}</p>}
       {eventos.length === 0 ? (
-        <p>No hay eventos disponibles.</p>
+        <p className="eventos-empty">No hay eventos disponibles.</p>
       ) : (
-        <table border="1" cellPadding="10" cellSpacing="0">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Foto Principal</th>
-              <th>Foto Secundaria</th>
-              <th>Cédula Adm</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {eventos.map((evento) => (
-              <tr key={evento.id_evento}>
-                <td>{evento.id_evento}</td>
-                <td>{evento.nombre}</td>
-                <td>{evento.descripcion}</td>
-                <td>
-                  <img
-                    src={evento.foto_principal}
-                    alt="Foto principal"
-                    width="100"
-                  />
-                </td>
-                <td>
-                  <img
-                    src={evento.foto_secundaria}
-                    alt="Foto secundaria"
-                    width="100"
-                  />
-                </td>
-                <td>{evento.cedula_adm}</td>
-                <td>{evento.estado}</td>
+        <div className="table-responsive">
+          <table className="eventos-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Foto Principal</th>
+                <th>Foto Secundaria</th>
+                <th>Cédula Adm</th>
+                <th>Estado</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {eventos.map((evento) => (
+                <tr key={evento.id_evento}>
+                  <td>{evento.id_evento}</td>
+                  <td>{evento.nombre}</td>
+                  <td>{evento.descripcion}</td>
+                  <td>
+                    <img
+                      src={evento.foto_principal}
+                      alt="Foto principal"
+                      className="evento-img"
+                    />
+                  </td>
+                  <td>
+                    <img
+                      src={evento.foto_secundaria}
+                      alt="Foto secundaria"
+                      className="evento-img"
+                    />
+                  </td>
+                  <td>{evento.cedula_adm}</td>
+                  <td>
+                    <span className={`status-indicator ${getEstadoClass(evento.estado)}`}></span>
+                    {evento.estado === 1 ? 'Activo' : 'Inactivo'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

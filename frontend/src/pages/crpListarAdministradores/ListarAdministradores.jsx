@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./ListarAdministradores.css";
 
 const ListarAdministradores = () => {
   const [administradores, setAdministradores] = useState([]);
@@ -22,45 +23,52 @@ const ListarAdministradores = () => {
     obtenerAdministradores();
   }, []);
 
+  const getEstadoClass = (estado) => {
+    return estado === 1 ? 'activo' : 'inactivo';
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Listado de Administradores</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="admin-container">
+      <h2 className="admin-title">Listado de Administradores</h2>
+      
+      {error && <p className="admin-error">{error}</p>}
+      
       {administradores.length === 0 ? (
-        <p>No hay administradores disponibles.</p>
+        <p className="admin-empty">No hay administradores disponibles.</p>
       ) : (
-        <table border="1" cellPadding="10" cellSpacing="0">
-          <thead>
-            <tr>
-              <th>Cédula</th>
-              <th>Nombres</th>
-              <th>Apellidos</th>
-              <th>Dirección</th>
-              <th>Municipio</th>
-              <th>Departamento</th>
-              <th>Email</th>
-              <th>Teléfono</th>
-              <th>Contraseña</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {administradores.map((admin) => (
-              <tr key={admin.cedula_adm}>
-                <td>{admin.cedula_adm}</td>
-                <td>{admin.nombres}</td>
-                <td>{admin.apellidos}</td>
-                <td>{admin.direccion}</td>
-                <td>{admin.municipio}</td>
-                <td>{admin.departamento}</td>
-                <td>{admin.email}</td>
-                <td>{admin.telefono}</td>
-                <td>********</td> {/* Contraseña oculta */}
-                <td>{admin.estado}</td>
+        <div className="table-responsive">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Cédula</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Municipio</th>
+                <th>Departamento</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {administradores.map((admin) => (
+                <tr key={admin.cedula_adm}>
+                  <td>{admin.cedula_adm}</td>
+                  <td>{admin.nombres}</td>
+                  <td>{admin.apellidos}</td>
+                  <td>{admin.municipio}</td>
+                  <td>{admin.departamento}</td>
+                  <td>{admin.email}</td>
+                  <td>{admin.telefono}</td>
+                  <td>
+                    <span className={`status-indicator ${getEstadoClass(admin.estado)}`}></span>
+                    {admin.estado === 1 ? 'Activo' : 'Inactivo'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

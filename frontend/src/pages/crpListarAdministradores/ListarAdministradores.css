@@ -1,0 +1,106 @@
+/* Contenedor principal */
+.admin-container {
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Título */
+  .admin-title {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3rem; /* Tamaño reducido */
+    font-weight: 600;
+  }
+  
+  /* Mensajes */
+  .admin-error {
+    color: #f44336;
+    font-size: 0.75rem;
+    margin-bottom: 15px;
+  }
+  
+  .admin-empty {
+    color: #666;
+    font-size: 0.75rem;
+  }
+  
+  /* Tabla responsive */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Estilos de tabla */
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem; /* Tamaño reducido */
+    min-width: 600px; /* Mínimo para no comprimir demasiado */
+  }
+  
+  /* Encabezados */
+  .admin-table thead tr {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .admin-table th {
+    padding: 10px 12px; /* Padding reducido */
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+  }
+  
+  /* Celdas */
+  .admin-table td {
+    padding: 10px 12px; /* Padding reducido */
+    color: #555;
+    line-height: 1.4;
+  }
+  
+  /* Filas */
+  .admin-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+  }
+  
+  .admin-table tbody tr:last-child {
+    border-bottom: none;
+  }
+  
+  .admin-table tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Indicadores de estado */
+  .status-indicator {
+    display: inline-block;
+    width: 10px; /* Tamaño reducido */
+    height: 10px; /* Tamaño reducido */
+    border-radius: 50%;
+    margin-right: 6px; /* Espacio reducido */
+    vertical-align: middle;
+  }
+  
+  .status-indicator.activo {
+    background-color: #4CAF50;
+  }
+  
+  .status-indicator.inactivo {
+    background-color: #F44336;
+  }
+  
+  /* Ajustes para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .admin-container {
+      padding: 15px;
+    }
+    
+    .admin-table th, 
+    .admin-table td {
+      padding: 8px 10px;
+    }
+  }

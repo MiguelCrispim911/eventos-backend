@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./ListarFunciones.css";
 
 const ListarFunciones = () => {
   const [funciones, setFunciones] = useState([]);
@@ -22,41 +23,50 @@ const ListarFunciones = () => {
     obtenerFunciones();
   }, []);
 
+  const getEstadoClass = (estado) => {
+    return estado === 1 ? 'activo' : 'inactivo';
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Listado de Funciones</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="funciones-container">
+      <h2 className="funciones-title">Listado de Funciones</h2>
+      {error && <p className="funciones-error">{error}</p>}
       {funciones.length === 0 ? (
-        <p>No hay funciones disponibles.</p>
+        <p className="funciones-empty">No hay funciones disponibles.</p>
       ) : (
-        <table border="1" cellPadding="10" cellSpacing="0">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Fecha</th>
-              <th>Hora de Inicio</th>
-              <th>ID Evento</th>
-              <th>ID Ubicación</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {funciones.map((funcion) => (
-              <tr key={funcion.id_funcion}>
-                <td>{funcion.id_funcion}</td>
-                <td>{funcion.nombre}</td>
-                <td>{funcion.descripcion}</td>
-                <td>{funcion.fecha}</td>
-                <td>{funcion.hora_inicio}</td>
-                <td>{funcion.id_evento}</td>
-                <td>{funcion.id_ubicacion}</td>
-                <td>{funcion.estado}</td>
+        <div className="table-responsive">
+          <table className="funciones-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Hora Inicio</th>
+                <th>ID Evento</th>
+                <th>ID Ubicación</th>
+                <th>Estado</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {funciones.map((funcion) => (
+                <tr key={funcion.id_funcion}>
+                  <td>{funcion.id_funcion}</td>
+                  <td>{funcion.nombre}</td>
+                  <td>{funcion.descripcion}</td>
+                  <td>{new Date(funcion.fecha).toLocaleDateString()}</td>
+                  <td>{funcion.hora_inicio}</td>
+                  <td>{funcion.id_evento}</td>
+                  <td>{funcion.id_ubicacion}</td>
+                  <td>
+                    <span className={`status-indicator ${getEstadoClass(funcion.estado)}`}></span>
+                    {funcion.estado === 1 ? 'Activo' : 'Inactivo'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
