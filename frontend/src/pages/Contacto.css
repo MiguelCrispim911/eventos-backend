@@ -40,18 +40,19 @@
 }
 
 .info-card {
-  background-color: #f8f9fa;
-  border-radius: 8px; /* Reducimos de 10px a 8px */
-  padding: 1.2rem; /* Reducimos de 1.5rem a 1.2rem */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); /* Reducimos la sombra */
+  background-color: #fafaf8;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-  height: auto; /* Permitimos que la altura se ajuste al contenido */
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .info-card:hover {
-  transform: translateY(-3px); /* Reducimos de -5px a -3px */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
 }
 
 .info-icon {
@@ -436,6 +437,9 @@
     transform: scale(40, 40);
   }
 }
+
+
+
 
 
 
