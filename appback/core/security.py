@@ -1,6 +1,7 @@
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from fastapi import HTTPException, status
+from passlib.context import CryptContext
 
 SECRET_KEY = "tu_clave_secreta_aleatoria_compleja"  # Cambia esto!
 ALGORITHM = "HS256"
@@ -26,3 +27,12 @@ def verify_token(token: str):
         return cedula
     except JWTError:
         raise credentials_exception
+    
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)

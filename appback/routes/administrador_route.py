@@ -5,6 +5,8 @@ from appback.database import get_session
 from typing import Annotated
 from appback.core.security import create_access_token
 from appback.api.dependencies import get_current_admin
+from appback.core.security import hash_password
+from appback.core.security import verify_password
 
 administrador_router = APIRouter()
 
@@ -12,7 +14,9 @@ session_dep = Annotated[Session, Depends(get_session)]
 
 @administrador_router.post("/", response_model=AdministradorPublic)
 def create_admin(admin: AdministradorCreate, session: session_dep):
-    db_admin = Administrador.model_validate(admin)
+    admin_dict = admin.model_dump()
+    admin_dict["contrasena"] = hash_password(admin_dict["contrasena"])  # aquí hasheamos
+    db_admin = Administrador(**admin_dict)
     session.add(db_admin)
     session.commit()
     session.refresh(db_admin)
@@ -53,19 +57,18 @@ def delete_admin(cedula_adm: int, session: session_dep):
 
 @administrador_router.post("/login/")
 def login_admin(admin: AdministradorLogin, session: Session = Depends(get_session)):
-    db_admin = session.exec(
-        select(Administrador)
-        .where(Administrador.cedula_adm == admin.cedula_adm)
-        .where(Administrador.contrasena == admin.contrasena)
-    ).first()
+    db_admin = session.get(Administrador, admin.cedula_adm)
     
-    if not db_admin:
+    if not db_admin or not verify_password(admin.contrasena, db_admin.contrasena):
         raise HTTPException(status_code=401, detail="Credenciales inválidas")
-    
-    access_token = create_access_token(data={"tipo_usuario":"admin", "id_usuario": str(db_admin.cedula_adm), "nombre_usuario":str(db_admin.nombres)})
+
+    access_token = create_access_token(data={
+        "tipo_usuario": "admin",
+        "id_usuario": str(db_admin.cedula_adm),
+        "nombre_usuario": str(db_admin.nombres)
+    })
     
     return {
         "access_token": access_token,
         "token_type": "bearer",
-        # "admin": db_admin
     }
