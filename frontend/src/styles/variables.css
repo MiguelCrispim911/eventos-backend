@@ -1,0 +1,31 @@
+:root {
+  /* Colores primarios */
+  --primary: #0070CE;
+  --primary-hover: #0056B3;
+  
+  /* Colores secundarios */
+  --secondary: #FF6B35;
+  --secondary-hover: #E85925;
+  
+  /* Colores de acento */
+  --accent: #17A2B8;
+  
+  /* Colores de texto */
+  --text-dark: #343A40;
+  --text-muted: #6c757d;
+  
+  /* Colores de fondo */
+  --background: #F8F9FA;
+  --light: #F8F9FA;
+  --dark: #343A40;
+  
+  /* Colores de borde */
+  --border-color: #E9ECEF;
+  --border-gray: #E9ECEF;
+  
+  /* Colores de estado */
+  --error: #DC3545;
+  --success: #28a745;
+  --warning: #ffc107;
+  --info: #17a2b8;
+}

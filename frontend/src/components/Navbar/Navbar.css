@@ -1,12 +1,12 @@
 /* Navbar.css - Versión mejorada estilo boceto */
 .navbar {
-    background-color: #0070CE; /* Azul Profundo */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* sombra un poco más marcada */
+    background-color: var(--primary);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     padding: 1rem 2rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    overflow: visible; /* Aseguramos que no corte el contenido */
+    overflow: visible;
 }
 
 .nav-container {

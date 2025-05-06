@@ -1,15 +1,5 @@
-/* Variables de colores */
-:root {
-  --primary: #007BFF;
-  --primary-dark: #0056B3;
-  --secondary: #FF6B35;
-  --accent: #17A2B8;
-  --dark: #343A40;
-  --light: #F8F9FA;
-  --border-gray: #E9ECEF;
-}
-
 /* Reset para eliminar márgenes y padding */
+
 body, html {
   margin: 0;
   padding: 0;

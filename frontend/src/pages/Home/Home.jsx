@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import CardEvento from "../components/CardEvento";
-import "../pages/Home.css";
+import CardEvento from "../../components/CardEvento/CardEvento";
+import "./Home.css";
 
 
 // Datos de ejemplo para eventos destacados

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import clienteService from '../services/clienteService';
-import { useAuth } from '../context/AuthContext';
-import './Registro.css';
+import clienteService from '../../services/clienteService';
+import { useAuth } from '../../context/AuthContext';
+import "./Registro.css";
 
 const Registro = () => {
   const navigate = useNavigate();

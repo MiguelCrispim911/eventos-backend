@@ -66,6 +66,7 @@
   flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -108,12 +109,12 @@
 
 .btn-details {
   background-color: transparent;
-  color: #0070CE;
-  border: 1px solid #0070CE;
+  color: var(--primary);
+  border: 1px solid var(--primary);
 }
 
 .btn-buy {
-  background-color: #FF6B35;
+  background-color: var(--secondary);
   color: white;
   border: none;
 }
