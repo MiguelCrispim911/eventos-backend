@@ -2,8 +2,11 @@ from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlmodel import select, Session
 from appback.models.cliente import Cliente, ClienteCreate, ClientePublic, ClienteUpdate, LoginData
 from appback.database import get_session
-from pydantic import BaseModel
 from typing import Annotated
+from appback.core.securityCliente import create_access_token
+from appback.api.dependencies import get_current_user
+from appback.core.securityCliente import hash_password
+from appback.core.securityCliente import verify_password
 
 cliente_router = APIRouter()
 
@@ -11,7 +14,9 @@ session_dep = Annotated[Session, Depends(get_session)]
 
 @cliente_router.post("/", response_model=ClientePublic)
 def create_cliente(cliente: ClienteCreate, session: session_dep):
-    db_cliente = Cliente.model_validate(cliente)
+    user_dict = cliente.model_dump()
+    user_dict["contrasena"] = hash_password(user_dict["contrasena"])
+    db_cliente = Cliente(**user_dict) 
     session.add(db_cliente)
     session.commit()
     session.refresh(db_cliente)
@@ -51,33 +56,19 @@ def delete_cliente(cedula: int, session: session_dep):
 
 
 @cliente_router.post("/login")
-def login(user: LoginData, session: session_dep):
-    cliente = session.exec(select(Cliente).where(Cliente.cedula == user.cedula)).first()
+def login(user: LoginData, session: Session = Depends(get_session)):
+    db_cliente = session.get(Cliente, user.cedula)  
 
-    if not cliente or cliente.contrasena != user.contrasena:
+    if not db_cliente or not verify_password(user.contrasena, db_cliente.contrasena):
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
 
-    return {"message": "Login exitoso", "user": cliente.cedula}
+    access_token = create_access_token(data={
+        "tipo_usuario": "cliente",
+        "id_usuario": str(db_cliente.cedula),
+        "nombre_usuario": str(db_cliente.nombres)
+    })
 
-
-class ChangePasswordRequest(BaseModel):
-    cedula: int
-    contrasena_actual: str
-    nueva_contrasena: str
-
-@cliente_router.post("/cambiar_contrasena")
-def cambiar_contrasena(data: ChangePasswordRequest, session: session_dep):
-    cliente = session.exec(select(Cliente).where(Cliente.cedula == data.cedula)).first()
-
-    if not cliente:
-        raise HTTPException(status_code=404, detail="Cliente no encontrado")
-
-    if cliente.contrasena != data.contrasena_actual:
-        raise HTTPException(status_code=401, detail="Contraseña actual incorrecta")
-
-    cliente.contrasena = data.nueva_contrasena
-    session.add(cliente)
-    session.commit()
-    session.refresh(cliente)
-
-    return {"message": "Contraseña actualizada exitosamente"}
+    return {
+        "access_token": access_token, 
+        "token_type": "bearer",
+    }

@@ -5,7 +5,7 @@ import Login from "../pages/Login/Login";
 import Contacto from "../pages/Contacto/Contacto";
 import Registro from "../pages/Registro/Registro";
 import Perfil from "../pages/Perfil/Perfil";
-import ProtectedRouteCliente from "./ProtectedRouteCliente";
+
 
 const AppRouter = () => (
     <MainLayout>
@@ -20,9 +20,9 @@ const AppRouter = () => (
             <Route 
                 path="/perfil" 
                 element={
-                    <ProtectedRouteCliente>
+                    
                         <Perfil />
-                    </ProtectedRouteCliente>
+                    
                 } 
             />
             

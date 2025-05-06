@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import clienteService from '../../services/clienteService';
+import { loginUser } from '../../services/apiAuth';
 import { useAuth } from '../../context/AuthContext';
 import "./Login.css";
+
+
 
 const Login = () => {
   const [cedula, setCedula] = useState('');
@@ -19,33 +21,13 @@ const Login = () => {
     
     try {
       // Validar que la cédula sea un número
-      const cedulaNum = parseInt(cedula, 10);
-      if (isNaN(cedulaNum)) {
+      if (isNaN(parseInt(cedula, 10))) {
         throw new Error('La cédula debe ser un número');
       }
       
-      // Realizar la solicitud de login
-      const response = await clienteService.post('/clientes/login', {
-        cedula: cedulaNum,
-        contrasena: password
-      });
-      
-      console.log('Respuesta de login:', response.data);
-      
-      // Extraer el token y la información del usuario
-      const { token, user: userId } = response.data;
-      
-      if (!token) {
-        throw new Error('No se recibió token de autenticación');
-      }
-      
-      // Obtener los datos completos del usuario
-      const userResponse = await clienteService.get(`/clientes/${cedulaNum}`);
-      const userData = userResponse.data;
-      
-      // Guardar los datos del usuario y el token en el contexto
-      login(userData, token);
-      
+      const userData = await loginUser({ cedula, password });
+      // Guardar los datos del usuario en el contexto
+      login(userData);
       // Redirigir a la página Home
       navigate('/');
     } catch (err) {
