@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ListarEventos.css";
 
 const ListarEventos = () => {
   const [eventos, setEventos] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [eventoSeleccionado, setEventoSeleccionado] = useState(null);
   const [error, setError] = useState(null);
 
+  // useEffect para obtener eventos desde la base de datos
   useEffect(() => {
     const obtenerEventos = async () => {
       try {
@@ -23,61 +26,111 @@ const ListarEventos = () => {
     obtenerEventos();
   }, []);
 
-  const getEstadoClass = (estado) => {
-    return estado === 1 ? 'activo' : 'inactivo';
+  const seleccionarEvento = (evento) => {
+    setEventoSeleccionado(evento);
+  };
+
+  const cerrarDetalle = () => {
+    setEventoSeleccionado(null);
+  };
+
+  const siguienteEvento = () => {
+    setCurrentIndex((prevIndex) => {
+      const nextIndex = prevIndex + 1;
+      return nextIndex >= eventos.length ? 0 : nextIndex;
+    });
+  };
+
+  const anteriorEvento = () => {
+    setCurrentIndex((prevIndex) =>
+      (prevIndex - 1 + eventos.length) % eventos.length
+    );
   };
 
   return (
     <div className="eventos-container">
-      <h2 className="eventos-title">Listado de Eventos</h2>
-      {error && <p className="eventos-error">{error}</p>}
-      {eventos.length === 0 ? (
-        <p className="eventos-empty">No hay eventos disponibles.</p>
-      ) : (
-        <div className="table-responsive">
-          <table className="eventos-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Foto Principal</th>
-                <th>Foto Secundaria</th>
-                <th>Cédula Adm</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {eventos.map((evento) => (
-                <tr key={evento.id_evento}>
-                  <td>{evento.id_evento}</td>
-                  <td>{evento.nombre}</td>
-                  <td>{evento.descripcion}</td>
-                  <td>
-                    <img
-                      src={evento.foto_principal}
-                      alt="Foto principal"
-                      className="evento-img"
-                    />
-                  </td>
-                  <td>
-                    <img
-                      src={evento.foto_secundaria}
-                      alt="Foto secundaria"
-                      className="evento-img"
-                    />
-                  </td>
-                  <td>{evento.cedula_adm}</td>
-                  <td>
-                    <span className={`status-indicator ${getEstadoClass(evento.estado)}`}></span>
-                    {evento.estado === 1 ? 'Activo' : 'Inactivo'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {/* Mostrar el mensaje de error si existe */}
+      {error && <div className="error-message">Error: {error}</div>}
+
+      {eventoSeleccionado && (
+        <div className="evento-detalle">
+          <div className="detalle-contenido">
+            <img
+              src={eventoSeleccionado.foto_principal}
+              alt={eventoSeleccionado.nombre}
+              className="detalle-img"
+            />
+            <h3>{eventoSeleccionado.nombre}</h3>
+            <p>{eventoSeleccionado.descripcion}</p>
+            <p>
+              Estado:{" "}
+              <span
+                className={`evento-status ${
+                  eventoSeleccionado.estado === 1 ? "activo" : "inactivo"
+                }`}
+              >
+                {eventoSeleccionado.estado === 1 ? "Activo" : "Inactivo"}
+              </span>
+            </p>
+            <div className="detalle-botones">
+              <button className="boton-comprar">Comprar Entrada</button>
+              <button className="boton-cerrar" onClick={cerrarDetalle}>
+                Cerrar
+              </button>
+            </div>
+          </div>
         </div>
       )}
+      <h2 className="eventos-title">Listado de Eventos</h2>
+      <div className="carousel">
+        <button onClick={anteriorEvento} className="carousel-button left">
+          &#8592;
+        </button>
+        <div className="eventos-grid">
+          {eventos.length > 0 ? (
+            Array.from({ length: 4 }).map((_, index) => {
+              const eventoIndex = (currentIndex + index) % eventos.length;
+              const evento = eventos[eventoIndex];
+              return (
+                <div
+                  key={evento.id_evento}
+                  className="evento-card"
+                  onClick={() => seleccionarEvento(evento)}
+                >
+                  <div className="evento-card-header">
+                    <img
+                      src={evento.foto_principal}
+                      alt={evento.nombre}
+                      className="evento-card-img"
+                    />
+                    <span
+                      className={`evento-status ${
+                        evento.estado === 1 ? "activo" : "inactivo"
+                      }`}
+                    >
+                      {evento.estado === 1 ? "Activo" : "Inactivo"}
+                    </span>
+                  </div>
+                  <div className="evento-card-body">
+                    <h3 className="evento-card-title">{evento.nombre}</h3>
+                    <p className="evento-card-description">
+                      {evento.descripcion}
+                    </p>
+                    <p className="evento-card-admin">
+                      Cédula Adm: {evento.cedula_adm}
+                    </p>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <p className="no-eventos-message">No hay eventos disponibles.</p>
+          )}
+        </div>
+        <button onClick={siguienteEvento} className="carousel-button right">
+          &#8594;
+        </button>
+      </div>
     </div>
   );
 };

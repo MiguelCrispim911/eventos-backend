@@ -24,6 +24,7 @@ const AppRouter = () => (
     <Route element={<MainLayout />}>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/eventos" element={<ListarEventos />} />
       {/* más rutas públicas aquí */}
     </Route>
 
