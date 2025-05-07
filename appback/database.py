@@ -6,7 +6,7 @@ from sqlalchemy import MetaData
 
 # Configuración de la base de datos
 db_username = "root"
-db_password = "admin"
+db_password = "root"
 db_host = "localhost"
 db_name = "bdeventointermedio"
 url_connection = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:3306/{db_name}"

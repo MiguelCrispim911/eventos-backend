@@ -3,6 +3,7 @@ from sqlmodel import select, Session
 from appback.models.administrador import Administrador, AdministradorCreate, AdministradorPublic, AdministradorUpdate
 from appback.database import get_session
 from typing import Annotated
+from appback.core.security import pwd_context
 
 administrador_router = APIRouter()
 

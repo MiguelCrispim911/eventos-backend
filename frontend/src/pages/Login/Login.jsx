@@ -1,50 +1,58 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { loginUser } from '../../services/apiAuth';
-import { useAuth } from '../../context/AuthContext';
 import "./Login.css";
-
-
 
 const Login = () => {
   const [cedula, setCedula] = useState('');
-  const [password, setPassword] = useState('');
+  const [contrasena, setContrasena] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
     
     try {
-      // Validar que la cédula sea un número
-      if (isNaN(parseInt(cedula, 10))) {
+      // Validación de cédula numérica
+      if (isNaN(parseInt(cedula))) {
         throw new Error('La cédula debe ser un número');
       }
+  
+      // Petición al backend
+      const response = await fetch('http://localhost:8000/clientes/login', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cedula: parseInt(cedula),
+          contrasena: contrasena
+        }),
+      });
       
-      const userData = await loginUser({ cedula, password });
-      // Guardar los datos del usuario en el contexto
-      login(userData);
-      // Redirigir a la página Home
-      navigate('/');
-    } catch (err) {
-      console.error('Error de login:', err);
+      const data = await response.json();
       
-      if (err.response && err.response.status === 401) {
-        setError('Cédula o contraseña incorrecta');
-      } else if (err.message === 'La cédula debe ser un número') {
-        setError(err.message);
-      } else {
-        setError('Error al iniciar sesión. Intente nuevamente.');
+      if (!response.ok) {
+        throw new Error(data.detail || 'Error de autenticación');
       }
-    } finally {
-      setLoading(false);
+      
+      
+      localStorage.setItem('authToken', data.access_token);  
+
+      
+      // Dispara eventos para actualizar el Navbar
+      window.dispatchEvent(new Event('auth-change'));
+      window.dispatchEvent(new StorageEvent('storage', { key: 'authToken' }));
+      // ---------------------------------------------
+  
+      navigate('/');
+  
+    } catch (error) {
+      setError(error.message);
+      setContrasena('');
     }
   };
 
+  // Renderizado (se mantiene igual)
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
@@ -68,20 +76,16 @@ const Login = () => {
           <label className="form-label">Contraseña</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
             className="form-input"
             placeholder="Ingresa tu contraseña"
             required
           />
         </div>
         
-        <button 
-          type="submit" 
-          className={`submit-button ${loading ? 'loading' : ''}`}
-          disabled={loading}
-        >
-          {loading ? 'Iniciando sesión...' : 'Entrar'}
+        <button type="submit" className="submit-button">
+          Entrar
         </button>
         
         <div className="register-link">

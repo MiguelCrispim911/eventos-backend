@@ -47,6 +47,8 @@ app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 def serve_index():
     return FileResponse(os.path.join("frontend", "index.html"))
 
+
+
 # ------------------------ LOGIN ------------------------
 # Base de datos simulada de usuarios (esto debe reemplazarse con una consulta real a la DB)
 usuarios_db = [

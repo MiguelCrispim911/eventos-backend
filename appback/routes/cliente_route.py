@@ -3,10 +3,8 @@ from sqlmodel import select, Session
 from appback.models.cliente import Cliente, ClienteCreate, ClientePublic, ClienteUpdate, LoginData
 from appback.database import get_session
 from typing import Annotated
-from appback.core.securityCliente import create_access_token
-from appback.api.dependencies import get_current_user
-from appback.core.securityCliente import hash_password
-from appback.core.securityCliente import verify_password
+from appback.core.security import create_access_token, hash_password, verify_password
+from fastapi import status
 
 cliente_router = APIRouter()
 
@@ -14,6 +12,14 @@ session_dep = Annotated[Session, Depends(get_session)]
 
 @cliente_router.post("/", response_model=ClientePublic)
 def create_cliente(cliente: ClienteCreate, session: session_dep):
+    # Verificar si el cliente ya existe
+    existing_cliente = session.get(Cliente, cliente.cedula)
+    if existing_cliente:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cliente ya existe"
+        )
+    
     user_dict = cliente.model_dump()
     user_dict["contrasena"] = hash_password(user_dict["contrasena"])
     db_cliente = Cliente(**user_dict) 
@@ -38,6 +44,11 @@ def update_cliente(cedula: int, cliente: ClienteUpdate, session: session_dep):
     cliente_db = session.get(Cliente, cedula)
     if not cliente_db:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    
+    # Si se actualiza la contraseña, hashearla
+    if cliente.contrasena:
+        cliente.contrasena = hash_password(cliente.contrasena)
+    
     cliente_data = cliente.model_dump(exclude_unset=True)
     cliente_db.sqlmodel_update(cliente_data)
     session.add(cliente_db)
@@ -54,21 +65,39 @@ def delete_cliente(cedula: int, session: session_dep):
     session.commit()
     return {"ok": True}
 
-
 @cliente_router.post("/login")
-def login(user: LoginData, session: Session = Depends(get_session)):
-    db_cliente = session.get(Cliente, user.cedula)  
+def login(user: LoginData, session: session_dep):
+    try:
+        db_cliente = session.get(Cliente, user.cedula)  
 
-    if not db_cliente or not verify_password(user.contrasena, db_cliente.contrasena):
-        raise HTTPException(status_code=401, detail="Credenciales incorrectas")
+        if not db_cliente:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Credenciales incorrectas"
+            )
 
-    access_token = create_access_token(data={
-        "tipo_usuario": "cliente",
-        "id_usuario": str(db_cliente.cedula),
-        "nombre_usuario": str(db_cliente.nombres)
-    })
+        # Verificación mejorada de contraseña
+        if not verify_password(user.contrasena, db_cliente.contrasena):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Credenciales incorrectas"
+            )
 
-    return {
-        "access_token": access_token, 
-        "token_type": "bearer",
-    }
+        access_token = create_access_token(data={
+            "tipo_usuario": "cliente",
+            "id_usuario": str(db_cliente.cedula),
+            "nombre_usuario": str(db_cliente.nombres)
+        })
+
+        return {
+            "access_token": access_token, 
+            "token_type": "bearer",
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error interno: {str(e)}"
+        )

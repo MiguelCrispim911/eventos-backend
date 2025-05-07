@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import clienteService from '../../services/clienteService';
-import { useAuth } from '../../context/AuthContext';
 import "./Registro.css";
 
 const Registro = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -72,28 +69,35 @@ const Registro = () => {
         estado: 1 // Activo por defecto
       };
       
-      // Enviar datos al servidor
-      const response = await clienteService.post('/clientes/', clienteData);
+      // Enviar datos al servidor usando fetch
+      const response = await fetch('http://localhost:8000/clientes/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(clienteData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Error al registrar usuario');
+      }
       
       setSuccess('¡Registro exitoso! Redirigiendo al inicio de sesión...');
       
-      // Opcional: iniciar sesión automáticamente
-      login(response.data);
-      
       // Redirigir después de un breve retraso
       setTimeout(() => {
-        navigate('/');
+        navigate('/login');
       }, 2000);
       
     } catch (err) {
       console.error('Error de registro:', err);
       
-      if (err.response && err.response.data && err.response.data.detail) {
-        setError(err.response.data.detail);
-      } else if (err.response && err.response.status === 409) {
+      if (err.message.includes('409')) {
         setError('Ya existe un usuario con esta cédula');
       } else {
-        setError('Error al registrar usuario. Intente nuevamente.');
+        setError(err.message || 'Error al registrar usuario. Intente nuevamente.');
       }
     } finally {
       setLoading(false);

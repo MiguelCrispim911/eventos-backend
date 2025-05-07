@@ -1,41 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import clienteService from '../../services/clienteService';
 import styles from './Perfil.module.css';
 
 const Perfil = () => {
-  const { user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [userData, setUserData] = useState(null);
   
   // Cargar datos del usuario al montar el componente
   useEffect(() => {
-    if (!isAuthenticated || !user) {
-      navigate('/login');
-      return;
-    }
-    
     const fetchUserData = async () => {
       try {
-        // Intentar obtener los datos más recientes del usuario
-        const response = await clienteService.get('/clientes/me');
-        setUserData(response.data);
+        // Verificar si hay token en localStorage
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+
+        // Obtener datos del usuario desde el backend
+        const response = await fetch('http://localhost:8000/clientes/me', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('No autorizado');
+        }
+
+        const data = await response.json();
+        setUserData(data);
         setLoading(false);
       } catch (err) {
         console.error('Error al cargar datos del usuario:', err);
-        // Si falla, usar los datos que ya tenemos en el contexto
-        setUserData(user);
-        setError('');  // Limpiar error ya que usamos datos de respaldo
+        
+        // Intentar usar datos de localStorage como respaldo
+        const storedUser = localStorage.getItem('userData');
+        if (storedUser) {
+          setUserData(JSON.parse(storedUser));
+          setError('');
+        } else {
+          setError('No se pudo cargar la información del perfil');
+          navigate('/login');
+        }
         setLoading(false);
       }
     };
     
     fetchUserData();
-  }, [isAuthenticated, user, navigate]);
+  }, [navigate]);
   
   if (loading) {
     return <div className="loading">Cargando datos del perfil...</div>;
@@ -99,8 +116,3 @@ const Perfil = () => {
 };
 
 export default Perfil;
-
-
-
-
-
