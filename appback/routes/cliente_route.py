@@ -86,7 +86,13 @@ def login(user: LoginData, session: session_dep):
         access_token = create_access_token(data={
             "tipo_usuario": "cliente",
             "id_usuario": str(db_cliente.cedula),
-            "nombre_usuario": str(db_cliente.nombres)
+            "nombre_usuario": str(db_cliente.nombres),
+            "apellido_usuario": str(db_cliente.apellidos),
+            "direccion_usuario": str(db_cliente.direccion),
+            "departamento_usuario": str(db_cliente.departamento),
+            "municipio_usuario": str(db_cliente.municipio),
+            "email_usuario": str(db_cliente.email),
+            "telefono_usuario": str(db_cliente.telefono)
         })
 
         return {

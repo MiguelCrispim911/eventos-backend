@@ -18,7 +18,7 @@ app = FastAPI()
 # Configurar CORS para permitir peticiones desde el frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # URL del frontend - Cambio con react 
+    allow_origins=["http://localhost:3000"],  # URL del frontend - Cambio con react "http://localhost:3000" 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

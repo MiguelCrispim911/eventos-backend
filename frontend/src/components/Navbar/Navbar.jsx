@@ -194,7 +194,7 @@ const Navbar = () => {
                   </div>
                   <div className="dropdown-divider"></div>
                   <Link 
-                    to={userType === 'cliente' ? '/perfil' : '/admin/perfil'} 
+                    to={userType === 'cliente' ? '/perfil' : '/perfil'} 
                     className="dropdown-item" 
                     onClick={() => setShowUserMenu(false)}
                   >

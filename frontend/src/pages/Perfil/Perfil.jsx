@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Perfil.module.css';
+import { jwtDecode } from 'jwt-decode';
 
 const Perfil = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [userData, setUserData] = useState(null);
-  
-  // Cargar datos del usuario al montar el componente
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Verificar si hay token en localStorage
         const token = localStorage.getItem('authToken');
         if (!token) {
           navigate('/login');
           return;
         }
 
-        // Obtener datos del usuario desde el backend
-        const response = await fetch('http://localhost:8000/clientes/me', {
+        const decodedToken = jwtDecode(token);
+        const cedula = decodedToken.cedula || decodedToken.id_usuario;
+
+        const response = await fetch(`http://localhost:8000/clientes/${cedula}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -37,39 +38,31 @@ const Perfil = () => {
         setLoading(false);
       } catch (err) {
         console.error('Error al cargar datos del usuario:', err);
-        
-        // Intentar usar datos de localStorage como respaldo
-        const storedUser = localStorage.getItem('userData');
-        if (storedUser) {
-          setUserData(JSON.parse(storedUser));
-          setError('');
-        } else {
-          setError('No se pudo cargar la información del perfil');
-          navigate('/login');
-        }
+        setError('No se pudo cargar la información del perfil');
         setLoading(false);
+        navigate('/login');
       }
     };
-    
+
     fetchUserData();
   }, [navigate]);
-  
+
   if (loading) {
     return <div className="loading">Cargando datos del perfil...</div>;
   }
-  
+
   if (error) {
     return <div className="error">{error}</div>;
   }
-  
+
   if (!userData) {
     return <div className="error">No se encontraron datos del usuario</div>;
   }
-  
+
   return (
     <div className={styles.perfilContainer}>
       <h2>Mi Perfil</h2>
-      
+
       <div className={styles.perfilInfo}>
         <div className={styles.infoItem}>
           <span className={styles.label}>Cédula:</span>
@@ -104,8 +97,8 @@ const Perfil = () => {
           <span className={styles.value}>{userData.municipio}</span>
         </div>
       </div>
-      
-      <button 
+
+      <button
         className={styles.editButton}
         onClick={() => navigate('/editar-perfil')}
       >
