@@ -4,6 +4,7 @@ import AdminLoginLayout from "../layouts/crpAdminLoginLayout/AdminLoginLayout";
 import AdminLayout from "../layouts/crpAdminLayout/AdminLayout";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import ExplorarEventos from "../pages/ExplorarEventos";
 import LoginAdministrador from "../pages/crpLoginAdministrador/LoginAdministrador";
 import AdminDashboard from "../pages/crpAdminDashboard/AdminDashboard";
 import CrearAdministrador from "../pages/crpCrearAdministrador/CrearAdministrador";
@@ -24,7 +25,7 @@ const AppRouter = () => (
     <Route element={<MainLayout />}>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/eventos" element={<ListarEventos />} />
+      <Route path="/eventos" element={<ExplorarEventos />} />
       {/* más rutas públicas aquí */}
     </Route>
 
