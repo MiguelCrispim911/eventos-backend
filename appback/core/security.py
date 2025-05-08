@@ -20,7 +20,7 @@ def verify_token(token: str):
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        cedula: str = payload.get("sub")
+        cedula: int = payload.get("sub")
         if cedula is None:
             raise credentials_exception
         return cedula

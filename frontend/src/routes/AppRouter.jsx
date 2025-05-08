@@ -30,13 +30,13 @@ const AppRouter = () => (
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/perfil" element={<Perfil />} />
-      <Route path="/eventos" element={<ExplorarEventos />} />
+      {/*<Route path="/eventos" element={<ExplorarEventos />} />*/}
       {/* más rutas públicas aquí */}
     </Route>
 
     {/* Rutas de login de administrador */}
     <Route element={<AdminLoginLayout />}>
-      <Route path="/administrador/login" element={<LoginAdministrador />} />
+      <Route path="/administrador" element={<LoginAdministrador />} />
     </Route>
 
     {/* Rutas de administrador protegidas */}
