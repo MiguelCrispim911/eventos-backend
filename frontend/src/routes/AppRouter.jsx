@@ -30,6 +30,8 @@ const AppRouter = () => (
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/perfil" element={<Perfil />} />
+      <Route path="/eventos" element={<ExplorarEventos />} />
+      {/* más rutas públicas aquí */}
     </Route>
 
     {/* Rutas de login de administrador */}
