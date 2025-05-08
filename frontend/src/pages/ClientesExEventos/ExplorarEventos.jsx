@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./ListarEventos.css";
+import "./ExplorarEventos.css";
 
 const ListarEventos = () => {
   const [eventos, setEventos] = useState([]);
