@@ -2,8 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AdminLoginLayout from "../layouts/crpAdminLoginLayout/AdminLoginLayout";
 import AdminLayout from "../layouts/crpAdminLayout/AdminLayout";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
 import LoginAdministrador from "../pages/crpLoginAdministrador/LoginAdministrador";
 import AdminDashboard from "../pages/crpAdminDashboard/AdminDashboard";
 import CrearAdministrador from "../pages/crpCrearAdministrador/CrearAdministrador";
@@ -17,15 +15,37 @@ import ListarFunciones from "../pages/crpListarFunciones/ListarFunciones";
 import ListarTipoBoleta from "../pages/crpListarTipoBoleta/ListarTipoBoleta";
 import ListarUbicaciones from "../pages/crpListarUbicaciones/ListarUbicaciones";
 import ProtectedRouteAdmin from './ProtectedRouteAdmin'; // Importa el componente ProtectedRoute
+import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
+import Contacto from "../pages/Contacto/Contacto";
+import Registro from "../pages/Registro/Registro";
+import Perfil from "../pages/Perfil/Perfil";
 
 const AppRouter = () => (
   <Routes>
-    {/* Layout de usuario normal */}
-    <Route element={<MainLayout />}>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      {/* más rutas públicas aquí */}
-    </Route>
+
+  <MainLayout>
+          <Routes>
+              {/* Rutas públicas */}
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/contacto" element={<Contacto />} />
+              <Route path="/registro" element={<Registro />} />
+              
+              {/* Rutas protegidas que requieren autenticación de cliente */}
+              <Route 
+                  path="/perfil" 
+                  element={
+                      
+                          <Perfil />
+                      
+                  } 
+              />
+              
+              {/* Puedes agregar más rutas protegidas aquí */}
+          </Routes>
+      </MainLayout>
+
 
     <Route element={<AdminLoginLayout />}>
       <Route path="/administrador" element={<LoginAdministrador />} />
@@ -49,6 +69,7 @@ const AppRouter = () => (
       {/* más rutas privadas o de admin aquí */}
     </Route>
   </Routes>
+
 );
 
 export default AppRouter;

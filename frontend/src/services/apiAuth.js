@@ -1,26 +1,29 @@
-import axios from 'axios';
 
-const apiAuth = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
-  withCredentials: true,
-});
+import clienteService from "../services/clienteService.js";
 
-/**
- * Inicia sesión de usuario
- * @param {{ email: string, password: string }} credentials
- * @returns {Promise}
- */
-export const loginUser = async (credentials) => {
-  const response = await apiAuth.post('/login', credentials);
+export async function loginUser({ cedula, password }) {
+  // Convertir la cédula a número para asegurar que coincida con lo que espera el backend
+  const cedulaNum = parseInt(cedula, 10);
+  
+  const response = await clienteService.post('/clientes/login', {
+    cedula: cedulaNum,
+    contrasena: password
+  });
+  
+  // Después del login exitoso, obtener los datos completos del usuario
+  const userResponse = await clienteService.get(`/clientes/${cedulaNum}`);
+  
+  // Devolver los datos completos del usuario
+  return userResponse.data;
+}
+
+export async function getUserProfile(cedula) {
+  const response = await clienteService.get(`/clientes/${cedula}`);
   return response.data;
-};
+}
 
-/**
- * Registra un nuevo usuario (cliente)
- * @param {{ nombres: string, apellidos: string, email: string, password: string }} data
- * @returns {Promise}
- */
-export const registerUser = async (data) => {
-  const response = await apiAuth.post('/registro', data);
-  return response.data;
-};
+export async function logout() {
+  // Si tienes un endpoint de logout en el backend, llámalo aquí
+  return true;
+}
+

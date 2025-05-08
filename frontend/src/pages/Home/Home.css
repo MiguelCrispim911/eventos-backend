@@ -1,0 +1,317 @@
+/* Reset para eliminar márgenes y padding */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Estilos para que el hero ocupe toda la pantalla y tenga más espacio vertical */
+.hero {
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  overflow-y: auto;
+  padding-bottom: 120px; /* CAMBIO 1: Reducido de 180px a 150px */
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 2rem;
+  z-index: 2;
+  margin-top: 180px; /* CAMBIO 2: Reducido de 200px a 180px */
+  margin-bottom: 150px; /* CAMBIO 3: Reducido de 180px a 150px */
+}
+
+.hero-content .highlight {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.hero-content .highlight-2 {
+  color: var(--light);
+  font-weight: 700;
+}
+
+.badge {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+p {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem; /* CAMBIO 8: Reducido de 3rem a 2.5rem */
+}
+
+.explore,
+.search {
+  display: inline-block;
+  padding: 1.2rem 2.5rem; /* CAMBIO 4: Aumentado de 1rem 2rem a 1.2rem 2.5rem */
+  font-size: 1.2rem; /* CAMBIO 5: Aumentado de 1.1rem a 1.2rem */
+  border-radius: 0.6rem; /* CAMBIO 6: Aumentado de 0.5rem a 0.6rem */
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px; /* CAMBIO 7: Añadido espaciado entre letras */
+}
+
+.explore {
+  background-color: var(--secondary);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); /* CAMBIO 8: Añadida sombra */
+}
+
+.search {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15); /* CAMBIO 9: Añadida sombra */
+}
+
+.explore:hover {
+  background-color: #e55a2b;
+  transform: translateY(-5px); /* CAMBIO 10: Aumentado de -3px a -5px */
+  box-shadow: 0 12px 25px rgba(255, 107, 53, 0.4); /* CAMBIO 11: Mejorada sombra en hover */
+}
+
+.search:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* CAMBIO 12: Aumentado de 0.1 a 0.15 */
+  transform: translateY(-5px); /* CAMBIO 13: Aumentado de -3px a -5px */
+  box-shadow: 0 12px 25px rgba(255, 255, 255, 0.25); /* CAMBIO 14: Mejorada sombra en hover */
+}
+
+/* Estilos para la sección de eventos destacados dentro del hero */
+.hero-featured-events {
+  width: 80%; /* CAMBIO 1: Reducido de 90% a 80% para un tamaño más compacto */
+  max-width: 1100px; /* CAMBIO 2: Reducido de 1400px a 1100px */
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 25px; /* CAMBIO 3: Reducido de 30px a 25px */
+  padding: 50px; /* CAMBIO 4: Reducido de 60px a 50px */
+  margin: 0 20px 120px 20px; /* CAMBIO 5: Reducido de 150px a 120px */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: var(--dark);
+  backdrop-filter: blur(8px);
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Elementos decorativos ajustados para un cuadro más pequeño */
+.hero-featured-events::before {
+  content: '';
+  position: absolute;
+  top: -40px; /* CAMBIO 6: Ajustado de -50px a -40px */
+  right: -40px; /* CAMBIO 7: Ajustado de -50px a -40px */
+  width: 150px; /* CAMBIO 8: Reducido de 200px a 150px */
+  height: 150px; /* CAMBIO 9: Reducido de 200px a 150px */
+  background: var(--secondary);
+  opacity: 0.1;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.hero-featured-events::after {
+  content: '';
+  position: absolute;
+  bottom: -50px; /* CAMBIO 10: Ajustado de -70px a -50px */
+  left: -50px; /* CAMBIO 11: Ajustado de -70px a -50px */
+  width: 180px; /* CAMBIO 12: Reducido de 250px a 180px */
+  height: 180px; /* CAMBIO 13: Reducido de 250px a 180px */
+  background: var(--primary);
+  opacity: 0.1;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem; /* CAMBIO 14: Reducido de 3rem a 2.5rem */
+  color: var(--dark);
+  margin-bottom: 50px; /* CAMBIO 6: Reducido de 60px a 50px */
+  position: relative;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.section-title:after {
+  content: '';
+  display: block;
+  width: 80px; /* CAMBIO 16: Reducido de 100px a 80px */
+  height: 4px; /* CAMBIO 17: Reducido de 5px a 4px */
+  background: linear-gradient(to right, var(--secondary), var(--primary));
+  margin: 20px auto 0; /* CAMBIO 18: Reducido de 30px a 20px */
+  border-radius: 4px; /* CAMBIO 19: Reducido de 5px a 4px */
+}
+
+/* Estilos para el carrusel de eventos */
+.events-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background-color: white;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow-prev {
+  left: -20px;
+}
+
+.carousel-arrow-next {
+  right: -20px;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background-color: var(--primary);
+  transform: scale(1.2);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .carousel-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+  
+  .carousel-arrow-prev {
+    left: -10px;
+  }
+  
+  .carousel-arrow-next {
+    right: -10px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 40px; /* CAMBIO 24: Reducido para móviles */
+  }
+  
+  .hero-featured-events {
+    width: 90%; /* CAMBIO 22: Ajustado para móviles */
+    padding: 40px 25px; /* CAMBIO 23: Reducido para móviles */
+    border-radius: 20px;
+  }
+  
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 30px; /* CAMBIO 25: Reducido para móviles */
+  }
+}
+
+/* Responsive para botones */
+@media (max-width: 768px) {
+  .buttons {
+    gap: 1.5rem; /* CAMBIO 15: Ajustado para móviles */
+    margin-top: 2rem; /* CAMBIO 16: Ajustado para móviles */
+  }
+  
+  .explore,
+  .search {
+    padding: 1rem 2rem; /* CAMBIO 17: Ajustado para móviles */
+    font-size: 1.1rem; /* CAMBIO 18: Ajustado para móviles */
+    width: 100%; /* CAMBIO 19: Ocupar todo el ancho en móviles */
+    max-width: 300px; /* CAMBIO 20: Limitar ancho máximo en móviles */
+  }
+}

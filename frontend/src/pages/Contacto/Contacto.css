@@ -1,0 +1,452 @@
+.contacto-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.contacto-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.contacto-header h1 {
+  color: #0070CE;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.contacto-header p {
+  color: #6C757D;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contacto-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem; /* Reducimos de 3rem a 2.5rem */
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.contacto-info {
+  flex: 1;
+  min-width: 300px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Reducimos de 220px a 180px */
+  gap: 1rem; /* Reducimos de 1.2rem a 1rem */
+}
+
+.info-card {
+  background-color: #fafaf8;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.info-icon {
+  font-size: 1.6rem; /* Reducimos de 2rem a 1.6rem */
+  margin-bottom: 0.8rem; /* Reducimos de 1.2rem a 0.8rem */
+  display: inline-block;
+  background-color: rgba(0, 112, 206, 0.1);
+  color: #0070CE;
+  width: 50px; /* Reducimos de 60px a 50px */
+  height: 50px; /* Reducimos de 60px a 50px */
+  line-height: 50px; /* Ajustamos la línea para centrar el icono */
+  border-radius: 50%;
+}
+
+.info-card h3 {
+  color: #343A40;
+  margin-bottom: 0.6rem; /* Reducimos de 0.8rem a 0.6rem */
+  font-size: 1.1rem; /* Reducimos de 1.2rem a 1.1rem */
+  font-weight: 600;
+}
+
+.info-card p {
+  color: #6C757D;
+  margin: 0.3rem 0; /* Reducimos de 0.4rem a 0.3rem */
+  font-size: 0.9rem; /* Reducimos de 0.95rem a 0.9rem */
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem; /* Reducimos de 0.4rem a 0.3rem */
+  margin-top: 0.3rem; /* Reducimos de 0.4rem a 0.3rem */
+}
+
+.social-link {
+  color: #0070CE;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.social-icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+  color: #005ba3;
+}
+
+.social-link:hover .social-icon-img {
+  transform: scale(1.1);
+}
+
+/* Ajustamos el tamaño de los iconos en móviles */
+@media (max-width: 768px) {
+  .social-icon-img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.contacto-form-container {
+  flex: 1.2;
+  min-width: 400px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 0.5rem; /* Añadimos un pequeño padding al contenedor */
+}
+
+.contacto-form {
+  padding: 3.5rem; /* Aumentamos el padding del formulario */
+}
+
+.contacto-form h2 {
+  color: #343A40;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  width: 100%; /* Aseguramos que ocupe todo el ancho disponible */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem 1.2rem; /* Aumentamos el padding horizontal */
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  box-sizing: border-box; /* Aseguramos que el padding no afecte el ancho total */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0070CE;
+  box-shadow: 0 0 0 3px rgba(0, 112, 206, 0.15);
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #0070CE;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #005ba3;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 112, 206, 0.3);
+}
+
+.submit-button.loading {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.mensaje-enviado {
+  padding: 4rem 2.5rem;
+  text-align: center;
+}
+
+.mensaje-enviado-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  color: #28a745;
+  display: inline-block;
+  background-color: rgba(40, 167, 69, 0.1);
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  border-radius: 50%;
+}
+
+.mensaje-enviado h2 {
+  color: #343A40;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.mensaje-enviado p {
+  color: #6C757D;
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+}
+
+.nuevo-mensaje-btn {
+  background-color: #0070CE;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nuevo-mensaje-btn:hover {
+  background-color: #005ba3;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 112, 206, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .contacto-content {
+    flex-direction: column;
+  }
+  
+  .contacto-form-container {
+    width: 100%;
+    min-width: 100%;  /* Aseguramos que ocupe todo el ancho en pantallas medianas */
+    padding: 0.5rem; /* Mantenemos el padding en pantallas medianas */
+  }
+  
+  .contacto-form {
+    padding: 3rem; /* Mantenemos buen padding en pantallas medianas */
+  }
+}
+
+@media (min-width: 992px) {
+  .contacto-info {
+    grid-template-columns: repeat(2, 1fr); /* Mantenemos 2 columnas en pantallas grandes */
+  }
+}
+
+@media (max-width: 768px) {
+  .contacto-header h1 {
+    font-size: 2.3rem;
+  }
+  
+  .contacto-info {
+    grid-template-columns: repeat(2, 1fr); /* Mantenemos 2 columnas en móviles más grandes */
+    gap: 0.8rem; /* Reducimos aún más el espacio en móviles */
+  }
+  
+  .info-card {
+    padding: 1rem; /* Reducimos aún más el padding en móviles */
+  }
+  
+  .info-icon {
+    width: 45px; /* Reducimos aún más en móviles */
+    height: 45px;
+    line-height: 45px;
+    font-size: 1.4rem;
+    margin-bottom: 0.7rem;
+  }
+  
+  .info-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .info-card p {
+    font-size: 0.85rem;
+  }
+  
+  .social-link {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .contacto-info {
+    grid-template-columns: repeat(2, 1fr); /* Mantenemos 2 columnas incluso en móviles pequeños */
+  }
+}
+
+@media (max-width: 400px) {
+  .contacto-info {
+    grid-template-columns: 1fr; /* 1 columna solo en móviles muy pequeños */
+  }
+}
+
+@media (max-width: 480px) {
+  .contacto-form {
+    padding: 2rem 1.5rem; /* Reducimos pero mantenemos espacio suficiente */
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 0.9rem 1rem; /* Ajustamos el padding en pantallas muy pequeñas */
+  }
+}
+
+.form-explanation {
+  background-color: #f8f9fa;
+  border-left: 3px solid #0070CE;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+.form-explanation p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #495057;
+  line-height: 1.5;
+}
+
+.field-hint {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.form-privacy {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.form-privacy a {
+  color: #0070CE;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.form-privacy a:hover {
+  text-decoration: underline;
+}
+
+/* Mejoramos el estilo de los campos del formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0070CE;
+  box-shadow: 0 0 0 3px rgba(0, 112, 206, 0.15);
+}
+
+/* Mejoramos el estilo del botón de envío */
+.submit-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.submit-button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

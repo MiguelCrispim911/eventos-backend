@@ -18,8 +18,7 @@ app = FastAPI()
 # Configurar CORS para permitir peticiones desde el frontend
 app.add_middleware(
     CORSMiddleware,
-    #allow_origins=["*"],
-    allow_origins=["http://localhost:3000"],  # URL del frontend
+    allow_origins=["http://localhost:3000"],  # URL del frontend - Cambio con react "http://localhost:3000" 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -47,6 +46,8 @@ app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 @app.get("/")
 def serve_index():
     return FileResponse(os.path.join("frontend", "index.html"))
+
+
 
 # ------------------------ LOGIN ------------------------
 # Base de datos simulada de usuarios (esto debe reemplazarse con una consulta real a la DB)
