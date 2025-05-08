@@ -1,171 +1,286 @@
 .eventos-container {
-    padding: 2rem;
-    background-color: #f8f9fa;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 200px);
+  width: 100%;
+}
+
+.eventos-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #343a40;
+  font-weight: 700;
+}
+
+.eventos-title:after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #FF6B35, #0070CE);
+  margin: 15px auto 0;
+  border-radius: 4px;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carousel-button {
+  background-color: #0070CE;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-button:hover {
+  background-color: #0056B3;
+}
+
+.carousel-button.left {
+  left: -20px;
+}
+
+.carousel-button.right {
+  right: -20px;
+}
+
+.eventos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  padding: 1rem;
+}
+
+.evento-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  height: 100%;
+}
+
+.evento-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.evento-card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.evento-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 5;
+}
+
+.evento-status.activo {
+  background-color: #28a745;
+}
+
+.evento-status.inactivo {
+  background-color: #dc3545;
+}
+
+.evento-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.evento-card-title {
+  font-size: 1.4rem;
+  margin: 0 0 12px 0;
+  color: #343a40;
+  font-weight: 700;
+}
+
+.evento-card-description {
+  font-size: 0.95rem;
+  color: #6c757d;
+  margin: 0 0 15px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.evento-card-admin {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-top: auto;
+}
+
+.evento-detalle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.detalle-contenido {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.detalle-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.detalle-botones {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  gap: 15px;
+}
+
+.boton-comprar,
+.boton-cerrar {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.boton-comprar {
+  background-color: #FF6B35;
+  color: white;
+}
+
+.boton-comprar:hover {
+  background-color: #E85925;
+}
+
+.boton-cerrar {
+  background-color: transparent;
+  color: #343a40;
+  border: 1px solid #E9ECEF;
+}
+
+.boton-cerrar:hover {
+  background-color: #F8F9FA;
+}
+
+.error-message {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  text-align: center;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.loading-message {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1.2rem;
+  margin: 50px 0;
+  padding: 30px;
+}
+
+.no-eventos-message {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1.2rem;
+  margin: 50px 0;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+}
+
+@media (max-width: 992px) {
+  .eventos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .eventos-container {
+    padding: 1.5rem 1rem;
   }
   
   .eventos-title {
-    text-align: center;
     font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #343a40;
   }
   
-  .evento-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  .carousel {
-    display: flex;
-    align-items: center;
-    position: relative;
+  .eventos-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
   }
   
   .carousel-button {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 1rem;
-    border-radius: 50%;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    transition: background-color 0.3s ease;
-  }
-  
-  .carousel-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
   }
   
   .carousel-button.left {
-    left: -2rem;
+    left: -10px;
   }
   
   .carousel-button.right {
-    right: -2rem;
-  }
-  
-  /* Contenedor de la cuadrícula */
-  .eventos-grid {
-    display: flex; /* Usa flexbox para alinear los elementos */
-    gap: 16px; /* Espaciado entre las tarjetas */
-    justify-content: center; /* Centra las tarjetas horizontalmente */
-    flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas si es necesario */
-  }
-  
-  /* Tarjeta de evento */
-  .evento-card {
-    display: flex;
-    flex-direction: column;
-    width: 250px; /* Ancho fijo para cada tarjeta */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #fff;
-    position: relative; /* Asegura que los elementos internos no se superpongan */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease; /* Animación al pasar el cursor */
-  }
-  
-  .evento-card:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
-  }
-  
-  /* Imagen de la tarjeta */
-  .evento-card-img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover; /* Mantiene la proporción de la imagen */
-  }
-  /* Estado del evento */
-  .evento-status {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    padding: 4px 8px;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 12px;
-  }
-  
-  .evento-status.activo {
-    background-color: #28a745; /* Verde para eventos activos */
-  }
-  
-  .evento-status.inactivo {
-    background-color: #dc3545; /* Rojo para eventos inactivos */
-  }
-  
-  /* Cuerpo de la tarjeta */
-  .evento-card-body {
-    padding: 16px;
-  }
-  
-  .evento-card-title {
-    font-size: 18px;
-    margin: 0 0 8px;
-  }
-  
-  .evento-card-description {
-    font-size: 14px;
-    color: #666;
-    margin: 0 0 8px;
-  }
-  
-  .evento-card-admin {
-    font-size: 12px;
-    color: #999;
-  }
-  .evento-detalle {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    right: -10px;
   }
   
   .detalle-contenido {
-    background: #fff;
     padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    width: 400px;
   }
-  
-  .detalle-img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 20px;
-  }
-  
-  .detalle-botones {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .boton-comprar,
-  .boton-cerrar {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .boton-comprar {
-    background-color: #28a745;
-    color: #fff;
-  }
-  
-  .boton-cerrar {
-    background-color: #dc3545;
-    color: #fff;
   }

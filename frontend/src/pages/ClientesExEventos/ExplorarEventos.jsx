@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ExplorarEventos.css";
 
-const ListarEventos = () => {
+const ExplorarEventos = () => {
   const [eventos, setEventos] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [eventoSeleccionado, setEventoSeleccionado] = useState(null);
@@ -135,4 +135,4 @@ const ListarEventos = () => {
   );
 };
 
-export default ListarEventos;
+export default ExplorarEventos;

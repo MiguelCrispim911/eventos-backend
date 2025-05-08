@@ -20,6 +20,7 @@ import Login from "../pages/Login/Login";
 import Contacto from "../pages/Contacto/Contacto";
 import Registro from "../pages/Registro/Registro";
 import Perfil from "../pages/Perfil/Perfil";
+import ExplorarEventos from "../pages/ClientesExEventos/ExplorarEventos";
 
 const AppRouter = () => (
   <Routes>
@@ -30,7 +31,7 @@ const AppRouter = () => (
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/perfil" element={<Perfil />} />
-      {/*<Route path="/eventos" element={<ExplorarEventos />} />*/}
+      <Route path="/eventos" element={<ExplorarEventos />} />
       {/* más rutas públicas aquí */}
     </Route>
 
