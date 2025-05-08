@@ -87,40 +87,40 @@ const LoginAdministrador = () => {
 
   // Renderizado del formulario
   return (
-    <div className="login-container">
-      <h2 className="login-title">Iniciar Sesión Administrador</h2>
+    <div className="admin-login-container">
+      <h2 className="admin-login-title">Iniciar Sesión Administrador</h2>
       
       {/* Muestra errores si existen */}
-      {error && <p className="login-error">{error}</p>}
+      {error && <p className="admin-login-error">{error}</p>}
       
-      <form onSubmit={handleSubmit} className="login-form">
-        <div className="form-group">
-          <label htmlFor="cedula" className="form-label">Cédula:</label>
+      <form onSubmit={handleSubmit} className="admin-login-form">
+        <div className="admin-form-group">
+          <label htmlFor="cedula" className="admin-form-label">Cédula:</label>
           <input
             type="number"
             id="cedula"
             value={cedula}
             onChange={(e) => setCedula(e.target.value)}
-            className="form-input"
+            className="admin-form-input"
             placeholder="Ingrese su cédula"
             required
           />
         </div>
         
-        <div className="form-group">
-          <label htmlFor="contrasena" className="form-label">Contraseña:</label>
+        <div className="admin-form-group">
+          <label htmlFor="contrasena" className="admin-form-label">Contraseña:</label>
           <input
             type="password"
             id="contrasena"
             value={contrasena}
             onChange={(e) => setContrasena(e.target.value)}
-            className="form-input"
+            className="admin-form-input"
             placeholder="Ingrese su contraseña"
             required
           />
         </div>
         
-        <button type="submit" className="login-button">Ingresar</button>
+        <button type="submit" className="admin-login-button">Ingresar</button>
       </form>     
     </div>
   );

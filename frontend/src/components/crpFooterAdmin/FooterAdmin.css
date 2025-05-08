@@ -1,28 +1,27 @@
-/* Estilos generales del footer */
-.footer {
+/* Cambiar el nombre de la clase para evitar conflictos */
+.footer-admin {
     background-color: #1a1a1a; /* Gris oscuro */
     color: #e0e0e0; /* Texto gris claro */
     padding: 1.5rem 0;
     height: 15vh;
     text-align: center;
     border-top: 1px solid #424242; /* Borde gris más claro */
-    
-  }
-  
-  .footer__content {
+}
+
+.footer-admin__content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
-  }
-  
-  .footer__text {
+}
+
+.footer-admin__text {
     margin: 0;
     font-size: 0.9rem;
     line-height: 1.6;
     color: #bdbdbd; /* Gris medio */
-  }
-  
-  .footer__copyright {
+}
+
+.footer-admin__copyright {
     margin: 0.5rem 0 0;
     font-size: 0.8rem;
     color: #9e9e9e; /* Gris más claro */

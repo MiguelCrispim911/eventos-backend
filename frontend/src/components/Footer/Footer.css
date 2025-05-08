@@ -1,14 +1,5 @@
 /* Footer.css - Versión ultra minimalista */
-
-:root {
-  --primary: #0070CE;
-  --primary-hover: #0056B3;
-  --secondary: #FF6B35;
-  --secondary-hover: #E85925;
-  --light: #F8F9FA;
-  --dark: #343A40;
-  --border-color: #E9ECEF;
-}
+/* Eliminar la redefinición de variables CSS */
 
 .footer {
   background-color: var(--primary);
