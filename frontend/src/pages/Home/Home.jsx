@@ -9,17 +9,17 @@ const eventosDestacados = [
   {
     id_evento: 1,
     nombre: "Festival de Música Electrónica",
-    descripcion: "El festival más grande de música electrónica con los mejores DJs internacionales.",
-    fecha: "15 Dic 2024",
-    foto_principal: "/src/assets/festival.jpeg",
+    descripcion: "El festival más grande de música electrónica ",
+    fecha: "15 Dic 2025",
+    foto_principal: "/src/assets/festivales-musica.jpg",
     ubicacion: "Arena Ciudad"
   },
   {
     id_evento: 2,
     nombre: "Concierto de Rock",
     descripcion: "Una noche llena de energía con las mejores bandas de rock del momento.",
-    fecha: "20 Nov 2024",
-    foto_principal: "/src/assets/festival.jpeg",
+    fecha: "20 Nov 2025",
+    foto_principal: "/src/assets/concierto-rock.jpg",
     ubicacion: "Estadio Central"
   },
   {
@@ -27,15 +27,15 @@ const eventosDestacados = [
     nombre: "Festival de Jazz",
     descripcion: "Disfruta del mejor jazz en un ambiente único con artistas de renombre mundial.",
     fecha: "5 Ene 2025",
-    foto_principal: "/src/assets/festival.jpeg",
+    foto_principal: "/src/assets/teatro-jazz.png",
     ubicacion: "Teatro Nacional"
   },
   {
     id_evento: 4,
-    nombre: "Concierto Pop",
+    nombre: "Concierto Pop Dua Lipa",
     descripcion: "Las mejores estrellas del pop en un concierto inolvidable.",
     fecha: "12 Feb 2025",
-    foto_principal: "/src/assets/festival.jpeg",
+    foto_principal: "/src/assets/concierto-pop.jpg",
     ubicacion: "Estadio Metropolitano"
   },
   {
@@ -43,7 +43,7 @@ const eventosDestacados = [
     nombre: "Festival de Verano",
     descripcion: "El mejor festival para disfrutar del verano con música y actividades.",
     fecha: "20 Jul 2025",
-    foto_principal: "/src/assets/festival.jpeg",
+    foto_principal: "/src/assets/festival-verano.jpg",
     ubicacion: "Parque Central"
   }
 ];

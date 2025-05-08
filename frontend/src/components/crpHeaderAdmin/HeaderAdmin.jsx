@@ -27,11 +27,11 @@ const HeaderAdmin = () => {
     <header className="header">
       <div className="header__brand">
         <img 
-          src="/ruta-del-logo.png"
+          src="/src/assets/logoeventticketnegro.png"
           alt="Logo" 
           className="header__logo" 
         />
-        <h1 className="header__title">Event Ticket</h1>
+        <h1 className="header__title">EventTicket</h1>
       </div>
 
       {/* 3. Mostrar nombre desde el token */}
