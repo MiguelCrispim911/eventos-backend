@@ -1,14 +1,14 @@
+/* Estilos para la página de Explorar Eventos */
 import React, { useState, useEffect } from "react";
 import "./ExplorarEventos.css";
 
 const ExplorarEventos = () => {
-  const [eventos, setEventos] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [eventoSeleccionado, setEventoSeleccionado] = useState(null);
-  const [error, setError] = useState(null);
+  const [eventos, setEventos] = useState([]);// Estado para almacenar los eventos
+  const [currentIndex, setCurrentIndex] = useState(0);// Estado para el índice actual del carrusel
+  const [eventoSeleccionado, setEventoSeleccionado] = useState(null);// Estado para almacenar el evento seleccionado
+  const [error, setError] = useState(null);// Estado para manejar errores
 
-  // useEffect para obtener eventos desde la base de datos
-  useEffect(() => {
+  useEffect(() => { // Función para obtener eventos cargandolos desde la API
     const obtenerEventos = async () => {
       try {
         const response = await fetch("http://localhost:8000/eventos/");
@@ -26,28 +26,28 @@ const ExplorarEventos = () => {
     obtenerEventos();
   }, []);
 
-  const seleccionarEvento = (evento) => {
+  const seleccionarEvento = (evento) => {// Seleccionar un evento para mostrar su detalle
     setEventoSeleccionado(evento);
   };
 
-  const cerrarDetalle = () => {
+  const cerrarDetalle = () => {// Cerrar el detalle del evento
     setEventoSeleccionado(null);
   };
 
-  const siguienteEvento = () => {
+  const siguienteEvento = () => {// Cambiar a la siguiente tarjeta
     setCurrentIndex((prevIndex) => {
       const nextIndex = prevIndex + 1;
       return nextIndex >= eventos.length ? 0 : nextIndex;
     });
   };
 
-  const anteriorEvento = () => {
+  const anteriorEvento = () => { // Cambiar a la tarjeta anterior
     setCurrentIndex((prevIndex) =>
       (prevIndex - 1 + eventos.length) % eventos.length
     );
   };
 
-  return (
+  return (// Componente principal
     <div className="eventos-container">
       {/* Mostrar el mensaje de error si existe */}
       {error && <div className="error-message">Error: {error}</div>}
@@ -133,6 +133,6 @@ const ExplorarEventos = () => {
       </div>
     </div>
   );
-};
+}; 
 
 export default ExplorarEventos;

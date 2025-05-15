@@ -1,9 +1,10 @@
+/* Estilos para la página de Explorar Eventos */
 .eventos-container {
   padding: 2rem;
   background-color: #f8f9fa;
   min-height: calc(100vh - 200px);
   width: 100%;
-}
+}/* Cambios en el contenedor de eventos */
 
 .eventos-title {
   text-align: center;
@@ -11,7 +12,7 @@
   margin-bottom: 2rem;
   color: #343a40;
   font-weight: 700;
-}
+}/* Cambios en el título de eventos */
 
 .eventos-title:after {
   content: '';
@@ -21,7 +22,7 @@
   background: linear-gradient(to right, #FF6B35, #0070CE);
   margin: 15px auto 0;
   border-radius: 4px;
-}
+}/* Cambios en la línea debajo del título */
 
 .carousel {
   display: flex;
@@ -30,11 +31,11 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 30px;
-}
+}/* Cambios en el contenedor del carrusel */
 
 .carousel:hover .carousel-button {
   opacity: 1;
-}
+}/* Cambios en el efecto hover del botón del carrusel */
 
 .carousel-button {
   background-color: #0070CE;
@@ -55,28 +56,27 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   opacity: 0.7;
-}
+}/* Cambios en el botón del carrusel */
 
 .carousel-button:hover {
   background-color: #0056B3;
   transform: translateY(-50%) scale(1.1);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
   opacity: 1;
-}
+}/* Cambios en el efecto hover del botón del carrusel */
 
 .carousel-button:focus {
   outline: none;
-}
+}/* Cambios en el enfoque del botón del carrusel */
 
 .carousel-button.left {
   left: -25px;
-}
+}/* Cambios en la posición del botón izquierdo */
 
 .carousel-button.right {
   right: -25px;
-}
+}/* Cambios en la posición del botón derecho */
 
-/* Mejora para dispositivos móviles */
 @media (max-width: 768px) {
   .carousel-button {
     width: 40px;
@@ -92,9 +92,8 @@
   .carousel-button.right {
     right: -15px;
   }
-}
+}/* Cambios en el botón del carrusel para pantallas pequeñas */
 
-/* Para pantallas muy pequeñas */
 @media (max-width: 480px) {
   .carousel-button {
     width: 35px;
@@ -109,7 +108,7 @@
   .carousel-button.right {
     right: -10px;
   }
-}
+}/* Cambios en el botón del carrusel para pantallas muy pequeñas */
 
 .eventos-grid {
   display: grid;
@@ -117,7 +116,7 @@
   gap: 30px;
   width: 100%;
   padding: 1rem;
-}
+}/* Cambios en el contenedor de la cuadrícula de eventos */
 
 .evento-card {
   display: flex;
@@ -129,18 +128,18 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   height: 100%;
-}
+}/* Cambios en la tarjeta de evento */
 
 .evento-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
+}/* Cambios en el efecto hover de la tarjeta de evento */
 
 .evento-card-img {
   width: 100%;
   height: 180px;
   object-fit: cover;
-}
+}/* Cambios en la imagen de la tarjeta de evento */
 
 .evento-status {
   position: absolute;
@@ -152,29 +151,29 @@
   font-size: 0.8rem;
   font-weight: 600;
   z-index: 5;
-}
+}/* Cambios en el estado del evento */
 
 .evento-status.activo {
   background-color: #28a745;
-}
+}/* Cambios en el estado activo del evento */
 
 .evento-status.inactivo {
   background-color: #dc3545;
-}
+}/* Cambios en el estado inactivo del evento */
 
 .evento-card-body {
   padding: 20px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-}
+}/* Cambios en el cuerpo de la tarjeta de evento */
 
 .evento-card-title {
   font-size: 1.4rem;
   margin: 0 0 12px 0;
   color: #343a40;
   font-weight: 700;
-}
+}/* Cambios en el título de la tarjeta de evento */
 
 .evento-card-description {
   font-size: 0.95rem;
@@ -187,13 +186,13 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   flex-grow: 1;
-}
+}/* Cambios en la descripción de la tarjeta de evento */
 
 .evento-card-admin {
   font-size: 0.85rem;
   color: #6c757d;
   margin-top: auto;
-}
+}/* Cambios en el texto del administrador de la tarjeta de evento */
 
 .evento-detalle {
   position: fixed;
@@ -207,7 +206,7 @@
   align-items: center;
   z-index: 1000;
   backdrop-filter: blur(5px);
-}
+}/* Cambios en el contenedor del detalle del evento */
 
 .detalle-contenido {
   background: #fff;
@@ -219,7 +218,7 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   max-height: 90vh;
   overflow-y: auto;
-}
+}/* Cambios en el contenido del detalle del evento */
 
 .detalle-img {
   width: 100%;
@@ -227,17 +226,16 @@
   border-radius: 8px;
   margin-bottom: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
+}/* Cambios en la imagen del detalle del evento */
 
 .detalle-botones {
   display: flex;
   justify-content: space-around;
   margin-top: 25px;
   gap: 15px;
-}
+}/* Cambios en el contenedor de botones del detalle del evento */
 
-.boton-comprar,
-.boton-cerrar {
+.boton-comprar, .boton-cerrar {
   padding: 12px 25px;
   border: none;
   border-radius: 6px;
@@ -245,26 +243,26 @@
   font-weight: 600;
   font-size: 0.9rem;
   flex: 1;
-}
+}/* Cambios en los botones del detalle del evento */
 
 .boton-comprar {
   background-color: #FF6B35;
   color: white;
-}
+}/* Cambios en el botón de comprar del detalle del evento */
 
 .boton-comprar:hover {
   background-color: #E85925;
-}
+}/* Cambios en el efecto hover del botón de comprar */
 
 .boton-cerrar {
   background-color: transparent;
   color: #343a40;
   border: 1px solid #E9ECEF;
-}
+}/* Cambios en el botón de cerrar del detalle del evento */
 
 .boton-cerrar:hover {
   background-color: #F8F9FA;
-}
+}/* Cambios en el efecto hover del botón de cerrar */
 
 .error-message {
   background-color: rgba(220, 53, 69, 0.1);
@@ -274,7 +272,7 @@
   margin-bottom: 25px;
   text-align: center;
   border: 1px solid rgba(220, 53, 69, 0.2);
-}
+}/* Cambios en el mensaje de error */
 
 .loading-message {
   text-align: center;
@@ -282,7 +280,7 @@
   font-size: 1.2rem;
   margin: 50px 0;
   padding: 30px;
-}
+}/* Cambios en el mensaje de carga */
 
 .no-eventos-message {
   text-align: center;
@@ -292,13 +290,13 @@
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.03);
   border-radius: 8px;
-}
+}/* Cambios en el mensaje de no eventos */
 
 @media (max-width: 992px) {
   .eventos-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
+}/* Cambios en la grilla de eventos para pantallas medianas */
 
 @media (max-width: 768px) {
   .eventos-container {
@@ -332,4 +330,4 @@
   .detalle-contenido {
     padding: 20px;
   }
-  }
+  }/* Cambios en el contenedor de eventos para pantallas pequeñas */
