@@ -20,8 +20,9 @@ import Login from "../pages/Login/Login";
 import Contacto from "../pages/Contacto/Contacto";
 import Registro from "../pages/Registro/Registro";
 import Perfil from "../pages/Perfil/Perfil";
-import EditarPerfil from "../pages/EditarPerfil/EditarPerfil"; // Importar el nuevo componente
+import EditarPerfil from "../pages/EditarPerfil/EditarPerfil";
 import ExplorarEventos from "../pages/ClientesExEventos/ExplorarEventos";
+import Funciones from "../pages/Funciones/Funciones";
 
 const AppRouter = () => (
   <Routes>
@@ -32,8 +33,9 @@ const AppRouter = () => (
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/perfil" element={<Perfil />} />
-      <Route path="/editar-perfil" element={<EditarPerfil />} /> {/* Añadir la nueva ruta */}
+      <Route path="/editar-perfil" element={<EditarPerfil />} />
       <Route path="/eventos" element={<ExplorarEventos />} />
+      <Route path="/funciones/:id_evento" element={<Funciones />} />
       {/* más rutas públicas aquí */}
     </Route>
 
