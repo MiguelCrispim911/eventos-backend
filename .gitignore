@@ -1,1 +1,4 @@
 venv
+
+#Ignora todas las carpetas pycache
+**/__pycache__/
