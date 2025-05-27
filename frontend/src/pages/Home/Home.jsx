@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CardEvento from "../../components/CardEvento/CardEvento";
 import "./Home.css";
 
+//Componente principal de la página de inicio. Muestra la sección hero y un carrusel de eventos destacados.
 
 // Datos de ejemplo para eventos destacados
 const eventosDestacados = [
@@ -49,7 +50,7 @@ const eventosDestacados = [
 ];
 
 const Home = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0); // Estado para controlar el índice del primer evento mostrado en el carrusel
   const eventsPerPage = 3; // Número de eventos a mostrar a la vez
   
   // Función para ir al siguiente grupo de eventos
@@ -76,7 +77,10 @@ const Home = () => {
   const hasPrevEvents = currentIndex > 0;
   const hasNextEvents = currentIndex + eventsPerPage < eventosDestacados.length;
 
-  return (
+
+  //seccion hero que correponde a la seccion de bienvenida con fondo azul degradado, nos presentra al usuario botones para poder explorar y buscar eventos
+  // esta seccion permite navegar entre grupos de eventos destacados mediante botones y puntos indicadores, 
+  return ( 
     <>
       <section className="hero">
         <div className="hero-content">
