@@ -2,82 +2,83 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginAdministrador.css';
 
+// Componente principal para el login de administrador
 const LoginAdministrador = () => {
-  // Estados para manejar los datos del formulario
+  // Estados para los campos del formulario y errores
   const [cedula, setCedula] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Función para manejar el envío del formulario
+  // Maneja el envío del formulario de login
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Evita que el formulario se recargue
-    
+    e.preventDefault(); // Previene recarga de la página
+
     try {
-      // 1. Realiza la petición al servidor
+      // Realiza la petición POST al backend para autenticar
       const response = await fetch('http://localhost:8000/administradores/login/', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          cedula_adm: parseInt(cedula), // Convierte la cédula a número
+          cedula_adm: parseInt(cedula), // Convierte cédula a número
           contrasena: contrasena
         }),
       });
-      
-      // 2. Procesa la respuesta
+
+      // Obtiene la respuesta en formato JSON
       const data = await response.json();
-      
-      // 3. Si la respuesta no es exitosa, lanza un error
+
+      // Si la respuesta no es exitosa, lanza error
       if (!response.ok) {
         throw new Error(data.detail || 'Error de autenticación');
       }
-      
-      // 4. Almacena los datos en localStorage
-      localStorage.setItem('adminToken', data.access_token); // Guarda el token JWT
-      localStorage.setItem('adminData', JSON.stringify(data.admin)); // Guarda datos del admin
-      
-      // 5. Redirige al dashboard
+
+      // Guarda el token y datos del admin en localStorage
+      localStorage.setItem('adminToken', data.access_token);
+      localStorage.setItem('adminData', JSON.stringify(data.admin));
+
+      // Redirige al dashboard del administrador
       navigate('/administrador/dashboard');
-      
+
     } catch (error) {
-      // Manejo de errores
-      setError(error.message); // Muestra el mensaje de error
-      setContrasena(''); // Limpia el campo de contraseña
+      // Muestra el mensaje de error y limpia la contraseña
+      setError(error.message);
+      setContrasena('');
     }
   };
 
-  // Función para hacer peticiones a rutas protegidas
+  // Ejemplo de función para acceder a rutas protegidas usando el token
   const fetchProtectedData = async () => {
     try {
-      // 1. Obtiene el token del localStorage
+      // Obtiene el token almacenado
       const token = localStorage.getItem('adminToken');
-      
+
       if (!token) {
         throw new Error('No hay token de autenticación');
       }
-      
-      // 2. Realiza la petición con el token en los headers
+
+      // Realiza la petición con el token en el header Authorization
       const response = await fetch('http://localhost:8000/administrador/perfil/', {
         headers: {
-          'Authorization': `Bearer ${token}` // Envía el token en el header
+          'Authorization': `Bearer ${token}`
         }
       });
-      
-      // 3. Verifica si la respuesta es exitosa
+
+      // Si la respuesta falla, lanza error
       if (!response.ok) {
         throw new Error('Error al obtener datos protegidos');
       }
-      
-      // 4. Procesa los datos
+
+      // Procesa los datos protegidos
       const protectedData = await response.json();
       console.log('Datos protegidos:', protectedData);
       return protectedData;
-      
+
     } catch (error) {
       console.error('Error:', error);
-      // Opcional: redirigir al login si el token es inválido
+      // Si el error es de autenticación, redirige al login
       if (error.message.includes('autenticación')) {
         navigate('/login');
       }
@@ -85,12 +86,12 @@ const LoginAdministrador = () => {
     }
   };
 
-  // Renderizado del formulario
+  // Renderiza el formulario de login
   return (
     <div className="admin-login-container">
       <h2 className="admin-login-title">Iniciar Sesión Administrador</h2>
       
-      {/* Muestra errores si existen */}
+      {/* Muestra mensaje de error si existe */}
       {error && <p className="admin-login-error">{error}</p>}
       
       <form onSubmit={handleSubmit} className="admin-login-form">
