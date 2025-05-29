@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import "./contacto.css";
 
+// Componente principal de la página de contacto
 const Contacto = () => {
+  // Estado para los datos del formulario
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
     asunto: '',
     mensaje: ''
   });
+  // Estado para indicar si se está enviando el formulario
   const [enviando, setEnviando] = useState(false);
+  // Estado para mostrar mensaje de éxito
   const [mensajeEnviado, setMensajeEnviado] = useState(false);
+  // Estado para mostrar errores
   const [error, setError] = useState('');
 
+  // Maneja los cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -20,17 +26,17 @@ const Contacto = () => {
     }));
   };
 
+  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEnviando(true);
     setError('');
     
     try {
-      // Aquí iría la lógica para enviar el formulario a un backend
-      // Por ahora, simularemos un envío exitoso después de 1 segundo
+      // Simula el envío del formulario (aquí iría la lógica real)
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Simulamos un envío exitoso
+      // Si el envío es exitoso, muestra mensaje y limpia el formulario
       setMensajeEnviado(true);
       setFormData({
         nombre: '',
@@ -39,6 +45,7 @@ const Contacto = () => {
         mensaje: ''
       });
     } catch (err) {
+      // Si ocurre un error, muestra mensaje de error
       setError('Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo.');
       console.error('Error al enviar formulario:', err);
     } finally {
@@ -48,12 +55,14 @@ const Contacto = () => {
 
   return (
     <div className="contacto-container">
+      {/* Encabezado de la página */}
       <div className="contacto-header">
         <h1>Contáctanos</h1>
         <p>Estamos aquí para ayudarte. Envíanos tu consulta y te responderemos lo antes posible.</p>
       </div>
       
       <div className="contacto-content">
+        {/* Información de contacto */}
         <div className="contacto-info">
           <div className="info-card">
             <div className="info-icon">📍</div>
@@ -99,8 +108,10 @@ const Contacto = () => {
           </div>
         </div>
         
+        {/* Formulario de contacto */}
         <div className="contacto-form-container">
           {mensajeEnviado ? (
+            // Mensaje de éxito tras enviar el formulario
             <div className="mensaje-enviado">
               <div className="mensaje-enviado-icon">✅</div>
               <h2>¡Mensaje enviado con éxito!</h2>
@@ -113,6 +124,7 @@ const Contacto = () => {
               </button>
             </div>
           ) : (
+            // Formulario para enviar mensaje
             <form onSubmit={handleSubmit} className="contacto-form">
               <h2>Envíanos un mensaje</h2>
               
@@ -121,6 +133,7 @@ const Contacto = () => {
                 <p>Recibirás una confirmación por correo electrónico y nos pondremos en contacto contigo en un plazo de 24-48 horas hábiles.</p>
               </div>
               
+              {/* Mensaje de error si ocurre */}
               {error && <div className="error-message">{error}</div>}
               
               <div className="form-group">
@@ -191,7 +204,3 @@ const Contacto = () => {
 };
 
 export default Contacto;
-
-
-
-

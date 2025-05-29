@@ -1,7 +1,9 @@
 import { useState } from "react";
 import "./CrearFuncion.css";
 
+// Componente principal para crear una función
 const CrearFuncion = () => {
+  // Estado para almacenar los datos del formulario
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
@@ -11,6 +13,7 @@ const CrearFuncion = () => {
     id_ubicacion: ""
   });
 
+  // Maneja los cambios en los campos del formulario
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -18,9 +21,11 @@ const CrearFuncion = () => {
     });
   };
 
+  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Prepara los datos para enviar al backend
     const dataToSend = {
       nombre: formData.nombre,
       descripcion: formData.descripcion,
@@ -32,6 +37,7 @@ const CrearFuncion = () => {
     };
 
     try {
+      // Realiza la petición POST al backend
       const response = await fetch("http://localhost:8000/funciones/", {
         method: "POST",
         headers: {
@@ -40,11 +46,13 @@ const CrearFuncion = () => {
         body: JSON.stringify(dataToSend),
       });
 
+      // Si la respuesta no es exitosa, lanza un error
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.detail || "Error al crear función");
       }
 
+      // Muestra mensaje de éxito y limpia el formulario
       const result = await response.json();
       console.log("Función creada:", result);
       alert("Función registrada con éxito");
@@ -58,11 +66,13 @@ const CrearFuncion = () => {
         id_ubicacion: ""
       });
     } catch (error) {
+      // Maneja errores y muestra alerta
       console.error("Error:", error.message);
       alert("Ocurrió un error: " + error.message);
     }
   };
 
+  // Renderiza el formulario
   return (
     <div className="crear-funcion-container">
       <form onSubmit={handleSubmit} className="crear-funcion-form">

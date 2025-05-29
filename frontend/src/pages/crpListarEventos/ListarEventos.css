@@ -1,119 +1,120 @@
-/* Contenedor principal */
+/* Contenedor principal: define el área principal de la página de eventos */
 .eventos-container {
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px; /* Espaciado interno */
+  background-color: white; /* Fondo blanco */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente */
+}
+  
+/* Título de la sección de eventos */
+.eventos-title {
+  color: #333; /* Color del texto */
+  margin-bottom: 20px; /* Espacio inferior */
+  font-size: 1.3rem; /* Tamaño de fuente */
+  font-weight: 600; /* Negrita */
+}
+  
+/* Mensaje de error */
+.eventos-error {
+  color: #f44336; /* Rojo */
+  font-size: 0.75rem; /* Tamaño pequeño */
+  margin-bottom: 15px; /* Espacio inferior */
+}
+  
+/* Mensaje cuando no hay eventos */
+.eventos-empty {
+  color: #666; /* Gris */
+  font-size: 0.75rem; /* Tamaño pequeño */
+}
+  
+/* Hace la tabla desplazable horizontalmente en pantallas pequeñas */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+  
+/* Estilos generales de la tabla de eventos */
+.eventos-table {
+  width: 100%; /* Ocupa todo el ancho */
+  border-collapse: collapse; /* Quita espacios entre celdas */
+  font-size: 0.75rem; /* Tamaño de fuente */
+  min-width: 800px; /* Ancho mínimo */
+}
+  
+/* Encabezado de la tabla */
+.eventos-table thead tr {
+  background-color: #f8f9fa; /* Fondo gris claro */
+  border-bottom: 2px solid #e0e0e0; /* Línea inferior */
+}
+  
+.eventos-table th {
+  padding: 10px 12px; /* Espaciado interno */
+  text-align: left; /* Alineación a la izquierda */
+  font-weight: 600; /* Negrita */
+  color: #444; /* Color del texto */
+}
+  
+/* Celdas de la tabla */
+.eventos-table td {
+  padding: 10px 12px; /* Espaciado interno */
+  color: #555; /* Color del texto */
+  line-height: 1.4; /* Altura de línea */
+  vertical-align: middle; /* Centrado vertical */
+}
+  
+/* Filas del cuerpo de la tabla */
+.eventos-table tbody tr {
+  border-bottom: 1px solid #e0e0e0; /* Línea inferior */
+  transition: background-color 0.2s ease; /* Transición al pasar el mouse */
+}
+  
+.eventos-table tbody tr:last-child {
+  border-bottom: none; /* Quita la línea en la última fila */
+}
+  
+.eventos-table tbody tr:hover {
+  background-color: #f5f5f5; /* Fondo al pasar el mouse */
+}
+  
+/* Imágenes de los eventos */
+.evento-img {
+  width: 80px; /* Ancho fijo */
+  height: auto; /* Altura automática */
+  border-radius: 4px; /* Bordes redondeados */
+  object-fit: cover; /* Recorta la imagen para cubrir el área */
+}
+  
+/* Indicadores de estado (círculos de color) */
+.status-indicator {
+  display: inline-block;
+  width: 10px; /* Tamaño */
+  height: 10px;
+  border-radius: 50%; /* Forma circular */
+  margin-right: 6px; /* Espacio a la derecha */
+  vertical-align: middle; /* Centrado vertical */
+}
+  
+.status-indicator.activo {
+  background-color: #4CAF50; /* Verde para activo */
+}
+  
+.status-indicator.inactivo {
+  background-color: #F44336; /* Rojo para inactivo */
+}
+  
+/* Ajustes para pantallas pequeñas (responsive) */
+@media (max-width: 768px) {
+  .eventos-container {
+    padding: 15px; /* Menos espacio */
   }
   
-  /* Título */
-  .eventos-title {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-  
-  /* Mensajes */
-  .eventos-error {
-    color: #f44336;
-    font-size: 0.75rem;
-    margin-bottom: 15px;
-  }
-  
-  .eventos-empty {
-    color: #666;
-    font-size: 0.75rem;
-  }
-  
-  /* Tabla responsive */
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Estilos de tabla */
-  .eventos-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.75rem;
-    min-width: 800px;
-  }
-  
-  /* Encabezados */
-  .eventos-table thead tr {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #e0e0e0;
-  }
-  
-  .eventos-table th {
-    padding: 10px 12px;
-    text-align: left;
-    font-weight: 600;
-    color: #444;
-  }
-  
-  /* Celdas */
+  .eventos-table th, 
   .eventos-table td {
-    padding: 10px 12px;
-    color: #555;
-    line-height: 1.4;
-    vertical-align: middle;
+    padding: 8px 10px; /* Menos espacio en celdas */
   }
   
-  /* Filas */
-  .eventos-table tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background-color 0.2s ease;
-  }
-  
-  .eventos-table tbody tr:last-child {
-    border-bottom: none;
-  }
-  
-  .eventos-table tbody tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Imágenes */
   .evento-img {
-    width: 80px;
-    height: auto;
-    border-radius: 4px;
-    object-fit: cover;
+    width: 60px; /* Imágenes más pequeñas */
   }
-  
-  /* Indicadores de estado */
-  .status-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-  
-  .status-indicator.activo {
-    background-color: #4CAF50;
-  }
-  
-  .status-indicator.inactivo {
-    background-color: #F44336;
-  }
-  
-  /* Ajustes para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .eventos-container {
-      padding: 15px;
-    }
-    
-    .eventos-table th, 
-    .eventos-table td {
-      padding: 8px 10px;
-    }
-    
-    .evento-img {
-      width: 60px;
-    }
-  }
+}

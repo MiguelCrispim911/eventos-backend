@@ -1,4 +1,5 @@
 /* Contenedor principal */
+/* Estilos para el contenedor general de la página de boletas */
 .boletas-container {
   padding: 20px;
   background-color: white;
@@ -8,6 +9,7 @@
 }
 
 /* Título */
+/* Estilo para el título principal */
 .boletas-title {
   color: #333;
   margin-bottom: 20px;
@@ -16,18 +18,21 @@
 }
 
 /* Mensajes */
+/* Mensaje de error */
 .boletas-error {
   color: #f44336;
   font-size: 0.85rem;
   margin-bottom: 15px;
 }
 
+/* Mensaje cuando no hay datos */
 .boletas-empty {
   color: #666;
   font-size: 0.85rem;
 }
 
 /* Tabla responsive */
+/* Hace que la tabla sea desplazable horizontalmente en pantallas pequeñas */
 .table-responsive {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -35,6 +40,7 @@
 }
 
 /* Estilos de tabla */
+/* Estilos generales para la tabla */
 .boletas-table {
   width: 100%;
   border-collapse: collapse;
@@ -43,11 +49,13 @@
 }
 
 /* Encabezados */
+/* Estilos para la fila de encabezado de la tabla */
 .boletas-table thead tr {
   background-color: #f8f9fa;
   border-bottom: 2px solid #e0e0e0;
 }
 
+/* Estilos para las celdas de encabezado */
 .boletas-table th {
   padding: 10px 12px;
   text-align: left;
@@ -56,6 +64,7 @@
 }
 
 /* Celdas */
+/* Estilos para las celdas del cuerpo de la tabla */
 .boletas-table td {
   padding: 10px 12px;
   color: #555;
@@ -64,6 +73,7 @@
 }
 
 /* Formato numérico */
+/* Alinea a la derecha y cambia la fuente de las columnas 4, 5 y 6 */
 .boletas-table td:nth-child(4),
 .boletas-table td:nth-child(5),
 .boletas-table td:nth-child(6) {
@@ -72,25 +82,30 @@
 }
 
 /* Filas */
+/* Estilos para las filas del cuerpo de la tabla */
 .boletas-table tbody tr {
   border-bottom: 1px solid #e0e0e0;
   transition: background-color 0.2s ease;
 }
 
+/* Elimina el borde inferior de la última fila */
 .boletas-table tbody tr:last-child {
   border-bottom: none;
 }
 
+/* Efecto hover en filas */
 .boletas-table tbody tr:hover {
   background-color: #f5f5f5;
 }
 
 /* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
+  /* Reduce el padding del contenedor */
   .boletas-container {
     padding: 15px;
   }
   
+  /* Reduce el padding y tamaño de fuente en la tabla */
   .boletas-table th, 
   .boletas-table td {
     padding: 8px 10px;

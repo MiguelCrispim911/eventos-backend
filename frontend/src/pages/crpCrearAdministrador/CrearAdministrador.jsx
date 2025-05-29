@@ -1,7 +1,9 @@
 import { useState } from "react";
 import "./CrearAdministrador.css";
 
+// Componente principal para crear un administrador
 const CrearAdministrador = ({ username }) => {
+  // Estado para manejar los datos del formulario
   const [formData, setFormData] = useState({
     cedula: "",
     nombres: "",
@@ -15,6 +17,7 @@ const CrearAdministrador = ({ username }) => {
     confirmPassword: "",
   });
 
+  // Maneja los cambios en los campos del formulario
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,14 +25,17 @@ const CrearAdministrador = ({ username }) => {
     });
   };
 
+  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    // Verifica que las contraseñas coincidan
     if (formData.password !== formData.confirmPassword) {
       alert("Las contraseñas no coinciden.");
       return;
     }
-  
+
+    // Prepara los datos para enviar al backend
     const dataToSend = {
       cedula_adm: parseInt(formData.cedula),
       nombres: formData.nombres,
@@ -42,8 +48,9 @@ const CrearAdministrador = ({ username }) => {
       contrasena: formData.password,
       estado: 1
     };
-  
+
     try {
+      // Envía los datos al backend
       const response = await fetch("http://localhost:8000/administradores/", {
         method: "POST",
         headers: {
@@ -51,12 +58,14 @@ const CrearAdministrador = ({ username }) => {
         },
         body: JSON.stringify(dataToSend),
       });
-  
+
+      // Maneja errores de la respuesta
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.detail || "Error al registrar administrador");
       }
-  
+
+      // Si todo sale bien, limpia el formulario y muestra mensaje
       const result = await response.json();
       console.log("Administrador creado:", result);
       alert("Administrador registrado con éxito");
@@ -73,16 +82,19 @@ const CrearAdministrador = ({ username }) => {
         confirmPassword: "",
       });
     } catch (error) {
+      // Maneja errores de red o del backend
       console.error("Error al enviar los datos:", error.message);
       alert("Ocurrió un error: " + error.message);
     }
   };
 
+  // Renderiza el formulario
   return (
     <div className="crear-administrador-container">
       <form onSubmit={handleSubmit} className="crear-administrador-form">
         <h2 className="form-title">Registro de Usuario</h2>
 
+        {/* Campo para la cédula */}
         <label className="form-label">
           Cédula:
           <input
@@ -95,6 +107,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para los nombres */}
         <label className="form-label">
           Nombres:
           <input
@@ -107,6 +120,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para los apellidos */}
         <label className="form-label">
           Apellidos:
           <input
@@ -119,6 +133,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para la dirección */}
         <label className="form-label">
           Dirección:
           <input
@@ -130,6 +145,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para el municipio */}
         <label className="form-label">
           Municipio:
           <input
@@ -141,6 +157,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para el departamento */}
         <label className="form-label">
           Departamento:
           <input
@@ -152,6 +169,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para el email */}
         <label className="form-label">
           Email:
           <input
@@ -164,6 +182,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para el teléfono */}
         <label className="form-label">
           Teléfono:
           <input
@@ -175,6 +194,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para la contraseña */}
         <label className="form-label">
           Contraseña:
           <input
@@ -187,6 +207,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Campo para confirmar la contraseña */}
         <label className="form-label">
           Confirmar Contraseña:
           <input
@@ -199,6 +220,7 @@ const CrearAdministrador = ({ username }) => {
           />
         </label>
 
+        {/* Botón para enviar el formulario */}
         <button type="submit" className="submit-button">
           Registrar
         </button>
