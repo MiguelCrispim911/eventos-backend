@@ -56,8 +56,8 @@ const ListarAdministradores = () => {
                   <td>{admin.cedula_adm}</td>
                   <td>{admin.nombres}</td>
                   <td>{admin.apellidos}</td>
-                  <td>{admin.municipio}</td>
-                  <td>{admin.departamento}</td>
+                  <td>{admin.nombre_municipio}</td>
+                  <td>{admin.nombre_departamento}</td>
                   <td>{admin.email}</td>
                   <td>{admin.telefono}</td>
                   <td>

@@ -5,10 +5,14 @@ from appback.models.compra import Compra, CompraCreate, CompraPublic, CompraUpda
 from appback.database import get_session
 from typing import Annotated
 
+# appback/routes/compra_route.py
+# Este archivo define las rutas para manejar las operaciones CRUD de las compras.
 compra_router = APIRouter()
 
+# Dependencia para obtener la sesión de la base de datos
 session_dep = Annotated[Session, Depends(get_session)]
 
+# Rutas para manejar las compras
 @compra_router.post("/", response_model=CompraPublic)
 def create_compra(compra: CompraCreate, session: session_dep):
     db_compra = Compra.model_validate(compra)
@@ -17,10 +21,12 @@ def create_compra(compra: CompraCreate, session: session_dep):
     session.refresh(db_compra)
     return db_compra
 
+# Obtener todas las compras con paginación
 @compra_router.get("/", response_model=list[CompraPublic])
 def read_compras(session: session_dep, offset: int = 0, limit: Annotated[int, Query(le=100)] = 100):
     return session.exec(select(Compra).offset(offset).limit(limit)).all()
 
+# Obtener una compra por su ID
 @compra_router.get("/{idcompra}", response_model=CompraPublic)
 def read_compra(idcompra: int, session: session_dep):
     compra = session.get(Compra, idcompra)
@@ -28,6 +34,7 @@ def read_compra(idcompra: int, session: session_dep):
         raise HTTPException(status_code=404, detail="Compra no encontrada")
     return compra
 
+# Actualizar una compra por su ID
 @compra_router.patch("/{idcompra}", response_model=CompraPublic)
 def update_compra(idcompra: int, compra: CompraUpdate, session: session_dep):
     compra_db = session.get(Compra, idcompra)
@@ -40,6 +47,7 @@ def update_compra(idcompra: int, compra: CompraUpdate, session: session_dep):
     session.refresh(compra_db)
     return compra_db
 
+# Eliminar una compra por su ID
 @compra_router.delete("/{idcompra}")
 def delete_compra(idcompra: int, session: session_dep):
     compra = session.get(Compra, idcompra)
@@ -49,7 +57,7 @@ def delete_compra(idcompra: int, session: session_dep):
     session.commit()
     return {"ok": True}
 
-
+# Obtener compras por cédula del cliente
 @compra_router.get("/cedula/{cedula}", response_model=list[CompraPublic])
 def read_compras_by_cedula(
     cedula: int, 

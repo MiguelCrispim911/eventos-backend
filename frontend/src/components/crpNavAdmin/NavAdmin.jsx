@@ -29,7 +29,11 @@ const NavAdmin = () => {
                     Listar Administradores
                   </Link>
                 </li>
-                <li>Buscar/Cambiar Administrador</li>
+                <li>
+                  <Link to="/administrador/dashboard/editarAdministrador" className="submenu-link">
+                    Buscar/Editar Administrador
+                  </Link>
+                </li>
               </ul>
             )}
           </li>
@@ -49,7 +53,11 @@ const NavAdmin = () => {
                     Listar Eventos
                   </Link>
                 </li>
-                <li>Editar Evento</li>
+                <li>
+                  <Link to="/administrador/dashboard/editarEvento" className="submenu-link">
+                    Buscar/Editar Eventos
+                  </Link>                  
+                </li>
               </ul>
             )}
           </li>
@@ -69,7 +77,11 @@ const NavAdmin = () => {
                     Listar Funciones
                   </Link>
                 </li>
-                <li>Modificar Función</li>
+                <li>
+                  <Link to="/administrador/dashboard/editarFuncion" className="submenu-link">
+                    Buscar/Editar Funcion
+                  </Link>                   
+                </li>
               </ul>
             )}
           </li>
@@ -89,7 +101,11 @@ const NavAdmin = () => {
                     Listar tipos de Boleta
                   </Link>
                 </li>
-                <li>Modificar Tipo</li>
+                <li>
+                  <Link to="/administrador/dashboard/editarTipoBoleta" className="submenu-link">
+                    Buscar/Editar Tipo Boleta
+                  </Link>                   
+                </li>
               </ul>
             )}
           </li>
@@ -109,7 +125,23 @@ const NavAdmin = () => {
                     Listar Ubicaciones
                   </Link>
                 </li>
-                <li>Buscar/Editar Ubicación</li>
+                <li>
+                  <Link to="/administrador/dashboard/EditarUbicacion" className="submenu-link">
+                    Buscar/Editar Ubicacion
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
+          <li onClick={() => toggleSection("compras")} className="menu-item">
+            Compras
+            {openSection === "compras" && (
+              <ul className="submenu">
+                <li>
+                  <Link to="/administrador/dashboard/listarCompras" className="submenu-link">
+                    Listar Compras
+                  </Link>
+                </li>
               </ul>
             )}
           </li>

@@ -11,6 +11,9 @@ from appback.routes.evento_route import evento_router
 from appback.routes.funcion_route import funcion_router
 from appback.routes.tipo_boleta_route import tipo_boleta_router
 from appback.routes.compra_route import compra_router
+from appback.routes.departamento_route import departamento_router
+from appback.routes.municipio_route import municipio_router
+
 import os
 
 app = FastAPI()
@@ -37,6 +40,11 @@ app.include_router(evento_router, prefix="/eventos", tags=["Eventos"])
 app.include_router(funcion_router, prefix="/funciones", tags=["Funciones"])
 app.include_router(tipo_boleta_router, prefix="/tiposboletas", tags=["TiposBoletas"])
 app.include_router(compra_router, prefix="/compras", tags=["Compras"])
+app.include_router(departamento_router, prefix="/departamentos", tags=["departamentos"])
+app.include_router(municipio_router)
+
+#Aqui hay que llenar las tablas de departamentos y municipios
+#!!!!Falta hacer esto!!!!!!
 
 # Definir rutas estáticas para servir archivos del frontend
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -50,7 +58,6 @@ def serve_index():
 
 
 # ------------------------ LOGIN ------------------------
-# Base de datos simulada de usuarios (esto debe reemplazarse con una consulta real a la DB)
 usuarios_db = [
     {"cedula": "12345678", "contraseña": "1234"}
 ]
@@ -65,3 +72,4 @@ def login(user: LoginData):
         if usuario["cedula"] == user.cedula and usuario["contraseña"] == user.contraseña:
             return {"message": "Login exitoso", "user": user.cedula}
     raise HTTPException(status_code=401, detail="Credenciales incorrectas")
+

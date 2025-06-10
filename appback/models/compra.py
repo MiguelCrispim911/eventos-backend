@@ -1,6 +1,8 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional
 
+
+# Modelo de Compra
 class CompraBase(SQLModel):
     fecha: str  # DATE
     cantidad: int
@@ -9,6 +11,7 @@ class CompraBase(SQLModel):
     id_tipoboleta: int 
     estado: int
 
+# Modelo de Compra tabla
 class Compra(SQLModel, table=True):
     idcompra: Optional[int] = Field(default=None, primary_key=True)
     fecha: str  # DATE

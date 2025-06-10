@@ -57,8 +57,8 @@ const ListarUbicaciones = () => {
                   <td>{ubicacion.persona_contacto}</td>
                   <td>{ubicacion.telefono}</td>
                   <td>{ubicacion.direccion}</td>
-                  <td>{ubicacion.municipio}</td>
-                  <td>{ubicacion.departamento}</td>
+                  <td>{ubicacion.nombre_municipio}</td>
+                  <td>{ubicacion.nombre_departamento}</td>
                   <td>{ubicacion.email}</td>
                   <td>
                     <span className={`status-indicator ${getEstadoClass(ubicacion.estado)}`}></span>

@@ -1,6 +1,7 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional
 
+# Modelo de Funcion
 class FuncionBase(SQLModel):
     nombre: str 
     descripcion: str
@@ -10,6 +11,7 @@ class FuncionBase(SQLModel):
     id_ubicacion: int
     estado: int
 
+# Modelo de Funcion tabla
 class Funcion(SQLModel, table=True):
     id_funcion: Optional[int] = Field(primary_key=True, default=None)
     nombre: str
@@ -20,11 +22,14 @@ class Funcion(SQLModel, table=True):
     id_ubicacion: int = Field(foreign_key="ubicacion.id_ubicacion")
     estado: int
 
+# Modelo de Funcion público
 class FuncionPublic(FuncionBase):
     id_funcion: int
 
+# Modelos de creación de Funcion
 class FuncionCreate(FuncionBase):
     pass
 
+# Modelos de actualización de Funcion
 class FuncionUpdate(FuncionBase):
     pass

@@ -22,7 +22,12 @@ import Registro from "../pages/Registro/Registro";
 import Perfil from "../pages/Perfil/Perfil";
 import EditarPerfil from "../pages/EditarPerfil/EditarPerfil"; // Importar el nuevo componente
 import ExplorarEventos from "../pages/ClientesExEventos/ExplorarEventos";
-
+import EditarAdministrador from "../pages/crpEditarAdministrador/EditarAdministrador";
+import EditarEvento from "../pages/crpEditarEvento/EditarEvento";
+import EditarFuncion from "../pages/crpEditarFuncion/editarFuncion";
+import EditarTipoBoleta from "../pages/crpEditarTipoBoleta/EditarTipoBoleta";
+import EditarUbicacion from "../pages/crpEditarUbicacion/EditarUbicacion";
+import EditarCompras from "../pages/crpListarCompras/ListarCompras"; 
 const AppRouter = () => (
   <Routes>
     {/* Rutas principales con MainLayout */}
@@ -132,6 +137,56 @@ const AppRouter = () => (
           </ProtectedRouteAdmin>
         } 
       />
+      <Route 
+        path="/administrador/dashboard/editarAdministrador" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarAdministrador />
+          </ProtectedRouteAdmin>
+        } 
+      />
+      <Route 
+        path="/administrador/dashboard/editarEvento" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarEvento />
+          </ProtectedRouteAdmin>
+        } 
+
+      />
+      <Route 
+        path="/administrador/dashboard/editarFuncion" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarFuncion />
+          </ProtectedRouteAdmin>
+        } 
+      />      
+      <Route 
+        path="/administrador/dashboard/EditarTipoBoleta" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarTipoBoleta />
+          </ProtectedRouteAdmin>
+        } 
+      /> 
+
+      <Route 
+        path="/administrador/dashboard/EditarUbicacion" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarUbicacion />
+          </ProtectedRouteAdmin>
+        } 
+      />   
+      <Route 
+        path="/administrador/dashboard/listarCompras" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarCompras />
+          </ProtectedRouteAdmin>
+        } 
+      />   
     </Route>
   </Routes>
 );

@@ -1,69 +1,121 @@
 /* Contenedor principal (fondo blanco) */
 .crear-ubicacion-container {
-    background-color: white;
-    min-height: 100vh;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Formulario */
-  .crear-ubicacion-form {
-    background-color: white;
-    width: 100%;
-    max-width: 600px;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  .form-title {
-    color: #333;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-weight: 600;
-  }
-  
-  /* Etiquetas e inputs */
-  .form-label {
-    display: block;
-    margin-bottom: 1rem;
-    color: #555;
-    font-size: 0.95rem;
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 0.75rem;
-    margin-top: 0.3rem;
-    background-color: #c5bebe;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .form-input:focus {
-    border-color: #4a90e2;
-    outline: none;
-  }
-  
-  /* Botón */
-  .submit-button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #1a1a1a;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: background-color 0.3s;
-  }
-  
-  .submit-button:hover {
-    background-color: #505254;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.crear-ubicacion-form {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Etiquetas e inputs */
+.form-label {
+  display: block;
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-input.error {
+  border-color: #dc3545;
+}
+
+.form-input.error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.error-message {
+  display: block;
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Botón */
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+select.form-input {
+  appearance: none;
+  background-color: white;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+select.form-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+select.form-input option {
+  padding: 0.5rem;
+}
+
+/* Estilos específicos para campos numéricos */
+input[type="tel"] {
+  appearance: textfield; /* Estándar moderno */
+  -webkit-appearance: none; /* Safari/Chrome */
+  margin: 0; /* Elimina márgenes extra en algunos navegadores */
+}
+
+/* Ocultar flechas en navegadores WebKit (Chrome, Safari, Edge) */
+input[type="tel"]::-webkit-outer-spin-button,
+input[type="tel"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

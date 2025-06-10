@@ -6,10 +6,15 @@ from typing import Annotated
 from appback.core.security import create_access_token, hash_password, verify_password
 from fastapi import status
 
+
+# appback/routes/cliente_route.py
+# Este archivo define las rutas para manejar las operaciones CRUD de los clientes.
 cliente_router = APIRouter()
 
+# Dependencia para obtener la sesión de la base de datos
 session_dep = Annotated[Session, Depends(get_session)]
 
+# Rutas para manejar los clientes
 @cliente_router.post("/", response_model=ClientePublic)
 def create_cliente(cliente: ClienteCreate, session: session_dep):
     # Verificar si el cliente ya existe
@@ -28,10 +33,12 @@ def create_cliente(cliente: ClienteCreate, session: session_dep):
     session.refresh(db_cliente)
     return db_cliente
 
+# Obtener todos los clientes con paginación
 @cliente_router.get("/", response_model=list[ClientePublic])
 def read_clientes(session: session_dep, offset: int = 0, limit: Annotated[int, Query(le=100)] = 100):
     return session.exec(select(Cliente).offset(offset).limit(limit)).all()
 
+# Obtener un cliente por su cédula
 @cliente_router.get("/{cedula}", response_model=ClientePublic)
 def read_cliente(cedula: int, session: session_dep):
     cliente = session.get(Cliente, cedula)
@@ -39,6 +46,7 @@ def read_cliente(cedula: int, session: session_dep):
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
     return cliente
 
+# Actualizar un cliente por su cédula
 @cliente_router.patch("/{cedula}", response_model=ClientePublic)
 def update_cliente(cedula: int, cliente: ClienteUpdate, session: session_dep):
     cliente_db = session.get(Cliente, cedula)
@@ -56,6 +64,7 @@ def update_cliente(cedula: int, cliente: ClienteUpdate, session: session_dep):
     session.refresh(cliente_db)
     return cliente_db
 
+# Eliminar un cliente por su cédula
 @cliente_router.delete("/{cedula}")
 def delete_cliente(cedula: int, session: session_dep):
     cliente = session.get(Cliente, cedula)
@@ -65,6 +74,7 @@ def delete_cliente(cedula: int, session: session_dep):
     session.commit()
     return {"ok": True}
 
+# Ruta para el login del cliente
 @cliente_router.post("/login")
 def login(user: LoginData, session: session_dep):
     try:

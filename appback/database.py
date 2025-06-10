@@ -13,6 +13,7 @@ url_connection = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:3306/{d
 
 engine = create_engine(url_connection)
 
+# Crear las tablas de la base de datos
 def create_db_and_tables():
     from appback.models.ubicacion import Ubicacion
     from appback.models.cliente import Cliente
