@@ -68,6 +68,23 @@ const ListarCompras = () => {
     });
   };
 
+  const formatHora = (hora) => {
+    if (!hora) return 'No disponible';
+    
+    try {
+      // Si la hora viene en formato HH:MM:SS, la formateamos a HH:MM AM/PM
+      const [horas, minutos, segundos] = hora.split(':');
+      if (horas && minutos) {
+        const hora12 = parseInt(horas, 10) % 12 || 12; // Convertir a formato 12 horas
+        const ampm = parseInt(horas, 10) >= 12 ? 'PM' : 'AM';
+        return `${hora12}:${minutos} ${ampm}`;
+      }
+      return hora;
+    } catch (error) {
+      return hora;
+    }
+  };
+
   if (loading) {
     return <div className="loading">Cargando datos...</div>;
   }
@@ -87,6 +104,7 @@ const ListarCompras = () => {
               <tr>
                 <th>ID Compra</th>
                 <th>Fecha</th>
+                <th>Hora</th>
                 <th>Cliente</th>
                 <th>Tipo de Boleta</th>
                 <th>Cantidad</th>
@@ -99,6 +117,7 @@ const ListarCompras = () => {
                 <tr key={compra.idcompra}>
                   <td>{compra.idcompra}</td>
                   <td>{formatFecha(compra.fecha)}</td>
+                  <td>{formatHora(compra.hora)}</td>
                   <td>
                     {clientes[compra.cedula] ? (
                       `${compra.cedula} - ${clientes[compra.cedula].nombres} ${clientes[compra.cedula].apellidos}`
@@ -117,7 +136,7 @@ const ListarCompras = () => {
                   <td>{compra.forma_pago}</td>
                   <td>
                     <span className={`status-indicator ${getEstadoClass(compra.estado)}`}></span>
-                    {compra.estado === 1 ? 'Activa' : 'Inactiva'}
+                    {compra.estado === 1 ? 'Activa' : 'Cancelada'}
                   </td>
                 </tr>
               ))}

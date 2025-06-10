@@ -21,6 +21,7 @@ import Contacto from "../pages/Contacto/Contacto";
 import Registro from "../pages/Registro/Registro";
 import Perfil from "../pages/Perfil/Perfil";
 import EditarPerfil from "../pages/EditarPerfil/EditarPerfil";
+import CambiarContrasena from "../pages/CambiarContrasena/CambiarContrasena";
 import ExplorarEventos from "../pages/ClientesExEventos/ExplorarEventos";
 import EditarAdministrador from "../pages/crpEditarAdministrador/EditarAdministrador";
 import EditarEvento from "../pages/crpEditarEvento/EditarEvento";
@@ -42,6 +43,7 @@ const AppRouter = () => (
       <Route path="/registro" element={<Registro />} />
       <Route path="/perfil" element={<Perfil />} />
       <Route path="/editar-perfil" element={<EditarPerfil />} />
+      <Route path="/cambiar-contrasena" element={<CambiarContrasena />} />
       <Route path="/eventos" element={<ExplorarEventos />} />
       <Route path="/funciones/:id_evento" element={<Funciones />} />
       <Route path="/comprar-boletos/:id_funcion" element={<Compras />} />
