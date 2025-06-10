@@ -1,4 +1,6 @@
 from sqlmodel import SQLModel, Field
+from typing import Optional
+
 
 # Base de datos para el administrador
 class ClienteBase(SQLModel):
@@ -31,8 +33,16 @@ class ClientePublic(ClienteBase):
 class ClienteCreate(ClienteBase):
     cedula: int
 # Modelo para actualizar un cliente existente
-class ClienteUpdate(ClienteBase):
-    pass
+class ClienteUpdate(SQLModel):
+    nombres: Optional[str] = None
+    apellidos: Optional[str] = None
+    direccion: Optional[str] = None
+    departamento: Optional[str] = None
+    municipio: Optional[str] = None
+    email: Optional[str] = None  # Cambiado de EmailStr a str para mayor compatibilidad
+    telefono: Optional[str] = None
+    contrasena: Optional[str] = None
+    estado: Optional[int] = None
 # Modelo para el inicio de sesión del cliente
 class LoginData(SQLModel):
     cedula: int

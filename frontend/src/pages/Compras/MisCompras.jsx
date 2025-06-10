@@ -32,9 +32,13 @@ const MisCompras = () => {
 
     try {
       setLoading(true);
+      setError(null);
+      
       // Decodificar el token para obtener la cédula del usuario
       const decodedToken = jwtDecode(token);
       const cedula = decodedToken.cedula || decodedToken.id_usuario;
+      
+      console.log("Cargando compras para cédula:", cedula);
 
       // Cargar las compras del usuario
       const response = await fetch(`http://localhost:8000/compras/cedula/${cedula}`, {
@@ -44,54 +48,72 @@ const MisCompras = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Error al cargar las compras');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || `Error ${response.status}: ${response.statusText}`);
       }
 
       const data = await response.json();
+      console.log("Compras cargadas:", data);
       setCompras(data);
       
-      // Obtener las funciones relacionadas con las compras
-      const funcionesIds = [...new Set(data.map(compra => compra.id_funcion))];
-      const funcionesData = {};
-      const tiposBoletaData = {};
-      
-      for (const id of funcionesIds) {
-        const funcionResponse = await fetch(`http://localhost:8000/funciones/${id}`);
-        if (funcionResponse.ok) {
-          const funcion = await funcionResponse.json();
-          funcionesData[id] = funcion;
-          
-          // Obtener el evento relacionado con esta función
-          if (!eventos[funcion.id_evento]) {
-            const eventoResponse = await fetch(`http://localhost:8000/eventos/${funcion.id_evento}`);
-            if (eventoResponse.ok) {
-              const evento = await eventoResponse.json();
-              setEventos(prev => ({...prev, [funcion.id_evento]: evento}));
-            }
-          }
-        }
+      // Si no hay compras, no necesitamos cargar datos relacionados
+      if (data.length === 0) {
+        setLoading(false);
+        return;
       }
       
       // Obtener información de tipos de boleta
       const tiposBoletaIds = [...new Set(data.map(compra => compra.id_tipoboleta))];
+      const tiposBoletaData = {};
+      const funcionesData = {};
+      const eventosData = {};
+      
+      // Cargar tipos de boleta y sus relaciones
       for (const id of tiposBoletaIds) {
         try {
           const tipoBoletaResponse = await fetch(`http://localhost:8000/tiposboletas/${id}`);
           if (tipoBoletaResponse.ok) {
             const tipoBoleta = await tipoBoletaResponse.json();
             tiposBoletaData[id] = tipoBoleta;
+            
+            // Obtener la función relacionada con este tipo de boleta
+            if (tipoBoleta.id_funcion && !funcionesData[tipoBoleta.id_funcion]) {
+              try {
+                const funcionResponse = await fetch(`http://localhost:8000/funciones/${tipoBoleta.id_funcion}`);
+                if (funcionResponse.ok) {
+                  const funcion = await funcionResponse.json();
+                  funcionesData[tipoBoleta.id_funcion] = funcion;
+                  
+                  // Obtener el evento relacionado con esta función
+                  if (funcion.id_evento && !eventosData[funcion.id_evento]) {
+                    try {
+                      const eventoResponse = await fetch(`http://localhost:8000/eventos/${funcion.id_evento}`);
+                      if (eventoResponse.ok) {
+                        const evento = await eventoResponse.json();
+                        eventosData[funcion.id_evento] = evento;
+                      }
+                    } catch (eventoError) {
+                      console.error(`Error al cargar evento para función ${funcion.id_funcion}:`, eventoError);
+                    }
+                  }
+                }
+              } catch (funcionError) {
+                console.error(`Error al cargar función ${tipoBoleta.id_funcion}:`, funcionError);
+              }
+            }
           }
         } catch (error) {
           console.error(`Error al cargar tipo de boleta ${id}:`, error);
         }
       }
       
-      setFunciones(funcionesData);
       setTiposBoleta(tiposBoletaData);
+      setFunciones(funcionesData);
+      setEventos(eventosData);
       setLoading(false);
     } catch (err) {
       console.error('Error:', err);
-      setError('No se pudieron cargar tus compras. Por favor, intenta más tarde.');
+      setError(`No se pudieron cargar tus compras: ${err.message}. Por favor, intenta más tarde.`);
       setLoading(false);
     }
   };
@@ -181,14 +203,14 @@ const MisCompras = () => {
       console.log("Generando factura para compra:", compra);
       
       // Obtener datos relacionados
-      const funcion = funciones[compra.id_funcion] || {};
+      const tipoBoleta = tiposBoleta[compra.id_tipoboleta] || {};
+      console.log("Tipo Boleta:", tipoBoleta);
+      
+      const funcion = tipoBoleta.id_funcion ? funciones[tipoBoleta.id_funcion] : {};
       console.log("Función:", funcion);
       
       const evento = funcion.id_evento ? eventos[funcion.id_evento] : {};
       console.log("Evento:", evento);
-      
-      const tipoBoleta = tiposBoleta[compra.id_tipoboleta] || {};
-      console.log("Tipo Boleta:", tipoBoleta);
       
       // Crear nuevo documento PDF
       const doc = new jsPDF();
@@ -199,24 +221,20 @@ const MisCompras = () => {
         doc.setFontSize(20);
         doc.setTextColor(40, 40, 40);
         doc.text('FACTURA DE COMPRA', 105, 20, { align: 'center' });
-        console.log("Título añadido");
         
         // Información del evento
         doc.setFontSize(12);
         doc.setTextColor(40, 40, 40);
         doc.text(`Evento: ${evento?.nombre || 'No disponible'}`, 14, 40);
         doc.text(`Función: ${funcion?.nombre || 'No disponible'}`, 14, 48);
-        console.log("Información del evento añadida");
         
         // Información de la compra
         doc.text(`Factura: ${compra.idcompra}`, 14, 60);
         doc.text(`Fecha: ${formatearFecha(compra.fecha)}`, 14, 68);
         doc.text(`Hora: ${formatearHora(compra.hora)}`, 14, 76);
-        console.log("Información de la compra añadida");
         
         // Información del cliente
         doc.text(`Cliente ID: ${compra.cedula}`, 14, 88);
-        console.log("Información del cliente añadida");
         
         // Línea separadora
         doc.setDrawColor(200, 200, 200);
@@ -272,14 +290,11 @@ const MisCompras = () => {
         doc.text('Total', 110, 156);
         doc.text(`$${((tipoBoleta?.precio || 0) * compra.cantidad * 1.19).toFixed(2)}`, 170, 156);
         
-        console.log("Tabla creada manualmente");
-        
         // Información de pago
-        const finalY = 166; // Posición después de la tabla manual
+        const finalY = 166;
         doc.text('Información de Pago:', 14, finalY + 10);
         doc.text(`Método de Pago: ${compra.forma_pago}`, 14, finalY + 18);
         doc.text(`Estado: ${compra.estado === 1 ? 'Pagado' : 'Cancelado'}`, 14, finalY + 26);
-        console.log("Información de pago añadida");
         
         // Términos y condiciones
         doc.setFontSize(10);
@@ -287,18 +302,14 @@ const MisCompras = () => {
         doc.text('- Esta factura es un comprobante de su compra.', 14, finalY + 48);
         doc.text('- Presente este documento para ingresar al evento.', 14, finalY + 54);
         doc.text('- No se aceptan devoluciones después de la fecha del evento.', 14, finalY + 60);
-        console.log("Términos y condiciones añadidos");
         
         // Pie de página
         doc.setFontSize(8);
         doc.text('© 2023 Sistema de Boletería - Todos los derechos reservados', 105, 285, { align: 'center' });
-        console.log("Pie de página añadido");
         
         // Guardar el PDF con nombre personalizado
         const nombreArchivo = `Factura_${compra.idcompra}_${evento?.nombre || 'Evento'}.pdf`;
-        console.log("Guardando PDF con nombre:", nombreArchivo);
         doc.save(nombreArchivo);
-        console.log("PDF guardado exitosamente");
         
       } catch (innerError) {
         console.error("Error específico durante la generación del PDF:", innerError);
@@ -372,9 +383,9 @@ const MisCompras = () => {
             </thead>
             <tbody>
               {compras.map((compra) => {
-                const funcion = funciones[compra.id_funcion] || {};
-                const evento = funcion.id_evento ? eventos[funcion.id_evento] : {};
                 const tipoBoleta = tiposBoleta[compra.id_tipoboleta] || {};
+                const funcion = tipoBoleta.id_funcion ? funciones[tipoBoleta.id_funcion] : {};
+                const evento = funcion.id_evento ? eventos[funcion.id_evento] : {};
                 
                 return (
                   <tr key={compra.idcompra}>

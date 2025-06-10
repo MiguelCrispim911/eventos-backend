@@ -5,7 +5,12 @@ from appback.database import get_session
 from typing import Annotated
 from appback.core.security import create_access_token, hash_password, verify_password
 from fastapi import status
+from pydantic import BaseModel
 
+# Modelo para la verificación de contraseña
+class PasswordVerifyRequest(BaseModel):
+    cedula: int
+    password: str
 
 # appback/routes/cliente_route.py
 # Este archivo define las rutas para manejar las operaciones CRUD de los clientes.
@@ -117,3 +122,23 @@ def login(user: LoginData, session: session_dep):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error interno: {str(e)}"
         )
+
+# Endpoint para verificar la contraseña de un cliente
+@cliente_router.post("/verify-password")
+def verify_client_password(request: PasswordVerifyRequest, session: session_dep):
+    cliente = session.get(Cliente, request.cedula)
+    if not cliente:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Cliente no encontrado"
+        )
+    
+    # Verificar si la contraseña es correcta
+    if not verify_password(request.password, cliente.contrasena):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Contraseña incorrecta"
+        )
+    
+    # Si la contraseña es correcta, devolver éxito
+    return {"verified": True}

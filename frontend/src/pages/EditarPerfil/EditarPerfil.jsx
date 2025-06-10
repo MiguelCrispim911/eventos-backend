@@ -17,8 +17,7 @@ const EditarPerfil = () => {
     municipio: '',
     email: '',
     telefono: '',
-    contrasena: '',
-    confirmarContrasena: ''
+    confirmarContrasena: '' // Solo mantenemos un campo para confirmar la contraseña actual
   });
 
   useEffect(() => {
@@ -57,8 +56,7 @@ const EditarPerfil = () => {
           municipio: data.municipio,
           email: data.email,
           telefono: data.telefono,
-          contrasena: '',
-          confirmarContrasena: ''
+          confirmarContrasena: '' // Inicializar vacío
         });
         
         setLoading(false);
@@ -86,9 +84,9 @@ const EditarPerfil = () => {
     setError('');
     setSuccess('');
     
-    // Validar contraseñas si se están actualizando
-    if (formData.contrasena && formData.contrasena !== formData.confirmarContrasena) {
-      setError('Las contraseñas no coinciden');
+    // Validar que se haya proporcionado la contraseña para confirmar
+    if (!formData.confirmarContrasena) {
+      setError('Debe ingresar su contraseña actual para confirmar los cambios');
       return;
     }
     
@@ -99,7 +97,26 @@ const EditarPerfil = () => {
         return;
       }
       
-      // Preparar datos para enviar al servidor
+      // Primero verificar la contraseña actual
+      const verifyResponse = await fetch('http://localhost:8000/clientes/verify-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          cedula: formData.cedula,
+          password: formData.confirmarContrasena
+        }),
+      });
+      
+      if (!verifyResponse.ok) {
+        setError('Contraseña incorrecta. No se pueden guardar los cambios.');
+        return;
+      }
+      
+      // Si la contraseña es correcta, proceder con la actualización
+      // IMPORTANTE: No incluimos la contraseña en los datos de actualización
       const updateData = {
         nombres: formData.nombres,
         apellidos: formData.apellidos,
@@ -111,10 +128,7 @@ const EditarPerfil = () => {
         estado: 1
       };
       
-      // Solo incluir contraseña si se ha proporcionado una nueva
-      if (formData.contrasena) {
-        updateData.contrasena = formData.contrasena;
-      }
+      console.log('Datos a enviar:', updateData);
       
       // Enviar datos al servidor usando fetch
       const response = await fetch(`http://localhost:8000/clientes/${formData.cedula}`, {
@@ -128,7 +142,19 @@ const EditarPerfil = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.detail || 'Error al actualizar perfil');
+        console.error('Error del servidor:', errorData);
+        
+        if (errorData.detail) {
+          throw new Error(errorData.detail);
+        } else if (typeof errorData === 'object') {
+          // Si es un objeto de validación de Pydantic, mostrar el primer error
+          const firstError = Object.values(errorData)[0];
+          if (Array.isArray(firstError) && firstError.length > 0) {
+            throw new Error(firstError[0].msg || 'Error de validación');
+          }
+        }
+        
+        throw new Error('Error al actualizar perfil');
       }
       
       const data = await response.json();
@@ -136,10 +162,9 @@ const EditarPerfil = () => {
       
       setSuccess('¡Perfil actualizado con éxito!');
       
-      // Limpiar campos de contraseña
+      // Limpiar campo de contraseña
       setFormData(prev => ({
         ...prev,
-        contrasena: '',
         confirmarContrasena: ''
       }));
       
@@ -268,30 +293,20 @@ const EditarPerfil = () => {
         </div>
         
         <div className={styles.passwordSection}>
-          <h3>Cambiar Contraseña (opcional)</h3>
+          <h3>Confirmar cambios</h3>
           
-          <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Nueva Contraseña:</label>
-              <input
-                type="password"
-                name="contrasena"
-                value={formData.contrasena}
-                onChange={handleChange}
-                className={styles.input}
-              />
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Confirmar Contraseña:</label>
-              <input
-                type="password"
-                name="confirmarContrasena"
-                value={formData.confirmarContrasena}
-                onChange={handleChange}
-                className={styles.input}
-              />
-            </div>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Ingrese su contraseña actual:</label>
+            <input
+              type="password"
+              name="confirmarContrasena"
+              value={formData.confirmarContrasena}
+              onChange={handleChange}
+              className={styles.input}
+              required
+              placeholder="Ingrese su contraseña para confirmar los cambios"
+            />
+            <span className={styles.helpText}>Debe ingresar su contraseña actual para guardar los cambios</span>
           </div>
         </div>
         
@@ -313,3 +328,6 @@ const EditarPerfil = () => {
 };
 
 export default EditarPerfil;
+
+
+

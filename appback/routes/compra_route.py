@@ -2,17 +2,14 @@ from fastapi import APIRouter, Depends, Query, HTTPException
 from sqlmodel import select, Session
 from typing import Annotated, Optional 
 from appback.models.compra import Compra, CompraCreate, CompraPublic, CompraUpdate
+from appback.models.tipo_boleta import TipoBoleta
 from appback.database import get_session
 from typing import Annotated
 
-# appback/routes/compra_route.py
-# Este archivo define las rutas para manejar las operaciones CRUD de las compras.
 compra_router = APIRouter()
 
-# Dependencia para obtener la sesión de la base de datos
 session_dep = Annotated[Session, Depends(get_session)]
 
-# Rutas para manejar las compras
 @compra_router.post("/", response_model=CompraPublic)
 def create_compra(compra: CompraCreate, session: session_dep):
     db_compra = Compra.model_validate(compra)
@@ -21,12 +18,10 @@ def create_compra(compra: CompraCreate, session: session_dep):
     session.refresh(db_compra)
     return db_compra
 
-# Obtener todas las compras con paginación
 @compra_router.get("/", response_model=list[CompraPublic])
 def read_compras(session: session_dep, offset: int = 0, limit: Annotated[int, Query(le=100)] = 100):
     return session.exec(select(Compra).offset(offset).limit(limit)).all()
 
-# Obtener una compra por su ID
 @compra_router.get("/{idcompra}", response_model=CompraPublic)
 def read_compra(idcompra: int, session: session_dep):
     compra = session.get(Compra, idcompra)
@@ -34,7 +29,6 @@ def read_compra(idcompra: int, session: session_dep):
         raise HTTPException(status_code=404, detail="Compra no encontrada")
     return compra
 
-# Actualizar una compra por su ID
 @compra_router.patch("/{idcompra}", response_model=CompraPublic)
 def update_compra(idcompra: int, compra: CompraUpdate, session: session_dep):
     compra_db = session.get(Compra, idcompra)
@@ -47,7 +41,6 @@ def update_compra(idcompra: int, compra: CompraUpdate, session: session_dep):
     session.refresh(compra_db)
     return compra_db
 
-# Eliminar una compra por su ID
 @compra_router.delete("/{idcompra}")
 def delete_compra(idcompra: int, session: session_dep):
     compra = session.get(Compra, idcompra)
@@ -57,7 +50,7 @@ def delete_compra(idcompra: int, session: session_dep):
     session.commit()
     return {"ok": True}
 
-# Obtener compras por cédula del cliente
+
 @compra_router.get("/cedula/{cedula}", response_model=list[CompraPublic])
 def read_compras_by_cedula(
     cedula: int, 
@@ -74,28 +67,34 @@ def read_compras_by_cedula(
 
     return compras
 
+# Nueva ruta para cancelar una compra
 @compra_router.patch("/cancelar/{idcompra}", response_model=CompraPublic)
 def cancelar_compra(idcompra: int, session: session_dep):
-    compra_db = session.get(Compra, idcompra)
-    if not compra_db:
-        raise HTTPException(status_code=404, detail="Compra no encontrada")
-    
-    # Verificar si la compra ya está cancelada
-    if compra_db.estado == 0:
-        raise HTTPException(status_code=400, detail="Esta compra ya está cancelada")
-    
-    # Actualizar el estado a cancelado (0)
-    compra_db.estado = 0
-    session.add(compra_db)
-    session.commit()
-    session.refresh(compra_db)
-    
-    # Actualizar disponibilidad de boletas
-    tipo_boleta = session.get(TipoBoleta, compra_db.id_tipoboleta)
-    if tipo_boleta:
-        tipo_boleta.disponibles += compra_db.cantidad
-        session.add(tipo_boleta)
+    try:
+        # Buscar la compra por ID
+        compra_db = session.get(Compra, idcompra)
+        if not compra_db:
+            raise HTTPException(status_code=404, detail="Compra no encontrada")
+        
+        # Verificar si la compra ya está cancelada
+        if compra_db.estado == 0:
+            raise HTTPException(status_code=400, detail="Esta compra ya está cancelada")
+        
+        # Actualizar el estado a cancelado (0)
+        compra_db.estado = 0
+        session.add(compra_db)
+        
+        # Actualizar disponibilidad de boletas
+        tipo_boleta = session.get(TipoBoleta, compra_db.id_tipoboleta)
+        if tipo_boleta:
+            # Aumentar la disponibilidad de boletas
+            tipo_boleta.disponibles += compra_db.cantidad
+            session.add(tipo_boleta)
+        
         session.commit()
-    
-    return compra_db
-
+        session.refresh(compra_db)
+        
+        return compra_db
+    except Exception as e:
+        session.rollback()
+        raise HTTPException(status_code=500, detail=f"Error al cancelar la compra: {str(e)}")
