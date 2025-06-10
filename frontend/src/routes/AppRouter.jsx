@@ -20,7 +20,7 @@ import Login from "../pages/Login/Login";
 import Contacto from "../pages/Contacto/Contacto";
 import Registro from "../pages/Registro/Registro";
 import Perfil from "../pages/Perfil/Perfil";
-import EditarPerfil from "../pages/EditarPerfil/EditarPerfil"; // Importar el nuevo componente
+import EditarPerfil from "../pages/EditarPerfil/EditarPerfil";
 import ExplorarEventos from "../pages/ClientesExEventos/ExplorarEventos";
 import EditarAdministrador from "../pages/crpEditarAdministrador/EditarAdministrador";
 import EditarEvento from "../pages/crpEditarEvento/EditarEvento";
@@ -28,6 +28,10 @@ import EditarFuncion from "../pages/crpEditarFuncion/editarFuncion";
 import EditarTipoBoleta from "../pages/crpEditarTipoBoleta/EditarTipoBoleta";
 import EditarUbicacion from "../pages/crpEditarUbicacion/EditarUbicacion";
 import EditarCompras from "../pages/crpListarCompras/ListarCompras"; 
+import Funciones from "../pages/Funciones/Funciones";
+import Compras from "../pages/Compras/Compras";
+import MisCompras from "../pages/Compras/MisCompras";
+
 const AppRouter = () => (
   <Routes>
     {/* Rutas principales con MainLayout */}
@@ -37,8 +41,11 @@ const AppRouter = () => (
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/perfil" element={<Perfil />} />
-      <Route path="/editar-perfil" element={<EditarPerfil />} /> {/* Añadir la nueva ruta */}
+      <Route path="/editar-perfil" element={<EditarPerfil />} />
       <Route path="/eventos" element={<ExplorarEventos />} />
+      <Route path="/funciones/:id_evento" element={<Funciones />} />
+      <Route path="/comprar-boletos/:id_funcion" element={<Compras />} />
+      <Route path="/mis-compras" element={<MisCompras />} />
       {/* más rutas públicas aquí */}
     </Route>
 

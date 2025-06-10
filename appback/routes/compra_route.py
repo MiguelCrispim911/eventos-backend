@@ -74,3 +74,28 @@ def read_compras_by_cedula(
 
     return compras
 
+@compra_router.patch("/cancelar/{idcompra}", response_model=CompraPublic)
+def cancelar_compra(idcompra: int, session: session_dep):
+    compra_db = session.get(Compra, idcompra)
+    if not compra_db:
+        raise HTTPException(status_code=404, detail="Compra no encontrada")
+    
+    # Verificar si la compra ya está cancelada
+    if compra_db.estado == 0:
+        raise HTTPException(status_code=400, detail="Esta compra ya está cancelada")
+    
+    # Actualizar el estado a cancelado (0)
+    compra_db.estado = 0
+    session.add(compra_db)
+    session.commit()
+    session.refresh(compra_db)
+    
+    # Actualizar disponibilidad de boletas
+    tipo_boleta = session.get(TipoBoleta, compra_db.id_tipoboleta)
+    if tipo_boleta:
+        tipo_boleta.disponibles += compra_db.cantidad
+        session.add(tipo_boleta)
+        session.commit()
+    
+    return compra_db
+

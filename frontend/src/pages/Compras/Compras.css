@@ -1,0 +1,344 @@
+.compras-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.compras-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  font-size: 2rem;
+  position: relative;
+}
+
+.compras-title:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #FF6B35;
+}
+
+.compra-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.compra-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Eliminar específicamente las líneas de degradado en los títulos de sección */
+.section-title:after {
+  content: none; /* Esto evita que se genere el pseudo-elemento */
+}
+
+/* Estilos para la sección de detalles del evento */
+.evento-info {
+  display: flex;
+  gap: 3rem; /* Aumentado el espacio entre la imagen y los detalles */
+  align-items: flex-start;
+}
+
+.evento-imagen {
+  flex: 0 0 200px;
+}
+
+.evento-imagen img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.evento-detalles {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Alinear todos los elementos de texto */
+.evento-detalles h3,
+.evento-funcion,
+.evento-fecha,
+.evento-hora {
+  padding-left: 0; /* Eliminar cualquier padding que pueda causar desalineación */
+  margin-left: 0; /* Eliminar cualquier margen que pueda causar desalineación */
+  text-align: left; /* Asegurar que todo el texto esté alineado a la izquierda */
+}
+
+.evento-detalles h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.evento-funcion {
+  font-size: 1.3rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+}
+
+.evento-fecha, .evento-hora {
+  margin-bottom: 0.7rem;
+  color: #666;
+  display: flex; /* Usar flexbox para alinear la etiqueta y el valor */
+  align-items: center; /* Alinear verticalmente */
+}
+
+.evento-fecha span, .evento-hora span {
+  font-weight: 600;
+  color: #444;
+  width: 60px; /* Ancho fijo para las etiquetas */
+  display: inline-block; /* Asegurar que tengan un ancho fijo */
+  margin-right: 10px; /* Añadir espacio entre la etiqueta y el valor */
+}
+
+/* Estilos para el formulario */
+.compra-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-group input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #FF6B35;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+}
+
+.btn-continuar {
+  grid-column: 1 / -1;
+  background-color: #FF6B35;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.btn-continuar:hover {
+  background-color: #E85925;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .compra-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .evento-info {
+    flex-direction: column;
+    gap: 1.5rem; /* Mantener buen espacio en vista móvil */
+  }
+  
+  .evento-imagen {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto; /* Centrar la imagen en móvil */
+  }
+  
+  .evento-detalles {
+    padding-left: 0; /* Eliminar padding en móvil */
+    text-align: center; /* Centrar texto en móvil */
+  }
+}
+
+/* Estilos para datos del usuario logueado */
+.user-data-container {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.user-data-row {
+  display: flex;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.user-data-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.user-data-label {
+  flex: 0 0 120px;
+  font-weight: 600;
+  color: #555;
+}
+
+.user-data-value {
+  flex: 1;
+  color: #333;
+}
+
+/* Estilos para el componente de login requerido */
+.login-required {
+  text-align: center;
+  padding: 2rem;
+}
+
+.login-message {
+  margin-bottom: 1.5rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.btn-login {
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #3A7BC8;
+}
+
+/* Estilos para la sección de datos del comprador */
+.comprador-info-container {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #0070CE;
+}
+
+.comprador-info-row {
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.comprador-info-row:last-child {
+  border-bottom: none;
+}
+
+.comprador-info-label {
+  font-weight: 600;
+  color: #495057;
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.comprador-info-value {
+  color: #212529;
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+/* Ajustes para el botón de finalizar compra */
+.btn-continuar {
+  background-color: #FF6B35;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-continuar:hover {
+  background-color: #E85925;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comprador-info-container {
+    padding: 1.2rem;
+  }
+  
+  .comprador-info-row {
+    padding: 0.8rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .comprador-info-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .comprador-info-label {
+    width: 100%;
+    margin-bottom: 0.3rem;
+  }
+}
+
