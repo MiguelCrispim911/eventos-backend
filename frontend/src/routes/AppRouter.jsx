@@ -24,6 +24,7 @@ import EditarPerfil from "../pages/EditarPerfil/EditarPerfil";
 import ExplorarEventos from "../pages/ClientesExEventos/ExplorarEventos";
 import Funciones from "../pages/Funciones/Funciones";
 import Compras from "../pages/Compras/Compras";
+import MisCompras from "../pages/Compras/MisCompras";
 
 const AppRouter = () => (
   <Routes>
@@ -38,6 +39,7 @@ const AppRouter = () => (
       <Route path="/eventos" element={<ExplorarEventos />} />
       <Route path="/funciones/:id_evento" element={<Funciones />} />
       <Route path="/comprar-boletos/:id_funcion" element={<Compras />} />
+      <Route path="/mis-compras" element={<MisCompras />} />
       {/* más rutas públicas aquí */}
     </Route>
 
