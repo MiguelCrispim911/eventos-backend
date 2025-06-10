@@ -98,7 +98,7 @@ const EditarEvento = () => {
 
   return (
     <div className="editar-evento-container">
-      <h2>Buscar/Editar Evento</h2>
+      <h3>Buscar/Editar Evento</h3>
       <form onSubmit={handleSearch} className="search-form">
         <div className="search-group">
           <input

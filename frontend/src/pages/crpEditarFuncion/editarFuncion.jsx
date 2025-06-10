@@ -176,7 +176,7 @@ const EditarFuncion = () => {
 
   return (
     <div className="editar-funcion-container">
-      <h2>Buscar/Editar Función</h2>
+      <h3>Buscar/Editar Función</h3>
       <form onSubmit={handleSearch} className="search-form">
         <div className="search-group">
           <input

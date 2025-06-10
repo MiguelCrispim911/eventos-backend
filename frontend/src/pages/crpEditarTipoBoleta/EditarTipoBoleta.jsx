@@ -178,7 +178,7 @@ const EditarTipoBoleta = () => {
 
   return (
     <div className="editar-tipo-boleta-container">
-      <h2>Buscar/Editar Tipo de Boleta</h2>
+      <h3>Buscar/Editar Tipo de Boleta</h3>
       <form onSubmit={handleSearch} className="search-form">
         <div className="search-group">
           <input

@@ -194,7 +194,7 @@ const EditarUbicacion = () => {
 
   return (
     <div className="editar-ubicacion-container">
-      <h2>Buscar/Editar Ubicación</h2>
+      <h3>Buscar/Editar Ubicación</h3>
       <form onSubmit={handleSearch} className="search-form">
         <div className="search-group">
           <input
