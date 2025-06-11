@@ -8,7 +8,7 @@
     background-color: var(--background);
     padding: 1rem;
     /* Fondo de imagen */
-    background-image: url('https://sdmntprwestus2.oaiusercontent.com/files/00000000-2834-61f8-b445-5796e6039d83/raw?se=2025-06-11T11%3A18%3A44Z&sp=r&sv=2024-08-04&sr=b&scid=bfa8f967-cd37-5c53-962b-87449dc80dd1&skoid=b64a43d9-3512-45c2-98b4-dea55d094240&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-10T21%3A02%3A11Z&ske=2025-06-11T21%3A02%3A11Z&sks=b&skv=2024-08-04&sig=v8bOYrVyEa38G/7FNYPsdukCFIGqkkO/5JfurfUb/oA%3D');
+    background-image: url('https://i.postimg.cc/vZLdtVgF/imagenfondologin.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -175,4 +175,51 @@
     .login-title {
       font-size: 1.75rem;
     }
+  }
+
+  .login-submit-button {
+    width: 100%;
+    min-width: 180px;
+    max-width: 400px;
+    padding: 1rem;
+    background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.08rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin: 0 -1rem 3rem auto;
+    box-sizing: border-box;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .login-submit-button:hover {
+    background: linear-gradient(90deg, var(--primary-hover), var(--primary));
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.18);
+  }
+
+  .login-submit-button.loading {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .login-submit-button.loading::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 50%;
+    left: 50%;
+    margin: -11px 0 0 -11px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
   }
