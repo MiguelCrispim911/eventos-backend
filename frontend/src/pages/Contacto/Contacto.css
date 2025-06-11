@@ -3,7 +3,7 @@
   max-width: 1000px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
+  background-color: white;
 }
 
 .contacto-header {
@@ -36,7 +36,7 @@
 }
 
 .info-card {
-  background-color: #ffffff;
+  background-color: #fff8f8;
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);

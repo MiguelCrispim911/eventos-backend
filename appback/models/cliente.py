@@ -46,7 +46,7 @@ class ClienteUpdate(SQLModel):
     direccion: Optional[str] = None
     departamento: Optional[str] = None
     municipio: Optional[str] = None
-    email: Optional[str] = None  # Cambiado de EmailStr a str para mayor compatibilidad
+    email: Optional[str] = None  
     telefono: Optional[str] = None
     contrasena: Optional[str] = None
     preguntaSeguridad: Optional[str] = None

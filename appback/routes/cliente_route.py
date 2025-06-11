@@ -12,6 +12,13 @@ class PasswordVerifyRequest(BaseModel):
     cedula: int
     password: str
 
+# Modelo para la recuperación de contraseña
+class RecuperarContrasenaRequest(BaseModel):
+    cedula: int
+    preguntaSeguridad: str
+    respuestaSeguridad: str
+    nuevaContrasena: str
+
 # appback/routes/cliente_route.py
 # Este archivo define las rutas para manejar las operaciones CRUD de los clientes.
 cliente_router = APIRouter()
@@ -142,3 +149,23 @@ def verify_client_password(request: PasswordVerifyRequest, session: session_dep)
     
     # Si la contraseña es correcta, devolver éxito
     return {"verified": True}
+
+# Endpoint para recuperar la contraseña
+@cliente_router.post("/recuperar-contrasena")
+def recuperar_contrasena(request: RecuperarContrasenaRequest, session: session_dep):
+    cliente = session.get(Cliente, request.cedula)
+    if not cliente:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Cliente no encontrado"
+        )
+    if (cliente.preguntaSeguridad != request.preguntaSeguridad or
+        cliente.respuestaSeguridad != request.respuestaSeguridad):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Pregunta o respuesta de seguridad incorrecta"
+        )
+    cliente.contrasena = hash_password(request.nuevaContrasena)
+    session.add(cliente)
+    session.commit()
+    return {"message": "Contraseña actualizada correctamente"}
