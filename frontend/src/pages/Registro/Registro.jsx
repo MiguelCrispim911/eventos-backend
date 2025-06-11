@@ -19,6 +19,8 @@ const Registro = () => {
     telefono: '',
     contrasena: '',
     confirmarContrasena: '',
+    preguntaSeguridad: '',
+    respuestaSeguridad: '',
   });
   
   const handleChange = (e) => {
@@ -66,6 +68,8 @@ const Registro = () => {
         email: formData.email,
         telefono: formData.telefono,
         contrasena: formData.contrasena,
+        preguntaSeguridad: formData.preguntaSeguridad,
+        respuestaSeguridad: formData.respuestaSeguridad,
         estado: 1 // Activo por defecto
       };
       
@@ -251,6 +255,38 @@ const Registro = () => {
             </div>
           </div>
         </div>
+        
+        <div className="form-group">
+              <label className="form-label">Pregunta de Seguridad *</label>
+              <select
+                name="preguntaSeguridad"
+                value={formData.preguntaSeguridad || ''}
+                onChange={handleChange}
+                className="form-input"
+                required
+              >
+                <option value="">Seleccione una pregunta</option>
+                <option value="¿En qué ciudad naciste?">¿En qué ciudad naciste?</option>
+                <option value="¿Cuál es el nombre de tu mascota?">¿Cuál es el nombre de tu mascota?</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label className="form-label">Respuesta de Seguridad *</label>
+              <input
+                type="text"
+                name="respuestaSeguridad"
+                value={formData.respuestaSeguridad || ''}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Ingrese su respuesta"
+                required
+              />
+            </div>
+            <div className="form-note">
+              <small>
+                <b>Nota:</b> La pregunta y respuesta de seguridad te ayudarán a recuperar tu cuenta si olvidas tu contraseña.
+              </small>
+            </div>
         
         <div className="form-actions">
           <button 
