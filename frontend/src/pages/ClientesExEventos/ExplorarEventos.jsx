@@ -8,6 +8,8 @@ const ExplorarEventos = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const eventosPorPagina = 6;
+
   // useEffect para obtener eventos desde la base de datos
   useEffect(() => {
     const obtenerEventos = async () => {
@@ -33,16 +35,15 @@ const ExplorarEventos = () => {
   };
 
   const siguienteEvento = () => {
-    setCurrentIndex((prevIndex) => {
-      const nextIndex = prevIndex + 1;
-      return nextIndex >= eventos.length ? 0 : nextIndex;
-    });
+    if (currentIndex + eventosPorPagina < eventos.length) {
+      setCurrentIndex(currentIndex + eventosPorPagina);
+    }
   };
 
   const anteriorEvento = () => {
-    setCurrentIndex((prevIndex) =>
-      (prevIndex - 1 + eventos.length) % eventos.length
-    );
+    if (currentIndex - eventosPorPagina >= 0) {
+      setCurrentIndex(currentIndex - eventosPorPagina);
+    }
   };
 
   return (
@@ -52,51 +53,73 @@ const ExplorarEventos = () => {
 
       <h2 className="eventos-title">Listado de Eventos</h2>
       <div className="carousel">
-        <button onClick={anteriorEvento} className="carousel-button left">
+        <button
+          onClick={anteriorEvento}
+          className="carousel-button left"
+          disabled={currentIndex === 0}
+        >
           &#8592;
         </button>
         <div className="eventos-grid">
           {eventos.length > 0 ? (
-            Array.from({ length: 4 }).map((_, index) => {
-              const eventoIndex = (currentIndex + index) % eventos.length;
-              const evento = eventos[eventoIndex];
-              return (
-                <div
-                  key={evento.id_evento}
-                  className="evento-card"
-                  onClick={() => seleccionarEvento(evento)}
-                >
-                  <div className="evento-card-header">
-                    <img
-                      src={evento.foto_principal}
-                      alt={evento.nombre}
-                      className="evento-card-img"
-                    />
-                    <span
-                      className={`evento-status ${
-                        evento.estado === 1 ? "activo" : "inactivo"
-                      }`}
-                    >
-                      {evento.estado === 1 ? "Activo" : "Inactivo"}
-                    </span>
-                  </div>
-                  <div className="evento-card-body">
-                    <h3 className="evento-card-title">{evento.nombre}</h3>
-                    <p className="evento-card-description">
-                      {evento.descripcion}
-                    </p>
-                    <p className="evento-card-admin">
-                      Cédula Adm: {evento.cedula_adm}
-                    </p>
-                  </div>
+            <>
+              {[0, 1].map((row) => (
+                <div className="eventos-row" key={row}>
+                  {eventos
+                    .slice(
+                      currentIndex + row * 3,
+                      currentIndex + row * 3 + 3
+                    )
+                    .map((evento) => {
+                      if (!evento) return null;
+                      return (
+                        <div
+                          key={evento.id_evento}
+                          className="evento-card"
+                          onClick={() => seleccionarEvento(evento)}
+                        >
+                          <div className="evento-card-header">
+                            <img
+                              src={evento.foto_principal}
+                              alt={evento.nombre}
+                              className="evento-card-img"
+                            />
+                            <span
+                              className={`evento-status ${
+                                evento.estado === 1 ? "activo" : "inactivo"
+                              }`}
+                            >
+                              {evento.estado === 1 ? "Activo" : "Inactivo"}
+                            </span>
+                          </div>
+                          <div className="evento-card-body">
+                            <h3 className="evento-card-title">{evento.nombre}</h3>
+                            <button
+                              className="btn-comprar-boletos"
+                              onClick={e => {
+                                e.stopPropagation();
+                                // Cambia '1' por el id_funcion real que corresponda al evento/función
+                                navigate("/compras/1");
+                              }}
+                            >
+                              Comprar boletos
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
                 </div>
-              );
-            })
+              ))}
+            </>
           ) : (
             <p className="no-eventos-message">No hay eventos disponibles.</p>
           )}
         </div>
-        <button onClick={siguienteEvento} className="carousel-button right">
+        <button
+          onClick={siguienteEvento}
+          className="carousel-button right"
+          disabled={currentIndex + eventosPorPagina >= eventos.length}
+        >
           &#8594;
         </button>
       </div>

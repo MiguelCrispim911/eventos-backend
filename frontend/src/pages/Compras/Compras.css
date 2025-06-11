@@ -44,15 +44,13 @@
   border-bottom: 1px solid #eee;
 }
 
-/* Eliminar específicamente las líneas de degradado en los títulos de sección */
 .section-title:after {
-  content: none; /* Esto evita que se genere el pseudo-elemento */
+  content: none;
 }
 
-/* Estilos para la sección de detalles del evento */
 .evento-info {
   display: flex;
-  gap: 3rem; /* Aumentado el espacio entre la imagen y los detalles */
+  gap: 3rem;
   align-items: flex-start;
 }
 
@@ -74,14 +72,13 @@
   flex-direction: column;
 }
 
-/* Alinear todos los elementos de texto */
 .evento-detalles h3,
 .evento-funcion,
 .evento-fecha,
 .evento-hora {
-  padding-left: 0; /* Eliminar cualquier padding que pueda causar desalineación */
-  margin-left: 0; /* Eliminar cualquier margen que pueda causar desalineación */
-  text-align: left; /* Asegurar que todo el texto esté alineado a la izquierda */
+  padding-left: 0;
+  margin-left: 0;
+  text-align: left;
 }
 
 .evento-detalles h3 {
@@ -101,105 +98,123 @@
 .evento-fecha, .evento-hora {
   margin-bottom: 0.7rem;
   color: #666;
-  display: flex; /* Usar flexbox para alinear la etiqueta y el valor */
-  align-items: center; /* Alinear verticalmente */
+  display: flex;
+  align-items: center;
 }
 
 .evento-fecha span, .evento-hora span {
   font-weight: 600;
   color: #444;
-  width: 60px; /* Ancho fijo para las etiquetas */
-  display: inline-block; /* Asegurar que tengan un ancho fijo */
-  margin-right: 10px; /* Añadir espacio entre la etiqueta y el valor */
+  width: 60px;
+  display: inline-block;
+  margin-right: 10px;
 }
 
-/* Estilos para el formulario */
-.compra-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+/* NUEVOS ESTILOS PARA BOLETA Y FORMA DE PAGO */
+.boleta-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
 }
-
-.form-group {
-  display: flex;
-  flex-direction: column;
+.boleta-table th, .boleta-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
 }
-
-.form-group label {
-  margin-bottom: 0.5rem;
+.boleta-table th {
+  background: #f5f5f5;
   font-weight: 600;
-  color: #555;
 }
 
-.form-group input {
-  padding: 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #FF6B35;
-  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
-}
-
-.btn-continuar {
-  grid-column: 1 / -1;
-  background-color: #FF6B35;
-  color: white;
-  border: none;
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 6px;
+.radio-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #888;
+  background: #fff;
+  margin-right: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  transition: border-color 0.2s, background 0.2s;
+}
+.radio-btn.selected {
+  background: #4caf50;
+  border-color: #388e3c;
+}
+.radio-btn.pago {
+  width: 110px;
+  border-radius: 16px;
+  padding: 6px 0;
+  margin-right: 12px;
+  font-weight: bold;
+  border: 2px solid #888;
+  background: #fff;
+  color: #333;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.radio-btn.pago.selected {
+  background: #1976d2;
+  color: #fff;
+  border-color: #1976d2;
 }
 
-.btn-continuar:hover {
-  background-color: #E85925;
+.pago-btn-group {
+  display: flex;
+  gap: 10px;
 }
 
-.loading {
+.cantidad-section {
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cantidad-btn {
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  border-radius: 50%;
+  border: 1px solid #888;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cantidad-btn:hover {
+  background: #e0e0e0;
+}
+.cantidad-num {
+  min-width: 24px;
   text-align: center;
-  padding: 2rem;
-  font-size: 1.2rem;
-  color: #666;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
-.error-message {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 1rem;
+.forma-pago-section {
+  margin-top: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.btn-finalizar {
+  background: #388e3c;
+  color: #fff;
+  border: none;
+  padding: 10px 28px;
   border-radius: 6px;
-  margin: 1rem 0;
-  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s, transform 0.2s;
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .compra-form {
-    grid-template-columns: 1fr;
-  }
-  
-  .evento-info {
-    flex-direction: column;
-    gap: 1.5rem; /* Mantener buen espacio en vista móvil */
-  }
-  
-  .evento-imagen {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto; /* Centrar la imagen en móvil */
-  }
-  
-  .evento-detalles {
-    padding-left: 0; /* Eliminar padding en móvil */
-    text-align: center; /* Centrar texto en móvil */
-  }
+.btn-finalizar:hover {
+  background: #2e7031;
+  transform: translateY(-2px);
 }
 
 /* Estilos para datos del usuario logueado */
@@ -319,14 +334,47 @@
   transform: translateY(-2px);
 }
 
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
-  .comprador-info-container {
-    padding: 1.2rem;
+  .compra-form {
+    grid-template-columns: 1fr;
   }
-  
-  .comprador-info-row {
-    padding: 0.8rem 0;
+
+  .evento-info {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .evento-imagen {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .evento-detalles {
+    padding-left: 0;
+    text-align: center;
+  }
+  .boleta-table th, .boleta-table td {
+    font-size: 0.95rem;
+    padding: 6px 6px;
   }
 }
 
@@ -335,10 +383,9 @@
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .comprador-info-label {
     width: 100%;
     margin-bottom: 0.3rem;
   }
 }
-

@@ -38,6 +38,7 @@ const AppRouter = () => (
       <Route path="/eventos" element={<ExplorarEventos />} />
       <Route path="/funciones/:id_evento" element={<Funciones />} />
       <Route path="/comprar-boletos/:id_funcion" element={<Compras />} />
+      <Route path="/compras/:id_funcion" element={<Compras />} />
       {/* más rutas públicas aquí */}
     </Route>
 

@@ -3,6 +3,7 @@ from typing import Optional
 
 class CompraBase(SQLModel):
     fecha: str  # DATE
+    hora: str  # TIME
     cantidad: int
     forma_pago: str
     cedula: int

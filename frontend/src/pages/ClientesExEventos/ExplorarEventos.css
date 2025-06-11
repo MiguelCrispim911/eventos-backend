@@ -112,11 +112,10 @@
 }
 
 .eventos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
-  width: 100%;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
 }
 
 .evento-card {
@@ -333,3 +332,26 @@
     padding: 20px;
   }
   }
+.eventos-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+.btn-comprar-boletos {
+  background-color: #ff6d3a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  letter-spacing: 1px;
+}
+
+.btn-comprar-boletos:hover {
+  background-color: #ff884d;
+}
