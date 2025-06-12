@@ -105,9 +105,9 @@ const Compras = () => {
     }
 
     const now = new Date();
-    const fecha = now.toLocaleDateString('es-CO', {
-      day: '2-digit',
+    const fecha = now.toLocaleDateString('en-US', {
       month: '2-digit',
+      day: '2-digit',
       year: 'numeric'
     });
     const hora = now.toTimeString().slice(0, 8);
