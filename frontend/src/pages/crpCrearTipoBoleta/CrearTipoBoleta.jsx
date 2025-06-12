@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./CrearTipoBoleta.css";
 
-// Componente principal para crear un tipo de boleta
 const CrearTipoBoleta = () => {
   const [funciones, setFunciones] = useState([]);
   const [formData, setFormData] = useState({
@@ -72,7 +71,6 @@ const CrearTipoBoleta = () => {
     }
   };
 
-  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -92,7 +90,6 @@ const CrearTipoBoleta = () => {
     };
 
     try {
-      // Realiza la petición POST al backend
       const response = await fetch("http://localhost:8000/tiposboletas/", {
         method: "POST",
         headers: {
@@ -101,18 +98,15 @@ const CrearTipoBoleta = () => {
         body: JSON.stringify(dataToSend),
       });
 
-      // Si la respuesta no es exitosa, lanza un error
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.detail || "Error al registrar tipo de boleta");
       }
 
-      // Procesa la respuesta exitosa
       const result = await response.json();
       console.log("Tipo de boleta creado:", result);
       alert("Tipo de boleta registrado con éxito");
 
-      // Reinicia el formulario
       setFormData({
         nombre: "",
         localizacion: "",
@@ -122,7 +116,6 @@ const CrearTipoBoleta = () => {
         id_funcion: "",
       });
     } catch (error) {
-      // Maneja errores en la petición
       console.error("Error al enviar los datos:", error.message);
       alert("Ocurrió un error: " + error.message);
     }
@@ -133,7 +126,6 @@ const CrearTipoBoleta = () => {
       <form onSubmit={handleSubmit} className="crear-tipo-boleta-form">
         <h2 className="form-title">Registro de Tipo de Boleta</h2>
 
-        {/* Campo para el nombre */}
         <label className="form-label">
           Nombre:
           <input
@@ -148,7 +140,6 @@ const CrearTipoBoleta = () => {
           {errors.nombre && <span className="error-message">{errors.nombre}</span>}
         </label>
 
-        {/* Campo para la localización */}
         <label className="form-label">
           Localización:
           <input
@@ -177,7 +168,6 @@ const CrearTipoBoleta = () => {
           {errors.descripcion && <span className="error-message">{errors.descripcion}</span>}
         </label>
 
-        {/* Campo para el precio */}
         <label className="form-label">
           Precio:
           <input
@@ -192,7 +182,6 @@ const CrearTipoBoleta = () => {
           {errors.precio && <span className="error-message">{errors.precio}</span>}
         </label>
 
-        {/* Campo para el cupo máximo */}
         <label className="form-label">
           Cupo Máximo:
           <input
@@ -207,7 +196,6 @@ const CrearTipoBoleta = () => {
           {errors.cupo_maximo && <span className="error-message">{errors.cupo_maximo}</span>}
         </label>
 
-        {/* Campo para el ID de función */}
         <label className="form-label">
           Función:
           <select
@@ -227,7 +215,6 @@ const CrearTipoBoleta = () => {
           {errors.id_funcion && <span className="error-message">{errors.id_funcion}</span>}
         </label>
 
-        {/* Botón para enviar el formulario */}
         <button type="submit" className="submit-button">
           Registrar
         </button>

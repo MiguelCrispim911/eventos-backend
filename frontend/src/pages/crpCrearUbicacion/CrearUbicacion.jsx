@@ -132,7 +132,6 @@ const CrearUbicacion = () => {
     }
   };
 
-  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 

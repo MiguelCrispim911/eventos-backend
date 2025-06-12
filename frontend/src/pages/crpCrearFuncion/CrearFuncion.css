@@ -26,7 +26,6 @@
 
 /* Etiquetas e inputs */
 .form-label {
-    /* Estilo para etiquetas de campos */
     display: block;
     margin-bottom: 1.5rem;
     color: #555;
@@ -62,7 +61,6 @@
 
 /* Botón */
 .submit-button {
-    /* Botón principal del formulario */
     width: 100%;
     padding: 1rem;
     background-color: #007bff;

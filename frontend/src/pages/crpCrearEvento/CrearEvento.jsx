@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./CrearEvento.css";
 
-// Componente principal para crear un evento
 function CrearEvento() {
   const [admins, setAdmins] = useState([]);
   const [formData, setFormData] = useState({
@@ -63,7 +62,6 @@ function CrearEvento() {
     }
   };
 
-  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,7 +70,6 @@ function CrearEvento() {
     }
 
     try {
-      // Realiza la solicitud POST al backend para crear el evento
       const response = await fetch("http://localhost:8000/eventos/", {
         method: "POST",
         headers: {
@@ -80,7 +77,7 @@ function CrearEvento() {
         },
         body: JSON.stringify({
           ...formData,
-          cedula_adm: parseInt(formData.cedula_adm), // Convierte la cédula a número
+          cedula_adm: parseInt(formData.cedula_adm),
           estado: 1,
         }),
       });
@@ -113,7 +110,6 @@ function CrearEvento() {
       <form onSubmit={handleSubmit} className="crear-evento-form">
         <h2 className="form-title">Crear Evento</h2>
 
-        {/* Campo para el nombre del evento */}
         <label className="form-label">
           Nombre:
           <input
@@ -130,7 +126,6 @@ function CrearEvento() {
           )}
         </label>
 
-        {/* Campo para la descripción */}
         <label className="form-label">
           Descripción:
           <textarea
@@ -149,7 +144,6 @@ function CrearEvento() {
           )}
         </label>
 
-        {/* Campo para la foto principal */}
         <label className="form-label">
           Foto principal (URL):
           <input
@@ -163,7 +157,6 @@ function CrearEvento() {
           />
         </label>
 
-        {/* Campo para la foto secundaria */}
         <label className="form-label">
           Foto secundaria (URL):
           <input
@@ -177,7 +170,6 @@ function CrearEvento() {
           />
         </label>
 
-        {/* Campo para la cédula del administrador */}
         <label className="form-label">
           Administrador:
           <select
@@ -199,7 +191,6 @@ function CrearEvento() {
           )}
         </label>
 
-        {/* Botón para enviar el formulario */}
         <button type="submit" className="submit-button">
           Crear Evento
         </button>
