@@ -98,12 +98,20 @@ const Perfil = () => {
         </div>
       </div>
 
-      <button
-        className={styles.editButton}
-        onClick={() => navigate('/editar-perfil')}
-      >
-        Editar Perfil
-      </button>
+      <div className={styles.buttonsContainer}>
+        <button
+          className={styles.editButton}
+          onClick={() => navigate('/editar-perfil')}
+        >
+          Editar Perfil
+        </button>
+        <button
+          className={styles.passwordButton}
+          onClick={() => navigate('/cambiar-contrasena')}
+        >
+          Cambiar Contraseña
+        </button>
+      </div>
     </div>
   );
 };

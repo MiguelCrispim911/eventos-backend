@@ -1,31 +1,26 @@
 /* Contenedor principal (fondo blanco) */
 .crear-funcion-container {
-    /* Fondo blanco y centrado vertical/horizontal */
-    background-color: white;
-    min-height: 100vh;
-    padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
 }
 
 /* Formulario */
 .crear-funcion-form {
-    /* Fondo blanco, sombra, bordes redondeados y ancho máximo */
-    background-color: white;
     width: 100%;
     max-width: 600px;
+    background: white;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-title {
-    /* Título centrado y destacado */
+    text-align: center;
+    margin-bottom: 2rem;
     color: #333;
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
     font-weight: 600;
 }
 
@@ -33,53 +28,67 @@
 .form-label {
     /* Estilo para etiquetas de campos */
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: #555;
     font-size: 0.95rem;
 }
 
 .form-input {
-    /* Estilo para campos de entrada */
+    display: block;
     width: 100%;
     padding: 0.75rem;
-    margin-top: 0.3rem;
-    background-color: #f5f5f5;
+    margin-top: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
     color: #333;
 }
 
-.form-input:focus {
-    /* Efecto al enfocar el input */
-    background-color: #ffffff;
-    border-color: #4a90e2;
-    outline: none;
-}
-
-/* Textarea específico */
-.form-input[type="textarea"] {
-    /* Ajuste para textarea */
+.form-input.textarea {
     min-height: 100px;
     resize: vertical;
+}
+
+.form-input.error {
+    border-color: #dc3545;
+}
+
+.error-message {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }
 
 /* Botón */
 .submit-button {
     /* Botón principal del formulario */
     width: 100%;
-    padding: 0.75rem;
-    background-color: #1a1a1a;
+    padding: 1rem;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
-    margin-top: 1rem;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
 .submit-button:hover {
-    /* Efecto hover en el botón */
-    background-color: #505254;
+    background-color: #0056b3;
+}
+
+select.form-input {
+    background-color: white;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+}
+
+select.form-input option {
+    padding: 0.5rem;
 }

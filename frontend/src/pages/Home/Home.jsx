@@ -1,61 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CardEvento from "../../components/CardEvento/CardEvento";
 import "./Home.css";
 
 //Componente principal de la página de inicio. Muestra la sección hero y un carrusel de eventos destacados.
 
-// Datos de ejemplo para eventos destacados
-const eventosDestacados = [
-  {
-    id_evento: 1,
-    nombre: "Festival de Música Electrónica",
-    descripcion: "El festival más grande de música electrónica ",
-    fecha: "15 Dic 2025",
-    foto_principal: "/src/assets/festivales-musica.jpg",
-    ubicacion: "Arena Ciudad"
-  },
-  {
-    id_evento: 2,
-    nombre: "Concierto de Rock",
-    descripcion: "Una noche llena de energía con las mejores bandas de rock del momento.",
-    fecha: "20 Nov 2025",
-    foto_principal: "/src/assets/concierto-rock.jpg",
-    ubicacion: "Estadio Central"
-  },
-  {
-    id_evento: 3,
-    nombre: "Festival de Jazz",
-    descripcion: "Disfruta del mejor jazz en un ambiente único con artistas de renombre mundial.",
-    fecha: "5 Ene 2025",
-    foto_principal: "/src/assets/teatro-jazz.png",
-    ubicacion: "Teatro Nacional"
-  },
-  {
-    id_evento: 4,
-    nombre: "Concierto Pop Dua Lipa",
-    descripcion: "Las mejores estrellas del pop en un concierto inolvidable.",
-    fecha: "12 Feb 2025",
-    foto_principal: "/src/assets/concierto-pop.jpg",
-    ubicacion: "Estadio Metropolitano"
-  },
-  {
-    id_evento: 5,
-    nombre: "Festival de Verano",
-    descripcion: "El mejor festival para disfrutar del verano con música y actividades.",
-    fecha: "20 Jul 2025",
-    foto_principal: "/src/assets/festival-verano.jpg",
-    ubicacion: "Parque Central"
-  }
-];
-
 const Home = () => {
+  const [eventos, setEventos] = useState([]);
+  const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0); // Estado para controlar el índice del primer evento mostrado en el carrusel
   const eventsPerPage = 3; // Número de eventos a mostrar a la vez
   
   // Función para ir al siguiente grupo de eventos
   const nextEvents = () => {
-    if (currentIndex + eventsPerPage < eventosDestacados.length) {
+    if (currentIndex + eventsPerPage < eventos.length) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -68,14 +26,30 @@ const Home = () => {
   };
   
   // Calcular eventos visibles actualmente
-  const visibleEvents = eventosDestacados.slice(
+  const visibleEvents = eventos.slice(
     currentIndex, 
     currentIndex + eventsPerPage
   );
   
   // Verificar si hay eventos anteriores o siguientes
   const hasPrevEvents = currentIndex > 0;
-  const hasNextEvents = currentIndex + eventsPerPage < eventosDestacados.length;
+  const hasNextEvents = currentIndex + eventsPerPage < eventos.length;
+
+  useEffect(() => {
+    const obtenerEventos = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/eventos/");
+        if (!response.ok) {
+          throw new Error("Error al obtener los eventos");
+        }
+        const data = await response.json();
+        setEventos(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    obtenerEventos();
+  }, []);
 
 
   //seccion hero que correponde a la seccion de bienvenida con fondo azul degradado, nos presentra al usuario botones para poder explorar y buscar eventos
@@ -98,7 +72,7 @@ const Home = () => {
         
         <div className="hero-featured-events">
           <div className="container">
-            <h2 className="section-title">Eventos Destacados</h2>
+            <h2 className="home-featured-title">Eventos Destacados</h2>
             
             <div className="events-carousel">
               {hasPrevEvents && (
@@ -118,9 +92,8 @@ const Home = () => {
                     id={evento.id_evento}
                     nombre={evento.nombre}
                     descripcion={evento.descripcion}
-                    fecha={evento.fecha}
                     imagen={evento.foto_principal}
-                    ubicacion={evento.ubicacion}
+                    estado={evento.estado}
                   />
                 ))}
               </div>
@@ -137,7 +110,7 @@ const Home = () => {
             </div>
             
             <div className="carousel-dots">
-              {Array.from({ length: Math.ceil(eventosDestacados.length / eventsPerPage) }).map((_, index) => (
+              {Array.from({ length: Math.ceil(eventos.length / eventsPerPage) }).map((_, index) => (
                 <span 
                   key={index} 
                   className={`carousel-dot ${index === Math.floor(currentIndex / eventsPerPage) ? 'active' : ''}`}

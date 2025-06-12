@@ -145,12 +145,12 @@ const Login = () => {
         </div>
         
         {/* Botón de envío del formulario */}
-        <button 
-          type="submit" 
-          className="submit-button"
-          disabled={isLoading} // Deshabilita el botón durante la carga
+        <button
+          type="submit"
+          className={`login-submit-button${isLoading ? " loading" : ""}`}
+          disabled={isLoading}
         >
-          {isLoading ? 'Cargando...' : 'Entrar'}
+          {isLoading ? "Cargando..." : "Entrar"}
         </button>
         
         {/* Enlaces a otras páginas de registro y recuperar contrase */}
@@ -165,4 +165,4 @@ const Login = () => {
   );
 };
 
-export default Login; 
+export default Login;

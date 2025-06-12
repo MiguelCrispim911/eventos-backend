@@ -19,9 +19,21 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Contacto from "../pages/Contacto/Contacto";
 import Registro from "../pages/Registro/Registro";
+import RecuperarContrasena from "../pages/RecuperarContrasena/RecuperarContrasena";
 import Perfil from "../pages/Perfil/Perfil";
-import EditarPerfil from "../pages/EditarPerfil/EditarPerfil"; // Importar el nuevo componente
+import EditarPerfil from "../pages/EditarPerfil/EditarPerfil";
+import CambiarContrasena from "../pages/CambiarContrasena/CambiarContrasena";
 import ExplorarEventos from "../pages/ClientesExEventos/ExplorarEventos";
+import EditarAdministrador from "../pages/crpEditarAdministrador/EditarAdministrador";
+import EditarEvento from "../pages/crpEditarEvento/EditarEvento";
+import EditarFuncion from "../pages/crpEditarFuncion/editarFuncion";
+import EditarTipoBoleta from "../pages/crpEditarTipoBoleta/EditarTipoBoleta";
+import EditarUbicacion from "../pages/crpEditarUbicacion/EditarUbicacion";
+import EditarCompras from "../pages/crpListarCompras/ListarCompras"; 
+import Funciones from "../pages/Funciones/Funciones";
+import Compras from "../pages/Compras/Compras";
+import MisCompras from "../pages/Compras/MisCompras";
+import Factura from "../pages/Factura/Factura";
 
 const AppRouter = () => (
   <Routes>
@@ -31,9 +43,15 @@ const AppRouter = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/contacto" element={<Contacto />} />
       <Route path="/registro" element={<Registro />} />
+      <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
       <Route path="/perfil" element={<Perfil />} />
-      <Route path="/editar-perfil" element={<EditarPerfil />} /> {/* Añadir la nueva ruta */}
+      <Route path="/editar-perfil" element={<EditarPerfil />} />
+      <Route path="/cambiar-contrasena" element={<CambiarContrasena />} />
       <Route path="/eventos" element={<ExplorarEventos />} />
+      <Route path="/funciones/:id_evento" element={<Funciones />} />
+      <Route path="/comprar-boletos/:id_funcion" element={<Compras />} />
+      <Route path="/mis-compras" element={<MisCompras />} />
+      <Route path="/factura" element={<Factura />} />
       {/* más rutas públicas aquí */}
     </Route>
 
@@ -132,6 +150,64 @@ const AppRouter = () => (
           </ProtectedRouteAdmin>
         } 
       />
+      <Route 
+        path="/administrador/dashboard/editarAdministrador" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarAdministrador />
+          </ProtectedRouteAdmin>
+        } 
+      />
+      <Route 
+        path="/administrador/dashboard/editarEvento" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarEvento />
+          </ProtectedRouteAdmin>
+        } 
+
+      />
+      <Route 
+        path="/administrador/dashboard/editarFuncion" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarFuncion />
+          </ProtectedRouteAdmin>
+        } 
+      />      
+      <Route 
+        path="/administrador/dashboard/EditarTipoBoleta" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarTipoBoleta />
+          </ProtectedRouteAdmin>
+        } 
+      /> 
+
+      <Route 
+        path="/administrador/dashboard/EditarUbicacion" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarUbicacion />
+          </ProtectedRouteAdmin>
+        } 
+      />   
+      <Route 
+        path="/administrador/dashboard/listarCompras" 
+        element={
+          <ProtectedRouteAdmin>
+            <EditarCompras />
+          </ProtectedRouteAdmin>
+        } 
+      />   
+      <Route 
+        path="/administrador/dashboard/factura" 
+        element={
+          <ProtectedRouteAdmin>
+            <Factura />
+          </ProtectedRouteAdmin>
+        } 
+      /> 
     </Route>
   </Routes>
 );

@@ -19,6 +19,8 @@ const Registro = () => {
     telefono: '',
     contrasena: '',
     confirmarContrasena: '',
+    preguntaSeguridad: '',
+    respuestaSeguridad: '',
   });
   
   const handleChange = (e) => {
@@ -66,6 +68,8 @@ const Registro = () => {
         email: formData.email,
         telefono: formData.telefono,
         contrasena: formData.contrasena,
+        preguntaSeguridad: formData.preguntaSeguridad,
+        respuestaSeguridad: formData.respuestaSeguridad,
         estado: 1 // Activo por defecto
       };
       
@@ -109,142 +113,142 @@ const Registro = () => {
       <form onSubmit={handleSubmit} className="registro-form">
         <h2 className="registro-title">Crear Cuenta</h2>
         
-        <div className="form-explanation">
+        <div className="registro-explanation">
           <p>Complete todos los campos para registrarse como cliente. Los campos marcados con * son obligatorios.</p>
         </div>
         
-        {error && <div className="error-message">{error}</div>}
-        {success && <div className="success-message">{success}</div>}
+        {error && <div className="registro-error-message">{error}</div>}
+        {success && <div className="registro-success-message">{success}</div>}
         
-        <div className="form-columns">
-          <div className="form-column">
-            <div className="form-group">
-              <label className="form-label">Cédula *</label>
+        <div className="registro-columns">
+          <div className="registro-column">
+            <div className="registro-form-group">
+              <label className="registro-form-label">Cédula *</label>
               <input
                 type="text"
                 name="cedula"
                 value={formData.cedula}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Ingrese su número de cédula"
                 required
               />
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Nombres *</label>
+            <div className="registro-form-group">
+              <label className="registro-form-label">Nombres *</label>
               <input
                 type="text"
                 name="nombres"
                 value={formData.nombres}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Ingrese sus nombres"
                 required
               />
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Apellidos *</label>
+            <div className="registro-form-group">
+              <label className="registro-form-label">Apellidos *</label>
               <input
                 type="text"
                 name="apellidos"
                 value={formData.apellidos}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Ingrese sus apellidos"
                 required
               />
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Dirección *</label>
+            <div className="registro-form-group">
+              <label className="registro-form-label">Dirección *</label>
               <input
                 type="text"
                 name="direccion"
                 value={formData.direccion}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Ingrese su dirección"
                 required
               />
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Departamento *</label>
+            <div className="registro-form-group">
+              <label className="registro-form-label">Departamento *</label>
               <input
                 type="text"
                 name="departamento"
                 value={formData.departamento}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Ingrese su departamento"
                 required
               />
             </div>
           </div>
           
-          <div className="form-column">
-            <div className="form-group">
-              <label className="form-label">Municipio *</label>
+          <div className="registro-column">
+            <div className="registro-form-group">
+              <label className="registro-form-label">Municipio *</label>
               <input
                 type="text"
                 name="municipio"
                 value={formData.municipio}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Ingrese su municipio"
                 required
               />
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Correo Electrónico *</label>
+            <div className="registro-form-group">
+              <label className="registro-form-label">Correo Electrónico *</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Ingrese su correo electrónico"
                 required
               />
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Teléfono *</label>
+            <div className="registro-form-group">
+              <label className="registro-form-label">Teléfono *</label>
               <input
                 type="tel"
                 name="telefono"
                 value={formData.telefono}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Ingrese su número de teléfono"
                 required
               />
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Contraseña *</label>
+            <div className="registro-form-group">
+              <label className="registro-form-label">Contraseña *</label>
               <input
                 type="password"
                 name="contrasena"
                 value={formData.contrasena}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Cree una contraseña"
                 required
               />
             </div>
             
-            <div className="form-group">
-              <label className="form-label">Confirmar Contraseña *</label>
+            <div className="registro-form-group">
+              <label className="registro-form-label">Confirmar Contraseña *</label>
               <input
                 type="password"
                 name="confirmarContrasena"
                 value={formData.confirmarContrasena}
                 onChange={handleChange}
-                className="form-input"
+                className="registro-form-input"
                 placeholder="Confirme su contraseña"
                 required
               />
@@ -252,16 +256,48 @@ const Registro = () => {
           </div>
         </div>
         
-        <div className="form-actions">
+        <div className="registro-form-group">
+          <label className="registro-form-label">Pregunta de Seguridad *</label>
+          <select
+            name="preguntaSeguridad"
+            value={formData.preguntaSeguridad || ''}
+            onChange={handleChange}
+            className="registro-form-input"
+            required
+          >
+            <option value="">Seleccione una pregunta</option>
+            <option value="¿En qué ciudad naciste?">¿En qué ciudad naciste?</option>
+            <option value="¿Cuál es el nombre de tu mascota?">¿Cuál es el nombre de tu mascota?</option>
+          </select>
+        </div>
+        <div className="registro-form-group">
+          <label className="registro-form-label">Respuesta de Seguridad *</label>
+          <input
+            type="text"
+            name="respuestaSeguridad"
+            value={formData.respuestaSeguridad || ''}
+            onChange={handleChange}
+            className="registro-form-input"
+            placeholder="Ingrese su respuesta"
+            required
+          />
+        </div>
+        <div className="registro-note">
+          <small>
+            <b>Nota:</b> La pregunta y respuesta de seguridad te ayudarán a recuperar tu cuenta si olvidas tu contraseña.
+          </small>
+        </div>
+        
+        <div className="registro-actions">
           <button 
             type="submit" 
-            className={`submit-button ${loading ? 'loading' : ''}`}
+            className={`registro-submit-button${loading ? ' loading' : ''}`}
             disabled={loading}
           >
             {loading ? 'Registrando...' : 'Crear Cuenta'}
           </button>
           
-          <div className="login-link">
+          <div className="registro-login-link">
             ¿Ya tienes una cuenta? <Link to="/login">Inicia Sesión</Link>
           </div>
         </div>

@@ -1,60 +1,94 @@
 /* Contenedor principal del login de administrador */
 .admin-login-container {
-    max-width: 400px; /* Ancho máximo del contenedor */
-    margin: 50px auto; /* Centrado vertical y horizontal */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    background-color: #fff; /* Fondo blanco */
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 2.5rem 4rem 2rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    background: rgba(255,255,255,0.98);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
   
 /* Título del login */
 .admin-login-title {
-    text-align: center; /* Centrar texto */
-    color: #333; /* Color del texto */
-    margin-bottom: 20px; /* Espacio inferior */
+    text-align: center;
+    color: #232526;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
   
 /* Formulario de login */
 .admin-login-form {
-    display: flex; /* Usar flexbox */
-    flex-direction: column; /* Dirección de columna */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
   
 /* Grupo de campos del formulario */
 .admin-form-group {
-    margin-bottom: 15px; /* Espacio inferior entre campos */
+    margin-bottom: 1.2rem;
+    width: 100%;
 }
   
 /* Etiqueta de los campos */
 .admin-form-label {
-    display: block; /* Mostrar como bloque */
-    margin-bottom: 5px; /* Espacio inferior */
-    color: #555; /* Color del texto */
+    display: block;
+    margin-bottom: 7px;
+    color: #444;
+    font-weight: 600;
+    font-size: 1rem;
 }
   
 /* Campos de entrada del formulario */
 .admin-form-input {
-    width: 100%; /* Ancho completo */
-    padding: 10px; /* Espaciado interno */
-    border: 1px solid #ddd; /* Borde gris claro */
-    border-radius: 4px; /* Bordes redondeados */
-    font-size: 16px; /* Tamaño de fuente */
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid #bdbdbd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #f7f7f7;
+    transition: border-color 0.3s, background 0.3s;
+}
+  
+.admin-form-input:focus {
+    border-color: #0070CE;
+    background: #fff;
+    outline: none;
 }
   
 /* Botón de login */
 .admin-login-button {
-    padding: 12px; /* Espaciado interno */
-    background-color: #007bff; /* Fondo azul */
-    color: white; /* Texto blanco */
-    border: none; /* Sin borde */
-    border-radius: 4px; /* Bordes redondeados */
-    cursor: pointer; /* Cursor tipo puntero */
-    font-size: 16px; /* Tamaño de fuente */
-    margin-top: 10px; /* Espacio superior */
+    width: 108%;
+    padding: 0.9rem;
+    background: linear-gradient(90deg, #0070CE 0%, #005fa3 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 0.7rem;
+    margin-bottom: 0.5rem;
 }
   
 /* Efecto hover para el botón */
 .admin-login-button:hover {
-    background-color: #0056b3; /* Fondo azul más oscuro al pasar el mouse */
+    background: linear-gradient(90deg, #005fa3 0%, #0070CE 100%);
+    transform: translateY(-2px) scale(1.03);
+}
+  
+.admin-login-error {
+    color: #d32f2f;
+    background: #ffeaea;
+    border: 1px solid #ffcdd2;
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.98rem;
+    text-align: center;
 }

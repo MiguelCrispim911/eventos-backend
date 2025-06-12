@@ -74,12 +74,11 @@
 
 .buttonsContainer {
   display: flex;
-  justify-content: center;
-  gap: 1.2rem;
+  gap: 1rem;
   margin-top: 2rem;
 }
 
-.editButton {
+.editButton, .passwordButton {
   background: linear-gradient(135deg, #0070CE 0%, #0056B3 100%);
   color: white;
   border: none;
@@ -96,13 +95,24 @@
   box-shadow: 0 4px 10px rgba(0, 112, 206, 0.3);
 }
 
+.passwordButton {
+  background: linear-gradient(135deg, #469ac1 0%, #469ac1 100%);
+  box-shadow: 0 4px 10px rgba(107, 70, 193, 0.3);
+}
+
 .editButton:hover {
-  background: linear-gradient(135deg, #0056B3 0%, #003d80 100%);
+  background: linear-gradient(135deg, #0056B3 0%, #0056B3 100%);
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(0, 112, 206, 0.4);
 }
 
-.editButton:active {
+.passwordButton:hover {
+  background: linear-gradient(135deg, #1152b3 0%, #1152b3 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(107, 70, 193, 0.4);
+}
+
+.editButton:active, .passwordButton:active {
   transform: translateY(-1px);
 }
 
@@ -147,10 +157,7 @@
     width: 100%;
   }
   
-  .editButton {
+  .editButton, .passwordButton {
     width: 100%;
   }
 }
-
-
-

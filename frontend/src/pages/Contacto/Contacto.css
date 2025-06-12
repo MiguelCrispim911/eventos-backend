@@ -1,482 +1,102 @@
 /* Estilos para la página de Contacto */
 .contacto-container {
-  max-width: 1200px;
+  padding: 2rem;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 3rem 1rem;
-}/* Contenedor principal centrado y con padding */
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
 
 /* Cabecera de la página de contacto */
 .contacto-header {
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 .contacto-header h1 {
-  color: #0070CE;
-  font-size: 2.8rem;
+  font-size: 2.5rem;
+  color: #2c3c4d;
   margin-bottom: 1rem;
-  font-weight: 700;
-}/* Título principal azul y grande */
-
-.contacto-header p {
-  color: #6C757D;
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto;
-}/* Descripción bajo el título, centrada y más pequeña */
-
-/* Contenido principal: info y formulario */
-.contacto-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.5rem; /* Espacio entre info y formulario */
-  margin-bottom: 2rem;
-  align-items: flex-start;
 }
 
-/* Grid de tarjetas de información */
-.contacto-info {
-  flex: 1;
-  min-width: 300px;
+.contacto-header p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.contacto-content-centered {
+  display: flex;
+  justify-content: center;
+}
+
+.contacto-info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 900px;
 }
 
 /* Tarjeta de información individual */
 .info-card {
-  background-color: #fafaf8;
-  border-radius: 8px;
-  padding: 1.2rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff8f8;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
   text-align: center;
-  height: auto;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .info-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
-}/* Efecto hover en la tarjeta */
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgb(221, 193, 193);
+}
 
 /* Icono dentro de la tarjeta */
 .info-icon {
-  font-size: 1.6rem;
+  font-size: 2rem;
   margin-bottom: 0.8rem;
-  display: inline-block;
-  background-color: rgba(0, 112, 206, 0.1);
-  color: #0070CE;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  border-radius: 50%;
 }
 
 /* Título de la tarjeta */
 .info-card h3 {
-  color: #343A40;
-  margin-bottom: 0.6rem;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 0.5rem;
 }
 
 /* Texto de la tarjeta */
 .info-card p {
-  color: #6C757D;
+  font-size: 1rem;
+  color: #6e6262;
   margin: 0.3rem 0;
-  font-size: 0.9rem;
 }
 
 /* Contenedor de enlaces sociales */
 .social-links {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  margin-top: 0.3rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 /* Enlace social individual */
 .social-link {
-  color: #0070CE;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  text-decoration: none;
+  color: #444;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #007BFF;
 }
 
 /* Icono de red social */
 .social-icon-img {
   width: 24px;
   height: 24px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
 }
-
-.social-link:hover {
-  color: #005ba3;
-}
-
-.social-link:hover .social-icon-img {
-  transform: scale(1.1);
-}/* Efecto hover en icono social */
-
-/* Ajuste de tamaño de iconos sociales en tablets/móviles */
-@media (max-width: 768px) {
-  .social-icon-img {
-    width: 22px;
-    height: 22px;
-  }
-}
-
-/* Contenedor del formulario */
-.contacto-form-container {
-  flex: 1.2;
-  min-width: 400px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  padding: 0.5rem;
-}
-
-/* Formulario de contacto */
-.contacto-form {
-  padding: 3.5rem;
-}
-
-/* Título del formulario */
-.contacto-form h2 {
-  color: #343A40;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  text-align: center;
-  font-weight: 600;
-}
-
-/* Grupo de campos del formulario */
-.form-group {
-  margin-bottom: 1.5rem;
-  width: 100%;
-}
-
-/* Etiqueta del campo */
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #343a40;
-}
-
-/* Campos de entrada y textarea */
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 1rem 1.2rem;
-  border: 1px solid #ced4da;
-  border-radius: 8px;
-  font-size: 1.05rem;
-  transition: all 0.3s ease;
-  background-color: #f8f9fa;
-  box-sizing: border-box;
-}
-
-/* Efecto focus en campos */
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #0070CE;
-  box-shadow: 0 0 0 3px rgba(0, 112, 206, 0.15);
-}
-
-/* Botón de envío */
-.submit-button {
-  width: 100%;
-  background-color: #0070CE;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 1rem 1.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
-}
-
-.submit-button:hover {
-  background-color: #005ba3;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 112, 206, 0.3);
-}
-
-/* Botón de envío en estado loading */
-.submit-button.loading {
-  background-color: #6c757d;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Mensaje de error */
-.error-message {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-}
-
-/* Mensaje de éxito tras enviar */
-.mensaje-enviado {
-  padding: 4rem 2.5rem;
-  text-align: center;
-}
-
-/* Icono de éxito */
-.mensaje-enviado-icon {
-  font-size: 4rem;
-  margin-bottom: 1.5rem;
-  color: #28a745;
-  display: inline-block;
-  background-color: rgba(40, 167, 69, 0.1);
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  border-radius: 50%;
-}
-
-/* Título del mensaje de éxito */
-.mensaje-enviado h2 {
-  color: #343A40;
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-/* Texto del mensaje de éxito */
-.mensaje-enviado p {
-  color: #6C757D;
-  margin-bottom: 2.5rem;
-  font-size: 1.1rem;
-}
-
-/* Botón para enviar nuevo mensaje */
-.nuevo-mensaje-btn {
-  background-color: #0070CE;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.nuevo-mensaje-btn:hover {
-  background-color: #005ba3;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 112, 206, 0.3);
-}
-
-/* Responsive: Ajustes para pantallas medianas */
-@media (max-width: 1100px) {
-  .contacto-content {
-    flex-direction: column;
-  }
-  
-  .contacto-form-container {
-    width: 100%;
-    min-width: 100%;
-    padding: 0.5rem;
-  }
-  
-  .contacto-form {
-    padding: 3rem;
-  }
-}
-
-/* Grid de info en 2 columnas en pantallas grandes */
-@media (min-width: 992px) {
-  .contacto-info {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Responsive: Ajustes para tablets/móviles */
-@media (max-width: 768px) {
-  .contacto-header h1 {
-    font-size: 2.3rem;
-  }
-  
-  .contacto-info {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-  }
-  
-  .info-card {
-    padding: 1rem;
-  }
-}
-  
-  /* Ajustamos el tamaño de los iconos de información en móviles */
-  .info-icon {
-    width: 45px; /* Reducimos aún más en móviles */
-    height: 45px;
-    line-height: 45px;
-    font-size: 1.4rem;
-    margin-bottom: 0.7rem;
-  }
-  
-  /* Reducimos el tamaño del título de la tarjeta de información en móviles */
-  .info-card h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Reducimos el tamaño del texto de la tarjeta de información en móviles */
-  .info-card p {
-    font-size: 0.85rem;
-  }
-  
-  .social-link {
-    font-size: 0.85rem;
-  }/* Cambiamos el tamaño de la fuente de los enlaces sociales */
-
-@media (max-width: 576px) {
-  .contacto-info {
-    grid-template-columns: repeat(2, 1fr); /* Mantenemos 2 columnas incluso en móviles pequeños */
-  }
-}/* Cambiamos el padding del formulario para pantallas pequeñas */
-
-@media (max-width: 400px) {
-  .contacto-info {
-    grid-template-columns: 1fr; /* 1 columna solo en móviles muy pequeños */
-  }
-}/* Cambiamos el padding del formulario para pantallas pequeñas */
-
-@media (max-width: 480px) {
-  .contacto-form {
-    padding: 2rem 1.5rem; /* Reducimos pero mantenemos espacio suficiente */
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    padding: 0.9rem 1rem; /* Ajustamos el padding en pantallas muy pequeñas */
-  }
-}/* Cambiamos el padding de los campos de entrada */
-
-.form-explanation {
-  background-color: #f8f9fa;
-  border-left: 3px solid #0070CE;
-  padding: 1rem 1.2rem;
-  margin-bottom: 1.5rem;
-  border-radius: 4px;
-}/* Cambiamos el color de fondo y el borde de la explicación */
-
-.form-explanation p {
-  margin: 0.5rem 0;
-  font-size: 0.95rem;
-  color: #495057;
-  line-height: 1.5;
-}/* Cambiamos el color de la fuente de la explicación */
-
-.field-hint {
-  display: block;
-  margin-top: 0.3rem;
-  font-size: 0.85rem;
-  color: #6c757d;
-  font-style: italic;
-}/* Cambiamos el color de la fuente de los hints */
-
-.form-privacy {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  font-size: 0.85rem;
-  color: #6c757d;
-}/* Cambiamos el color de la fuente de los enlaces de privacidad */
-
-.form-privacy a {
-  color: #0070CE;
-  text-decoration: none;
-  font-weight: 500;
-}/* Cambiamos el color del enlace de privacidad */
-
-.form-privacy a:hover {
-  text-decoration: underline;
-}/* Mejoramos el estilo de los enlaces de privacidad */
-
-/* Mejoramos el estilo de los campos del formulario */
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #343a40;
-}/* Cambiamos el color del texto de las etiquetas */
-
-.form-group input:focus, .form-group textarea:focus {
-  border-color: #0070CE;
-  box-shadow: 0 0 0 3px rgba(0, 112, 206, 0.15);
-}/* Cambiamos el color del borde y la sombra al enfocar los campos de entrada */
-
-.submit-button {
-  position: relative;
-  overflow: hidden;
-}/* Mejoramos el estilo del botón de envío */
-
-.submit-button::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.5);
-  opacity: 0;
-  border-radius: 100%;
-  transform: scale(1, 1) translate(-50%);
-  transform-origin: 50% 50%;
-}/* Mejoramos el estilo del botón de envío */
-
-.submit-button:focus:not(:active)::after {
-  animation: ripple 1s ease-out;
-}/* Añadimos un efecto de "ripple" al botón de envío */
-
-@keyframes ripple {
-  0% {
-    transform: scale(0, 0);
-    opacity: 0.5;
-  }
-  20% {
-    transform: scale(25, 25);
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(40, 40);
-  }
-}/* Mejoramos el estilo del botón de envío */
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -5,11 +5,28 @@ from appback.database import get_session
 from typing import Annotated
 from appback.core.security import create_access_token, hash_password, verify_password
 from fastapi import status
+from pydantic import BaseModel
 
+# Modelo para la verificación de contraseña
+class PasswordVerifyRequest(BaseModel):
+    cedula: int
+    password: str
+
+# Modelo para la recuperación de contraseña
+class RecuperarContrasenaRequest(BaseModel):
+    cedula: int
+    preguntaSeguridad: str
+    respuestaSeguridad: str
+    nuevaContrasena: str
+
+# appback/routes/cliente_route.py
+# Este archivo define las rutas para manejar las operaciones CRUD de los clientes.
 cliente_router = APIRouter()
 
+# Dependencia para obtener la sesión de la base de datos
 session_dep = Annotated[Session, Depends(get_session)]
 
+# Rutas para manejar los clientes
 @cliente_router.post("/", response_model=ClientePublic)
 def create_cliente(cliente: ClienteCreate, session: session_dep):
     # Verificar si el cliente ya existe
@@ -28,10 +45,12 @@ def create_cliente(cliente: ClienteCreate, session: session_dep):
     session.refresh(db_cliente)
     return db_cliente
 
+# Obtener todos los clientes con paginación
 @cliente_router.get("/", response_model=list[ClientePublic])
 def read_clientes(session: session_dep, offset: int = 0, limit: Annotated[int, Query(le=100)] = 100):
     return session.exec(select(Cliente).offset(offset).limit(limit)).all()
 
+# Obtener un cliente por su cédula
 @cliente_router.get("/{cedula}", response_model=ClientePublic)
 def read_cliente(cedula: int, session: session_dep):
     cliente = session.get(Cliente, cedula)
@@ -39,6 +58,7 @@ def read_cliente(cedula: int, session: session_dep):
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
     return cliente
 
+# Actualizar un cliente por su cédula
 @cliente_router.patch("/{cedula}", response_model=ClientePublic)
 def update_cliente(cedula: int, cliente: ClienteUpdate, session: session_dep):
     cliente_db = session.get(Cliente, cedula)
@@ -56,6 +76,7 @@ def update_cliente(cedula: int, cliente: ClienteUpdate, session: session_dep):
     session.refresh(cliente_db)
     return cliente_db
 
+# Eliminar un cliente por su cédula
 @cliente_router.delete("/{cedula}")
 def delete_cliente(cedula: int, session: session_dep):
     cliente = session.get(Cliente, cedula)
@@ -65,6 +86,7 @@ def delete_cliente(cedula: int, session: session_dep):
     session.commit()
     return {"ok": True}
 
+# Ruta para el login del cliente
 @cliente_router.post("/login")
 def login(user: LoginData, session: session_dep):
     try:
@@ -107,3 +129,43 @@ def login(user: LoginData, session: session_dep):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error interno: {str(e)}"
         )
+
+# Endpoint para verificar la contraseña de un cliente
+@cliente_router.post("/verify-password")
+def verify_client_password(request: PasswordVerifyRequest, session: session_dep):
+    cliente = session.get(Cliente, request.cedula)
+    if not cliente:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Cliente no encontrado"
+        )
+    
+    # Verificar si la contraseña es correcta
+    if not verify_password(request.password, cliente.contrasena):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Contraseña incorrecta"
+        )
+    
+    # Si la contraseña es correcta, devolver éxito
+    return {"verified": True}
+
+# Endpoint para recuperar la contraseña
+@cliente_router.post("/recuperar-contrasena")
+def recuperar_contrasena(request: RecuperarContrasenaRequest, session: session_dep):
+    cliente = session.get(Cliente, request.cedula)
+    if not cliente:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Cliente no encontrado"
+        )
+    if (cliente.preguntaSeguridad != request.preguntaSeguridad or
+        cliente.respuestaSeguridad != request.respuestaSeguridad):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Pregunta o respuesta de seguridad incorrecta"
+        )
+    cliente.contrasena = hash_password(request.nuevaContrasena)
+    session.add(cliente)
+    session.commit()
+    return {"message": "Contraseña actualizada correctamente"}

@@ -1,17 +1,22 @@
 /* login.css */
   
   .login-container {
-    min-height: 100vh;
+    height: 100vh; 
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--background);
     padding: 1rem;
+    /* Fondo de imagen */
+    background-image: url('https://i.postimg.cc/vZLdtVgF/imagenfondologin.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   .login-form {
     background: white;
-    padding: 2.5rem;
+    padding: 2.5rem 4.5rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border-color);
@@ -58,23 +63,25 @@
     font-weight: 500;
   }
   
-  .form-input {
-    width: 100%;
+  .login-form-input {
+    width: 60%;      
+    min-width: 180px; 
+    max-width: 375px; 
     padding: 0.75rem;
     border: 2px solid var(--border-color);
     border-radius: 6px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    display: inline-block; 
   }
-  
-  .form-input:focus {
+  .login-form-input:focus {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
   }
   
   .submit-button {
-    width: 50%;
+    width: 60%;
     padding: 0.75rem;
     background-color: var(--primary);
     color: white;
@@ -84,7 +91,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin: 0 auto 1.5rem auto;
+    margin: 0 auto 2rem auto;
     box-sizing: border-box;
     height: 45px;
     display: flex;
@@ -168,4 +175,51 @@
     .login-title {
       font-size: 1.75rem;
     }
+  }
+
+  .login-submit-button {
+    width: 100%;
+    min-width: 180px;
+    max-width: 400px;
+    padding: 1rem;
+    background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.08rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin: 0 -0.5rem 3rem auto;
+    box-sizing: border-box;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .login-submit-button:hover {
+    background: linear-gradient(90deg, var(--primary-hover), var(--primary));
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.18);
+  }
+
+  .login-submit-button.loading {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .login-submit-button.loading::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 50%;
+    left: 50%;
+    margin: -11px 0 0 -11px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
   }

@@ -1,69 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./contacto.css";
 
 // Componente principal de la página de contacto
 const Contacto = () => {
-  // Estado para los datos del formulario
-  const [formData, setFormData] = useState({
-    nombre: '',
-    email: '',
-    asunto: '',
-    mensaje: ''
-  });
-  // Estado para indicar si se está enviando el formulario
-  const [enviando, setEnviando] = useState(false);
-  // Estado para mostrar mensaje de éxito
-  const [mensajeEnviado, setMensajeEnviado] = useState(false);
-  // Estado para mostrar errores
-  const [error, setError] = useState('');
-
-  // Maneja los cambios en los campos del formulario
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  // Maneja el envío del formulario
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setEnviando(true);
-    setError('');
-    
-    try {
-      // Simula el envío del formulario (aquí iría la lógica real)
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Si el envío es exitoso, muestra mensaje y limpia el formulario
-      setMensajeEnviado(true);
-      setFormData({
-        nombre: '',
-        email: '',
-        asunto: '',
-        mensaje: ''
-      });
-    } catch (err) {
-      // Si ocurre un error, muestra mensaje de error
-      setError('Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo.');
-      console.error('Error al enviar formulario:', err);
-    } finally {
-      setEnviando(false);
-    }
-  };
-
   return (
     <div className="contacto-container">
       {/* Encabezado de la página */}
       <div className="contacto-header">
         <h1>Contáctanos</h1>
-        <p>Estamos aquí para ayudarte. Envíanos tu consulta y te responderemos lo antes posible.</p>
+        <p>Estamos aquí para ayudarte. Puedes comunicarte con nosotros a través de cualquiera de los siguientes medios.</p>
       </div>
       
-      <div className="contacto-content">
-        {/* Información de contacto */}
-        <div className="contacto-info">
+      <div className="contacto-content-centered">
+        <div className="contacto-info-grid">
           <div className="info-card">
             <div className="info-icon">📍</div>
             <h3>Visítanos</h3>
@@ -106,97 +55,6 @@ const Contacto = () => {
               </a>
             </div>
           </div>
-        </div>
-        
-        {/* Formulario de contacto */}
-        <div className="contacto-form-container">
-          {mensajeEnviado ? (
-            // Mensaje de éxito tras enviar el formulario
-            <div className="mensaje-enviado">
-              <div className="mensaje-enviado-icon">✅</div>
-              <h2>¡Mensaje enviado con éxito!</h2>
-              <p>Gracias por contactarnos. Nos pondremos en contacto contigo lo antes posible.</p>
-              <button 
-                className="nuevo-mensaje-btn"
-                onClick={() => setMensajeEnviado(false)}
-              >
-                Enviar otro mensaje
-              </button>
-            </div>
-          ) : (
-            // Formulario para enviar mensaje
-            <form onSubmit={handleSubmit} className="contacto-form">
-              <h2>Envíanos un mensaje</h2>
-              
-              <div className="form-explanation">
-                <p>Completa el formulario a continuación para ponerte en contacto con nuestro equipo. Todos los campos son obligatorios para poder atender tu solicitud de manera eficiente.</p>
-                <p>Recibirás una confirmación por correo electrónico y nos pondremos en contacto contigo en un plazo de 24-48 horas hábiles.</p>
-              </div>
-              
-              {/* Mensaje de error si ocurre */}
-              {error && <div className="error-message">{error}</div>}
-              
-              <div className="form-group">
-                <label htmlFor="nombre">Nombre completo</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  placeholder="Ingresa tu nombre completo"
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="email">Correo electrónico</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Ingresa tu correo electrónico"
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="asunto">Asunto</label>
-                <input
-                  type="text"
-                  id="asunto"
-                  name="asunto"
-                  value={formData.asunto}
-                  onChange={handleChange}
-                  placeholder="¿Sobre qué nos quieres contactar?"
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="mensaje">Mensaje</label>
-                <textarea
-                  id="mensaje"
-                  name="mensaje"
-                  value={formData.mensaje}
-                  onChange={handleChange}
-                  placeholder="Escribe tu mensaje aquí..."
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-              
-              <button 
-                type="submit" 
-                className={`submit-button ${enviando ? 'loading' : ''}`}
-                disabled={enviando}
-              >
-                {enviando ? 'Enviando...' : 'Enviar mensaje'}
-              </button>
-            </form>
-          )}
         </div>
       </div>
     </div>
