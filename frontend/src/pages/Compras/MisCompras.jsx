@@ -294,7 +294,7 @@ const MisCompras = () => {
         const finalY = 166;
         doc.text('Información de Pago:', 14, finalY + 10);
         doc.text(`Método de Pago: ${compra.forma_pago}`, 14, finalY + 18);
-        doc.text(`Estado: ${compra.estado === 1 ? 'Pagado' : 'Cancelado'}`, 14, finalY + 26);
+        doc.text(`Estado: ${compra.estado === 1 ? 'Activo' : 'Cancelado'}`, 14, finalY + 26);
         
         // Términos y condiciones
         doc.setFontSize(10);

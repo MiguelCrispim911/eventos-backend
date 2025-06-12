@@ -190,7 +190,7 @@
     font-weight: 700;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
-    margin: 0 -1rem 3rem auto;
+    margin: 0 -0.5rem 3rem auto;
     box-sizing: border-box;
     height: 48px;
     display: flex;

@@ -162,22 +162,23 @@ p {
 
 .section-title {
   text-align: center;
-  font-size: 2.5rem; /* CAMBIO 14: Reducido de 3rem a 2.5rem */
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
   color: var(--dark);
-  margin-bottom: 50px; /* CAMBIO 6: Reducido de 60px a 50px */
-  position: relative;
   font-weight: 700;
   letter-spacing: -0.5px;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .section-title:after {
   content: '';
   display: block;
-  width: 80px; /* CAMBIO 16: Reducido de 100px a 80px */
-  height: 4px; /* CAMBIO 17: Reducido de 5px a 4px */
+  width: 80px;
+  height: 4px;
   background: linear-gradient(to right, var(--secondary), var(--primary));
-  margin: 20px auto 0; /* CAMBIO 18: Reducido de 30px a 20px */
-  border-radius: 4px; /* CAMBIO 19: Reducido de 5px a 4px */
+  margin: 20px auto 0;
+  border-radius: 4px;
 }
 
 /* Estilos para el carrusel de eventos */
@@ -283,9 +284,15 @@ p {
     font-size: 2.5rem;
   }
   
-  .section-title {
-    font-size: 2rem;
-    margin-bottom: 40px; /* CAMBIO 24: Reducido para móviles */
+  .home-featured-title {
+  text-align: center;
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: var(--dark);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  font-family: 'Segoe UI', Arial, sans-serif;
   }
   
   .hero-featured-events {

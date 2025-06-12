@@ -11,6 +11,10 @@ const Compras = () => {
   const [error, setError] = useState(null);
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [tiposBoleta, setTiposBoleta] = useState([]);
+  const [selectedBoletaId, setSelectedBoletaId] = useState(null);
+  const [cantidad, setCantidad] = useState(1);
+  const [metodoPago, setMetodoPago] = useState(""); // "" o "Efecty" o "Gane"
   
   // Hooks
   const { id_funcion } = useParams();
@@ -79,14 +83,67 @@ const Compras = () => {
     checkUserLogin();
   }, []);
 
+  // Efecto para cargar tipos de boleta al cambiar la función
+  useEffect(() => {
+    if (!funcion?.id_funcion) return;
+    fetch(`http://localhost:8000/tiposboletas/por_funcion/${funcion.id_funcion}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Error en la respuesta del servidor');
+        return res.json();
+      })
+      .then(data => setTiposBoleta(data))
+      .catch(() => setError('Error al cargar los tipos de boleta'));
+  }, [funcion]);
+
   // Manejador para continuar con la compra
-  const handleContinuar = (e) => {
+  const handleContinuar = async (e) => {
     e.preventDefault();
-    // Por ahora solo mostraremos los datos en consola
-    console.log("Datos del usuario:", userData);
-    console.log("Función seleccionada:", funcion);
-    console.log("Evento seleccionado:", evento);
-    alert("Continuando con el proceso de compra (simulación)");
+
+    if (!isLoggedIn || !boletaSeleccionada || !metodoPago) {
+      alert("Por favor, completa todos los campos antes de finalizar la compra.");
+      return;
+    }
+
+    const now = new Date();
+    const fecha = now.toLocaleDateString('es-CO', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    const hora = now.toTimeString().slice(0, 8);
+
+    const compraData = {
+      fecha,
+      hora,
+      cantidad,
+      forma_pago: metodoPago,
+      cedula: userData.cedula,
+      id_tipoboleta: boletaSeleccionada.id_tipoboleta,
+      estado: 1
+    };
+
+    try {
+      const response = await fetch("http://localhost:8000/compras/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(compraData)
+      });
+
+      if (!response.ok) throw new Error("Error al registrar la compra");
+
+      // Espera la respuesta con el id de la compra
+      const data = await response.json();
+      // Guarda el id en localStorage
+      localStorage.setItem("ultimaCompraId", data.idcompra);
+
+      alert("¡Compra realizada con éxito!");
+      navigate("/factura");
+    } catch (error) {
+      alert("Hubo un error al registrar la compra. Intenta nuevamente.");
+      console.error(error);
+    }
   };
 
   // Manejador para redirigir al login
@@ -101,21 +158,41 @@ const Compras = () => {
   if (error) return <div className="error-message">Error: {error}</div>;
   if (!funcion || !evento) return <div className="error-message">No se encontró la información solicitada</div>;
 
+  // Calculos para la boleta seleccionada
+  const boletaSeleccionada = tiposBoleta.find(boleta => boleta.id_tipoboleta === selectedBoletaId);
+  const precio = boletaSeleccionada ? boletaSeleccionada.precio : 0;
+  const subtotal = precio * cantidad;
+  const iva = subtotal * 0.19;
+  const total = subtotal + iva;
+
   // Renderizado principal
   return (
     <div className="compras-container">
       <h1 className="compras-title">Proceso de Compra</h1>
-      
       <div className="compra-sections">
-        {/* Sección 1: Detalles del Evento */}
         <DetallesEvento evento={evento} funcion={funcion} />
-        
-        {/* Sección 2: Datos del Comprador */}
         {isLoggedIn ? (
-          <DatosCompradorLogueado userData={userData} handleContinuar={handleContinuar} />
+          <DatosCompradorLogueado userData={userData} />
         ) : (
           <LoginRequired handleRedirectToLogin={handleRedirectToLogin} />
         )}
+        <SeleccionBoleta
+          tiposBoleta={tiposBoleta}
+          selectedBoletaId={selectedBoletaId}
+          setSelectedBoletaId={setSelectedBoletaId}
+          cantidad={cantidad}
+          setCantidad={setCantidad}
+        />
+        <MetodoPago
+          metodoPago={metodoPago}
+          setMetodoPago={setMetodoPago}
+        />
+        {/* Botón al final de todas las secciones */}
+        <div style={{ textAlign: "center", margin: "2rem 0" }}>
+          <button onClick={handleContinuar} className="btn-continuar">
+            Finalizar Compra
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -144,7 +221,7 @@ const DetallesEvento = ({ evento, funcion }) => (
 );
 
 // Componente para mostrar datos del comprador logueado
-const DatosCompradorLogueado = ({ userData, handleContinuar }) => (
+const DatosCompradorLogueado = ({ userData }) => (
   <div className="compra-section">
     <h2 className="section-title">Datos del Comprador</h2>
     <div className="comprador-info-container">
@@ -169,9 +246,6 @@ const DatosCompradorLogueado = ({ userData, handleContinuar }) => (
         </div>
       )}
     </div>
-    <button onClick={handleContinuar} className="btn-continuar">
-      Finalizar Compra
-    </button>
   </div>
 );
 
@@ -185,6 +259,129 @@ const LoginRequired = ({ handleRedirectToLogin }) => (
     <button onClick={handleRedirectToLogin} className="btn-login">
       Iniciar Sesión
     </button>
+  </div>
+);
+
+// Componente para la selección de boleta
+const SeleccionBoleta = ({ tiposBoleta, selectedBoletaId, setSelectedBoletaId, cantidad, setCantidad }) => {
+  const boletaSeleccionada = tiposBoleta.find(boleta => boleta.id_tipoboleta === selectedBoletaId);
+  const precio = boletaSeleccionada ? boletaSeleccionada.precio : 0;
+  const subtotal = precio * cantidad;
+  const iva = subtotal * 0.19;
+  const total = subtotal + iva;
+
+  return (
+    <div className="compra-section">
+      <h2 className="section-title">Selecciona tu Boleta</h2>
+      <table className="boleta-tabla">
+        <thead>
+          <tr>
+            <th>Seleccionar</th>
+            <th>Nombre</th>
+            <th>Localización</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Cupo Máximo</th>
+            <th>Disponibles</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tiposBoleta
+            .filter(boleta => boleta.estado === 1)
+            .map((boleta) => (
+              <tr
+                key={boleta.id_tipoboleta}
+                className={selectedBoletaId === boleta.id_tipoboleta ? "selected-row" : ""}
+              >
+                <td>
+                  <input
+                    type="radio"
+                    name="tipoBoleta"
+                    value={boleta.id_tipoboleta}
+                    checked={selectedBoletaId === boleta.id_tipoboleta}
+                    onChange={() => setSelectedBoletaId(boleta.id_tipoboleta)}
+                    disabled={boleta.disponibles === 0}
+                  />
+                </td>
+                <td>{boleta.nombre}</td>
+                <td>{boleta.localizacion}</td>
+                <td>${boleta.precio}</td>
+                <td>{boleta.descripcion}</td>
+                <td>{boleta.cupo_maximo}</td>
+                <td>{boleta.disponibles}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+
+      {/* Sección de cantidad y totales */}
+      {boletaSeleccionada && (
+        <div style={{ marginTop: "1.5rem" }}>
+          <div className="cantidad-section">
+            <span>Cantidad</span>
+            <button
+              className="cantidad-btn"
+              onClick={() => setCantidad(c => Math.max(1, c - 1))}
+              disabled={cantidad <= 1}
+              type="button"
+            >-</button>
+            <span className="cantidad-num">{cantidad}</span>
+            <button
+              className="cantidad-btn"
+              onClick={() => setCantidad(c => boletaSeleccionada ? Math.min(boletaSeleccionada.disponibles, c + 1) : c + 1)}
+              disabled={boletaSeleccionada && cantidad >= boletaSeleccionada.disponibles}
+              type="button"
+            >+</button>
+          </div>
+          <div style={{ marginTop: "1rem", fontWeight: 500 }}>
+            <div>Subtotal: ${subtotal.toLocaleString()}</div>
+            <div>IVA (19%): ${iva.toLocaleString()}</div>
+            <div>Total a pagar: <strong>${total.toLocaleString()}</strong></div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Componente para el método de pago
+const MetodoPago = ({ metodoPago, setMetodoPago }) => (
+  <div className="compra-section">
+    <h2 className="section-title">Método de Pago</h2>
+    <div className="pago-btn-group pago-btn-center">
+      <label className={`radio-btn pago${metodoPago === "Efecty" ? " selected" : ""}`}>
+        <input
+          type="radio"
+          name="metodoPago"
+          value="Efecty"
+          checked={metodoPago === "Efecty"}
+          onChange={() => setMetodoPago("Efecty")}
+          style={{ display: "none" }}
+        />
+        <img
+          src="https://tse1.mm.bing.net/th/id/OIP.9bnpdK2Ow6SGvDBF_ASWOAAAAA?rs=1&pid=ImgDetMain"
+          alt="Efecty"
+          className="metodo-logo"
+        />
+        Efecty
+      </label>
+      <label className={`radio-btn pago${metodoPago === "Gane" ? " selected" : ""}`}>
+        <input
+          type="radio"
+          name="metodoPago"
+          value="Gane"
+          checked={metodoPago === "Gane"}
+          onChange={() => setMetodoPago("Gane")}
+          style={{ display: "none" }}
+        />
+        <img
+          src="https://www.logotypes101.com/logos/1/AFF94F03E8D776AA1D0105993AD37269/ganesured_amarillo_ok.png"
+          alt="Gane"
+          className="metodo-logo"
+        />
+        Gane
+      </label>
+    </div>
   </div>
 );
 

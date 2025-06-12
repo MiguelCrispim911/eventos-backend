@@ -11,11 +11,25 @@ compra_router = APIRouter()
 session_dep = Annotated[Session, Depends(get_session)]
 
 @compra_router.post("/", response_model=CompraPublic)
-def create_compra(compra: CompraCreate, session: session_dep):
+def crear_compra(compra: CompraCreate, session: Session = Depends(get_session)):
+    # Guardar la compra
     db_compra = Compra.model_validate(compra)
     session.add(db_compra)
     session.commit()
     session.refresh(db_compra)
+
+    # Actualizar disponibles en tipoboleta
+    tipo_boleta = session.get(TipoBoleta, compra.id_tipoboleta)
+    if tipo_boleta:
+        if tipo_boleta.disponibles >= compra.cantidad:
+            tipo_boleta.disponibles -= compra.cantidad
+            session.add(tipo_boleta)
+            session.commit()
+        else:
+            raise HTTPException(status_code=400, detail="No hay suficientes boletas disponibles")
+    else:
+        raise HTTPException(status_code=404, detail="Tipo de boleta no encontrado")
+
     return db_compra
 
 @compra_router.get("/", response_model=list[CompraPublic])

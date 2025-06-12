@@ -33,6 +33,7 @@ import EditarCompras from "../pages/crpListarCompras/ListarCompras";
 import Funciones from "../pages/Funciones/Funciones";
 import Compras from "../pages/Compras/Compras";
 import MisCompras from "../pages/Compras/MisCompras";
+import Factura from "../pages/Factura/Factura";
 
 const AppRouter = () => (
   <Routes>
@@ -50,6 +51,7 @@ const AppRouter = () => (
       <Route path="/funciones/:id_evento" element={<Funciones />} />
       <Route path="/comprar-boletos/:id_funcion" element={<Compras />} />
       <Route path="/mis-compras" element={<MisCompras />} />
+      <Route path="/factura" element={<Factura />} />
       {/* más rutas públicas aquí */}
     </Route>
 
@@ -198,6 +200,14 @@ const AppRouter = () => (
           </ProtectedRouteAdmin>
         } 
       />   
+      <Route 
+        path="/administrador/dashboard/factura" 
+        element={
+          <ProtectedRouteAdmin>
+            <Factura />
+          </ProtectedRouteAdmin>
+        } 
+      /> 
     </Route>
   </Routes>
 );

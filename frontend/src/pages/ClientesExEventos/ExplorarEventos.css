@@ -1,16 +1,19 @@
 .eventos-container {
-  padding: 2rem;
-  background-color: #f8f9fa;
-  min-height: calc(100vh - 200px);
+  padding: 2.5rem 1rem 2rem 1rem;
+  background: linear-gradient(120deg, #f8f9fa 60%, #e3eafc 100%);
+  min-height: calc(100vh - 180px);
   width: 100%;
 }
 
 .eventos-title {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #343a40;
+  font-size: 2.8rem;
+  margin-bottom: 2.2rem;
+  color: #393c55;
   font-weight: 700;
+  letter-spacing: 1.5px;
+  font-family: Arial, sans-serif;
+  position: relative;
 }
 
 .eventos-title:after {
@@ -29,19 +32,15 @@
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 30px;
-}
-
-.carousel:hover .carousel-button {
-  opacity: 1;
+  padding: 0 20px;
 }
 
 .carousel-button {
-  background-color: #0070CE;
+  background: linear-gradient(135deg, #0070CE 60%, #FF6B35 100%);
   color: white;
   border: none;
-  width: 45px;
-  height: 45px;
+  width: 64px;         /* Más grande */
+  height: 64px;        /* Más grande */
   border-radius: 50%;
   cursor: pointer;
   position: absolute;
@@ -51,219 +50,157 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.4rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  opacity: 0.7;
-}
-
-.carousel-button:hover {
-  background-color: #0056B3;
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-  opacity: 1;
-}
-
-.carousel-button:focus {
-  outline: none;
+  font-size: 2.2rem;   /* Ícono más grande */
+  box-shadow: 0 4px 16px rgba(0, 112, 206, 0.13);
+  transition: background 0.3s, transform 0.2s, opacity 0.2s;
+  opacity: 0.85;
 }
 
 .carousel-button.left {
-  left: -25px;
+  left: -80px;   /* Más separado */
 }
-
 .carousel-button.right {
-  right: -25px;
+  right: -80px;  /* Más separado */
 }
 
-/* Mejora para dispositivos móviles */
-@media (max-width: 768px) {
-  .carousel-button {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    background-color: rgba(0, 112, 206, 0.9);
-  }
-  
-  .carousel-button.left {
-    left: -15px;
-  }
-  
-  .carousel-button.right {
-    right: -15px;
-  }
+.carousel-button:hover {
+  background: linear-gradient(135deg, #FF6B35 60%, #0070CE 100%);
+  transform: translateY(-50%) scale(1.08);
+  opacity: 1;
 }
 
-/* Para pantallas muy pequeñas */
-@media (max-width: 480px) {
-  .carousel-button {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-  
-  .carousel-button.left {
-    left: -10px;
-  }
-  
-  .carousel-button.right {
-    right: -10px;
-  }
+.carousel-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .eventos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 32px;
   width: 100%;
-  padding: 1rem;
+  padding: 1.5rem 0;
 }
 
 .evento-card {
   display: flex;
   flex-direction: column;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  background-color: #fff;
+  background: #fff;
   position: relative;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 112, 206, 0.08), 0 1.5px 6px rgba(0,0,0,0.04);
   cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s;
   height: 100%;
 }
 
 .evento-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 16px 32px rgba(0, 112, 206, 0.13), 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.evento-card-header {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
 }
 
 .evento-card-img {
   width: 100%;
-  height: 180px;
+  height: 100%;
   object-fit: cover;
+  transition: filter 0.2s;
+}
+
+.evento-card:hover .evento-card-img {
+  filter: brightness(0.92) blur(0.5px);
 }
 
 .evento-status {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 6px 12px;
-  border-radius: 20px;
-  color: #fff;
-  font-size: 0.8rem;
+  top: 14px;
+  right: 14px;
+  padding: 6px 18px;
+  border-radius: 16px;
+  font-size: 1rem;
   font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(30, 42, 73, 0.10);
+  border: none;
+  transition: background 0.2s, color 0.2s;
   z-index: 5;
 }
 
 .evento-status.activo {
-  background-color: #28a745;
+  background: linear-gradient(90deg, #004bd6 0%, #241ba8 100%);
+  color: #fff;
 }
 
 .evento-status.inactivo {
-  background-color: #dc3545;
+  background: linear-gradient(90deg, #8092b8 60%, #7bb4c5 100%);
+  color: #fff;
 }
 
 .evento-card-body {
-  padding: 20px;
+  padding: 22px 18px 18px 18px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .evento-card-title {
-  font-size: 1.4rem;
-  margin: 0 0 12px 0;
-  color: #343a40;
+  font-size: 1.25rem;
+  margin: 0 0 10px 0;
+  color: #1a237e;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .evento-card-description {
-  font-size: 0.95rem;
-  color: #6c757d;
-  margin: 0 0 15px;
+  font-size: 1.02rem;
+  color: #495057;
+  margin: 0 0 18px 0;
   line-height: 1.5;
+  min-height: 48px;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  line-clamp: 3;
   -webkit-box-orient: vertical;
-  overflow: hidden;
-  flex-grow: 1;
 }
 
-.evento-card-admin {
-  font-size: 0.85rem;
-  color: #6c757d;
-  margin-top: auto;
-}
-
-.evento-detalle {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-}
-
-.detalle-contenido {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
-  width: 500px;
-  max-width: 90%;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.detalle-img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.detalle-botones {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 25px;
-  gap: 15px;
-}
-
-.boton-comprar,
-.boton-cerrar {
-  padding: 12px 25px;
+.btn-comprar-boletos {
+  background: linear-gradient(90deg, #0070CE 0%, #38bcf9 100%);
+  color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1.08rem;
+  font-weight: bold;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  flex: 1;
+  margin-top: auto;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  letter-spacing: 1px;
+  width: 100%;
 }
 
-.boton-comprar {
-  background-color: #FF6B35;
-  color: white;
+.btn-comprar-boletos:hover {
+  background: linear-gradient(90deg, #005fa3 0%, #6fe2ff 100%);
+  transform: scale(1.04);
 }
 
-.boton-comprar:hover {
-  background-color: #E85925;
-}
-
-.boton-cerrar {
-  background-color: transparent;
-  color: #343a40;
-  border: 1px solid #E9ECEF;
-}
-
-.boton-cerrar:hover {
-  background-color: #F8F9FA;
+.btn-comprar-boletos--disabled,
+.btn-comprar-boletos:disabled {
+  background: #bdbdbd !important;
+  color: #fff !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  border: none;
 }
 
 .error-message {
@@ -274,14 +211,6 @@
   margin-bottom: 25px;
   text-align: center;
   border: 1px solid rgba(220, 53, 69, 0.2);
-}
-
-.loading-message {
-  text-align: center;
-  color: #6c757d;
-  font-size: 1.2rem;
-  margin: 50px 0;
-  padding: 30px;
 }
 
 .no-eventos-message {
@@ -297,39 +226,37 @@
 @media (max-width: 992px) {
   .eventos-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
   .eventos-container {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0.5rem;
   }
-  
   .eventos-title {
     font-size: 2rem;
   }
-  
   .eventos-grid {
     grid-template-columns: 1fr;
     max-width: 400px;
     margin: 0 auto;
+    gap: 18px;
   }
-  
   .carousel-button {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    left: -12px;
+    right: -12px;
   }
-  
-  .carousel-button.left {
-    left: -10px;
+}
+
+@media (max-width: 480px) {
+  .eventos-title {
+    font-size: 1.3rem;
   }
-  
-  .carousel-button.right {
-    right: -10px;
+  .eventos-grid {
+    padding: 0.5rem 0;
   }
-  
-  .detalle-contenido {
-    padding: 20px;
-  }
-  }
+}

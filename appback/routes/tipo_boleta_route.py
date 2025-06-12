@@ -34,6 +34,12 @@ def read_tipo_boleta(id_tipoboleta: int, session: session_dep):
         raise HTTPException(status_code=404, detail="Tipo de Boleta no encontrado")
     return tipo_boleta
 
+# Obtener tipos de boleta por id_funcion
+@tipo_boleta_router.get("/por_funcion/{id_funcion}", response_model=list[TipoBoletaPublic])
+def read_tipo_boletas_por_funcion(id_funcion: int, session: session_dep):
+    tipos = session.exec(select(TipoBoleta).where(TipoBoleta.id_funcion == id_funcion)).all()
+    return tipos
+
 # Actualizar un tipo de boleta por su ID
 @tipo_boleta_router.patch("/{id_tipoboleta}", response_model=TipoBoletaPublic)
 def update_tipo_boleta(id_tipoboleta: int, tipo_boleta: TipoBoletaUpdate, session: session_dep):

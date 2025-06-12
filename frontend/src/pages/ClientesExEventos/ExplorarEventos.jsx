@@ -8,6 +8,8 @@ const ExplorarEventos = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const eventosPorPagina = 8;
+
   // useEffect para obtener eventos desde la base de datos
   useEffect(() => {
     const obtenerEventos = async () => {
@@ -27,22 +29,16 @@ const ExplorarEventos = () => {
     obtenerEventos();
   }, []);
 
-  const seleccionarEvento = (evento) => {
-    // Redirigir a la página de funciones con el ID del evento
-    navigate(`/funciones/${evento.id_evento}`);
-  };
-
   const siguienteEvento = () => {
-    setCurrentIndex((prevIndex) => {
-      const nextIndex = prevIndex + 1;
-      return nextIndex >= eventos.length ? 0 : nextIndex;
-    });
+    if (currentIndex + eventosPorPagina < eventos.length) {
+      setCurrentIndex(currentIndex + eventosPorPagina);
+    }
   };
 
   const anteriorEvento = () => {
-    setCurrentIndex((prevIndex) =>
-      (prevIndex - 1 + eventos.length) % eventos.length
-    );
+    if (currentIndex - eventosPorPagina >= 0) {
+      setCurrentIndex(currentIndex - eventosPorPagina);
+    }
   };
 
   return (
@@ -50,21 +46,23 @@ const ExplorarEventos = () => {
       {/* Mostrar el mensaje de error si existe */}
       {error && <div className="error-message">Error: {error}</div>}
 
-      <h2 className="eventos-title">Listado de Eventos</h2>
+      <h2 className="eventos-title">Eventos</h2>
       <div className="carousel">
-        <button onClick={anteriorEvento} className="carousel-button left">
+        <button
+          onClick={anteriorEvento}
+          className="carousel-button left"
+          disabled={currentIndex === 0}
+        >
           &#8592;
         </button>
         <div className="eventos-grid">
           {eventos.length > 0 ? (
-            Array.from({ length: 4 }).map((_, index) => {
-              const eventoIndex = (currentIndex + index) % eventos.length;
-              const evento = eventos[eventoIndex];
-              return (
+            eventos
+              .slice(currentIndex, currentIndex + eventosPorPagina)
+              .map((evento) => (
                 <div
                   key={evento.id_evento}
                   className="evento-card"
-                  onClick={() => seleccionarEvento(evento)}
                 >
                   <div className="evento-card-header">
                     <img
@@ -85,18 +83,27 @@ const ExplorarEventos = () => {
                     <p className="evento-card-description">
                       {evento.descripcion}
                     </p>
-                    <p className="evento-card-admin">
-                      Cédula Adm: {evento.cedula_adm}
-                    </p>
+                    <button
+                      className={`btn-comprar-boletos${
+                        evento.estado !== 1 ? " btn-comprar-boletos--disabled" : ""
+                      }`}
+                      onClick={() => navigate(`/funciones/${evento.id_evento}`)}
+                      disabled={evento.estado !== 1}
+                    >
+                      {evento.estado === 1 ? "Comprar boletos" : "No disponible"}
+                    </button>
                   </div>
                 </div>
-              );
-            })
+              ))
           ) : (
             <p className="no-eventos-message">No hay eventos disponibles.</p>
           )}
         </div>
-        <button onClick={siguienteEvento} className="carousel-button right">
+        <button
+          onClick={siguienteEvento}
+          className="carousel-button right"
+          disabled={currentIndex + eventosPorPagina >= eventos.length}
+        >
           &#8594;
         </button>
       </div>
