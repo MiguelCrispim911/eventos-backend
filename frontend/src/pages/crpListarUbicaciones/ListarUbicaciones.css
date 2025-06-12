@@ -1,110 +1,128 @@
 /* Contenedor principal */
 .ubicaciones-container {
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Espaciado interno y estilos de fondo */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.ubicaciones-title {
+  /* Color y estilo del título */
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Mensajes de error */
+.ubicaciones-error {
+  /* Estilo para mensajes de error */
+  color: #f44336;
+  font-size: 0.75rem;
+  margin-bottom: 15px;
+}
+
+/* Mensajes cuando no hay datos */
+.ubicaciones-empty {
+  /* Estilo para mensajes vacíos */
+  color: #666;
+  font-size: 0.75rem;
+}
+
+/* Contenedor para hacer la tabla responsive */
+.table-responsive {
+  /* Permite desplazamiento horizontal en pantallas pequeñas */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 15px;
+}
+
+/* Estilos generales de la tabla */
+.ubicaciones-table {
+  /* Ancho completo y colapsar bordes */
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  min-width: 1000px;
+}
+
+/* Encabezados de la tabla */
+.ubicaciones-table thead tr {
+  /* Fondo y borde inferior */
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.ubicaciones-table th {
+  /* Espaciado y estilo de texto en encabezados */
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #444;
+  white-space: nowrap;
+}
+
+/* Celdas de la tabla */
+.ubicaciones-table td {
+  /* Espaciado y color de texto */
+  padding: 10px 12px;
+  color: #555;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+/* Filas del cuerpo de la tabla */
+.ubicaciones-table tbody tr {
+  /* Borde inferior y transición al pasar el mouse */
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+/* Quita el borde de la última fila */
+.ubicaciones-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Efecto hover en filas */
+.ubicaciones-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Indicadores de estado (círculos de color) */
+.status-indicator {
+  /* Círculo pequeño alineado al texto */
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Estado activo: verde */
+.status-indicator.activo {
+  background-color: #4CAF50;
+}
+
+/* Estado inactivo: rojo */
+.status-indicator.inactivo {
+  background-color: #F44336;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .ubicaciones-container {
+    /* Menor padding */
+    padding: 15px;
   }
-  
-  /* Título */
-  .ubicaciones-title {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-  
-  /* Mensajes */
-  .ubicaciones-error {
-    color: #f44336;
-    font-size: 0.75rem;
-    margin-bottom: 15px;
-  }
-  
-  .ubicaciones-empty {
-    color: #666;
-    font-size: 0.75rem;
-  }
-  
-  /* Tabla responsive */
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-top: 15px;
-  }
-  
-  /* Estilos de tabla */
-  .ubicaciones-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.75rem;
-    min-width: 1000px;
-  }
-  
-  /* Encabezados */
-  .ubicaciones-table thead tr {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #e0e0e0;
-  }
-  
-  .ubicaciones-table th {
-    padding: 10px 12px;
-    text-align: left;
-    font-weight: 600;
-    color: #444;
-    white-space: nowrap;
-  }
-  
-  /* Celdas */
+
+  .ubicaciones-table th, 
   .ubicaciones-table td {
-    padding: 10px 12px;
-    color: #555;
-    line-height: 1.4;
-    vertical-align: middle;
+    /* Menor padding y tamaño de fuente */
+    padding: 8px 10px;
+    font-size: 0.7rem;
   }
-  
-  /* Filas */
-  .ubicaciones-table tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background-color 0.2s ease;
-  }
-  
-  .ubicaciones-table tbody tr:last-child {
-    border-bottom: none;
-  }
-  
-  .ubicaciones-table tbody tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Indicadores de estado */
-  .status-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-  
-  .status-indicator.activo {
-    background-color: #4CAF50;
-  }
-  
-  .status-indicator.inactivo {
-    background-color: #F44336;
-  }
-  
-  /* Ajustes para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .ubicaciones-container {
-      padding: 15px;
-    }
-    
-    .ubicaciones-table th, 
-    .ubicaciones-table td {
-      padding: 8px 10px;
-      font-size: 0.7rem;
-    }
-  }
+}

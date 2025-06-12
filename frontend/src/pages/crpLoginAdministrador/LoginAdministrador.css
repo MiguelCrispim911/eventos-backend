@@ -1,52 +1,60 @@
+/* Contenedor principal del login de administrador */
 .admin-login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    max-width: 400px; /* Ancho máximo del contenedor */
+    margin: 50px auto; /* Centrado vertical y horizontal */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #fff; /* Fondo blanco */
 }
   
+/* Título del login */
 .admin-login-title {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
+    text-align: center; /* Centrar texto */
+    color: #333; /* Color del texto */
+    margin-bottom: 20px; /* Espacio inferior */
 }
   
+/* Formulario de login */
 .admin-login-form {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Usar flexbox */
+    flex-direction: column; /* Dirección de columna */
 }
   
+/* Grupo de campos del formulario */
 .admin-form-group {
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Espacio inferior entre campos */
 }
   
+/* Etiqueta de los campos */
 .admin-form-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
+    display: block; /* Mostrar como bloque */
+    margin-bottom: 5px; /* Espacio inferior */
+    color: #555; /* Color del texto */
 }
   
+/* Campos de entrada del formulario */
 .admin-form-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
 }
   
+/* Botón de login */
 .admin-login-button {
-    padding: 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
+    padding: 12px; /* Espaciado interno */
+    background-color: #007bff; /* Fondo azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor tipo puntero */
+    font-size: 16px; /* Tamaño de fuente */
+    margin-top: 10px; /* Espacio superior */
 }
   
+/* Efecto hover para el botón */
 .admin-login-button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Fondo azul más oscuro al pasar el mouse */
 }

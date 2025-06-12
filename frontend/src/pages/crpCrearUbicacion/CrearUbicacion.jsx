@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./CrearUbicacion.css"; // Archivo CSS adjunto
 
 const CrearUbicacion = () => {
+  // Estado para almacenar los datos del formulario
   const [formData, setFormData] = useState({
     nombre: "",
     persona_contacto: "",
@@ -12,6 +13,7 @@ const CrearUbicacion = () => {
     email: "",
   });
 
+  // Maneja los cambios en los campos del formulario
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,6 +21,7 @@ const CrearUbicacion = () => {
     });
   };
 
+  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     // ... (tu lógica existente de submit)
@@ -29,6 +32,7 @@ const CrearUbicacion = () => {
       <form onSubmit={handleSubmit} className="crear-ubicacion-form">
         <h2 className="form-title">Registro de Ubicación</h2>
 
+        {/* Genera los campos del formulario dinámicamente */}
         {[
           { label: "Nombre", name: "nombre" },
           { label: "Persona de Contacto", name: "persona_contacto" },
@@ -51,6 +55,7 @@ const CrearUbicacion = () => {
           </label>
         ))}
 
+        {/* Botón para enviar el formulario */}
         <button type="submit" className="submit-button">
           Registrar Ubicación
         </button>

@@ -1,115 +1,120 @@
-/* Contenedor principal */
+/* Contenedor principal: define el estilo general del área principal */
 .funciones-container {
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px; /* Espaciado interno */
+  background-color: white; /* Fondo blanco */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente */
+}
+
+/* Título de la sección */
+.funciones-title {
+  color: #333; /* Color de texto */
+  margin-bottom: 20px; /* Espacio inferior */
+  font-size: 1.3rem; /* Tamaño de fuente */
+  font-weight: 600; /* Negrita */
+}
+
+/* Mensaje de error */
+.funciones-error {
+  color: #f44336; /* Rojo */
+  font-size: 0.75rem; /* Tamaño pequeño */
+  margin-bottom: 15px; /* Espacio inferior */
+}
+
+/* Mensaje cuando no hay datos */
+.funciones-empty {
+  color: #666; /* Gris */
+  font-size: 0.75rem; /* Tamaño pequeño */
+}
+
+/* Contenedor para hacer la tabla desplazable horizontalmente en pantallas pequeñas */
+.table-responsive {
+  overflow-x: auto; /* Scroll horizontal */
+  -webkit-overflow-scrolling: touch; /* Mejor experiencia en iOS */
+  margin-top: 15px; /* Espacio superior */
+}
+
+/* Estilos generales de la tabla */
+.funciones-table {
+  width: 100%; /* Ocupa todo el ancho */
+  border-collapse: collapse; /* Sin espacio entre bordes */
+  font-size: 0.75rem; /* Tamaño de fuente */
+  min-width: 900px; /* Ancho mínimo */
+}
+
+/* Encabezado de la tabla */
+.funciones-table thead tr {
+  background-color: #f8f9fa; /* Fondo claro */
+  border-bottom: 2px solid #e0e0e0; /* Línea inferior */
+}
+
+/* Celdas de encabezado */
+.funciones-table th {
+  padding: 10px 12px; /* Espaciado interno */
+  text-align: left; /* Alineación a la izquierda */
+  font-weight: 600; /* Negrita */
+  color: #444; /* Color de texto */
+  white-space: nowrap; /* No permite salto de línea */
+}
+
+/* Celdas de datos */
+.funciones-table td {
+  padding: 10px 12px; /* Espaciado interno */
+  color: #555; /* Color de texto */
+  line-height: 1.4; /* Altura de línea */
+  vertical-align: middle; /* Centrado vertical */
+}
+
+/* Filas del cuerpo de la tabla */
+.funciones-table tbody tr {
+  border-bottom: 1px solid #e0e0e0; /* Línea inferior */
+  transition: background-color 0.2s ease; /* Transición al pasar el mouse */
+}
+
+/* Última fila sin borde inferior */
+.funciones-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Efecto hover en filas */
+.funciones-table tbody tr:hover {
+  background-color: #f5f5f5; /* Fondo al pasar el mouse */
+}
+
+/* Formato especial para la columna de fecha (4ta columna) */
+.funciones-table td:nth-child(4) {
+  white-space: nowrap; /* No permite salto de línea */
+}
+
+/* Indicadores de estado (círculos de color) */
+.status-indicator {
+  display: inline-block; /* Elemento en línea */
+  width: 10px; /* Ancho */
+  height: 10px; /* Alto */
+  border-radius: 50%; /* Forma circular */
+  margin-right: 6px; /* Espacio a la derecha */
+  vertical-align: middle; /* Centrado vertical */
+}
+
+/* Indicador de estado activo (verde) */
+.status-indicator.activo {
+  background-color: #4CAF50;
+}
+
+/* Indicador de estado inactivo (rojo) */
+.status-indicator.inactivo {
+  background-color: #F44336;
+}
+
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .funciones-container {
+    padding: 15px; /* Menos espaciado */
   }
-  
-  /* Título */
-  .funciones-title {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-  
-  /* Mensajes */
-  .funciones-error {
-    color: #f44336;
-    font-size: 0.75rem;
-    margin-bottom: 15px;
-  }
-  
-  .funciones-empty {
-    color: #666;
-    font-size: 0.75rem;
-  }
-  
-  /* Tabla responsive */
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-top: 15px;
-  }
-  
-  /* Estilos de tabla */
-  .funciones-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.75rem;
-    min-width: 900px;
-  }
-  
-  /* Encabezados */
-  .funciones-table thead tr {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #e0e0e0;
-  }
-  
-  .funciones-table th {
-    padding: 10px 12px;
-    text-align: left;
-    font-weight: 600;
-    color: #444;
-    white-space: nowrap;
-  }
-  
-  /* Celdas */
+  .funciones-table th, 
   .funciones-table td {
-    padding: 10px 12px;
-    color: #555;
-    line-height: 1.4;
-    vertical-align: middle;
+    padding: 8px 10px; /* Menos espaciado */
+    font-size: 0.8rem; /* Fuente un poco más grande */
   }
-  
-  /* Filas */
-  .funciones-table tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background-color 0.2s ease;
-  }
-  
-  .funciones-table tbody tr:last-child {
-    border-bottom: none;
-  }
-  
-  .funciones-table tbody tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Formato de fecha */
-  .funciones-table td:nth-child(4) {
-    white-space: nowrap;
-  }
-  
-  /* Indicadores de estado */
-  .status-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-  
-  .status-indicator.activo {
-    background-color: #4CAF50;
-  }
-  
-  .status-indicator.inactivo {
-    background-color: #F44336;
-  }
-  
-  /* Ajustes para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .funciones-container {
-      padding: 15px;
-    }
-    
-    .funciones-table th, 
-    .funciones-table td {
-      padding: 8px 10px;
-      font-size: 0.8rem;
-    }
-  }
+}
